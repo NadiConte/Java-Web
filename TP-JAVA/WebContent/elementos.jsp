@@ -40,8 +40,8 @@
 				<td><%= e.getTipoElemento().getNombre() %></td>
 				<td>
 					<form method="post" action="Elemento">
-						<button type="input" value=<%= e.getId_elemento() %> name="mapear">Modificar</button>
-						<button type="input" value=<%= e.getId_elemento() %> name="borrar">Borrar</button>
+						<button type="input" value=<%= e.getNombre() %> name="mapear">Modificar</button>
+						<button type="input" value=<%= e.getNombre() %> name="borrar">Borrar</button>
 					</form>
 				</td>
 			</tr>

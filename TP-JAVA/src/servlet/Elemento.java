@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controlers.CtrlABMElemento;
+import controlers.CtrlABMTipo;
+import entity.TipoElemento;
 
 /**
  * Servlet implementation class Elemento
@@ -37,13 +39,14 @@ public class Elemento extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (request.getParameter("mapear")!= null) {
-			int idTipo = Integer.parseInt(request.getParameter("mapear"));
 			
+			String nombre = request.getParameter("mapear");
+						
 			
 			entity.Elemento e = new entity.Elemento();
 			CtrlABMElemento cte = new CtrlABMElemento();
 			
-			e = cte.getByID(idTipo);
+			e=cte.getByNombre(nombre);
 			
 			request.setAttribute("elemento", e);
 			
@@ -56,9 +59,15 @@ public class Elemento extends HttpServlet {
 			entity.Elemento e = new entity.Elemento();
 			CtrlABMElemento cte = new CtrlABMElemento();
 			
+			TipoElemento te = new TipoElemento();
+			CtrlABMTipo ctt = new CtrlABMTipo();
+
+			
 			e.setId_elemento(Integer.parseInt(request.getParameter("id")));
 			e.setNombre(request.getParameter("nombre"));
-
+			int id_tipo=Integer.parseInt(request.getParameter("id_tipo"));
+			te=ctt.getByID(id_tipo);
+			e.setTipoElemento(te);			
 			
 			cte.update(e);
 			
@@ -70,8 +79,19 @@ public class Elemento extends HttpServlet {
 			entity.Elemento e = new entity.Elemento();
 			CtrlABMElemento cte = new CtrlABMElemento();
 			
+			TipoElemento te = new TipoElemento();
+			CtrlABMTipo ctt = new CtrlABMTipo();
+			
+
+			
 			e.setNombre(request.getParameter("nombre"));
 			//e.set del tipo de elemento NO SE COMO SE PASA 
+
+			int id_tipo=Integer.parseInt(request.getParameter("id_tipo"));
+			te=ctt.getByID(id_tipo);
+			
+			e.setTipoElemento(te);
+
 			
 			cte.add(e);
 			
@@ -83,10 +103,12 @@ public class Elemento extends HttpServlet {
 			entity.Elemento e = new entity.Elemento();
 			CtrlABMElemento cte = new CtrlABMElemento();
 			
-			int idTipo = Integer.parseInt(request.getParameter("borrar"));
-			System.out.println(idTipo);
-			e = cte.getByID(idTipo);
-			System.out.println(e.getId_elemento());
+			String nombre = request.getParameter("borrar");
+			//System.out.println(id);
+			//e = cte.getByID(id);
+			//System.out.println(e.getId_elemento());
+			
+			e=cte.getByNombre(nombre);
 			cte.delete(e);
 			
 			request.getRequestDispatcher("elementos.jsp").forward(request, response);

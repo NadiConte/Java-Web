@@ -201,29 +201,29 @@ public ArrayList<Elemento> getAll(){
 	}
 	
 
-	public Elemento getByID(int id){
-		Elemento el=null;
-		PreparedStatement stmt=null;
-		ResultSet rs=null;
-		try {
-			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
-					"select * from elemento e inner join tipoelemento t on e.id_tipo=t.id_tipo where e.id_elemento=?");
-			stmt.setInt(1, id);
-			rs=stmt.executeQuery();
-			if(rs!=null && rs.next()){
-				el=new Elemento ();
-	 			el.setTipoElemento(new TipoElemento());
-	 			el.setId_elemento(rs.getInt("id_elemento"));
-	 			el.setNombre(rs.getString("nombre"));
-	 			
-	 			el.getTipoElemento().setId_tipo(rs.getInt("id_tipo"));
-	 			el.getTipoElemento().setNombre(rs.getString("t.nombre"));
-	 			//el.getTipoElemento().setCantMaxima(rs.getInt("cantMaxima"));
-	 			//el.getTipoElemento().setDiasAnticipacion(rs.getInt("diasAnticipacion"));
-	 			//el.getTipoElemento().setTiempoMax(rs.getInt("tiempoMax"));
-	 				
-			}
-			
+	public Elemento getById(int id) throws Exception{
+ 		Elemento el=null;
+ 		PreparedStatement stmt=null;
+ 		ResultSet rs=null;
+ 		try {
+ 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
+ 					"select id_elemento, e.nombre, id_tipo, t.nombre, cantMaxima,tiempoMax,diasAnticipacion"
+ 					+ " from elementos e "
+ 					+ "inner join tipoelemento t on e.id_tipo=t.id_tipo where id_elemento=?");
+ 			stmt.setInt(1, id);
+ 			rs=stmt.executeQuery();
+ 			if(rs!=null && rs.next()){
+ 					el=new Elemento();
+ 					el.setTipoElemento(new TipoElemento());
+		 			el.setId_elemento(rs.getInt("id_elemento"));
+		 			el.setNombre(rs.getString("nombre"));
+		 			
+		 			el.getTipoElemento().setId_tipo(rs.getInt("id_tipo"));
+		 			el.getTipoElemento().setNombre(rs.getString("t.nombre"));
+		 			el.getTipoElemento().setCantMaxima(rs.getInt("cantMaxima"));
+		 			el.getTipoElemento().setTiempoMax(rs.getInt("tiempoMax"));									
+		 			el.getTipoElemento().setDiasAnticipacion(rs.getInt("diasAnticipacion"));
+ 			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}

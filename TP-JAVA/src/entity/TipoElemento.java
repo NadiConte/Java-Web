@@ -72,4 +72,5 @@ public class TipoElemento {
 	public int hashCode(){
 		return ((Integer)this.getId_tipo()).hashCode();
 	}
+
 }
