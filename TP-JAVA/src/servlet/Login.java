@@ -63,7 +63,7 @@ public class Login extends HttpServlet {
 
 
 			
-			request.getRequestDispatcher("tipoElementos.jsp").forward(request, response);
+			request.getRequestDispatcher("menuPrincipal.jsp").forward(request, response);
 			//response.getWriter().append(user).append(" ").append(pass);
 			
 			

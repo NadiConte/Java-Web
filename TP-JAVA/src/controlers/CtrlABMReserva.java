@@ -26,39 +26,48 @@ public class CtrlABMReserva {
 	private DataTipoElemento dataTipo;
 	private ArrayList<Reserva> res;
 	
-	public CtrlABMReserva() {
-		dataRes = new DataReserva();
-		dataElem= new DataElemento();
-		dataPer= new DataPersona();
-		dataTipo= new DataTipoElemento();
-	}
+	public void initDataBindings(ArrayList<Elemento> elementos, JComboBox cboElementos_1) {
+		JComboBoxBinding<Elemento,List<Elemento>,JComboBox> jComboBinding = SwingBindings.createJComboBoxBinding(UpdateStrategy.READ_WRITE, elementos, cboElementos_1, "elementosDeUnTipo");
+		jComboBinding.bind();
+	}	
 	
-	public void add(Reserva r) {
-		dataRes.add(r);;
-	}
+public CtrlABMReserva() {
+	dataRes = new DataReserva();
+	dataElem= new DataElemento();
+	dataPer= new DataPersona();
+	dataTipo= new DataTipoElemento();
+}
+
+public void add(Reserva r) {
+	dataRes.add(r);;
+}
+
+public void delete(Reserva r){
+	dataRes.delete(r);
+}
+
+public void update(Reserva r){
+	dataRes.update(r);
+}
+
+
+public ArrayList<Reserva> getAll(){
+return dataRes.getAll();}
+
+public ArrayList<Persona> getPersonas(){
+return dataPer.getAll();}
+
+
+
+public ArrayList<Reserva> reservasDePer(Persona logged) {
+	return dataRes.getReservasdePer(logged);
 	
-	public void delete(Reserva r){
-		dataRes.delete(r);
-	}
-	
-	public void update(Reserva r){
-		dataRes.update(r);
-	}
-	
-	
-	public ArrayList<Reserva> getAll(){
-	return dataRes.getAll();}
-	
-	public ArrayList<Persona> getPersonas(){
-	return dataPer.getAll();}
-	
-	
-	
-	public ArrayList<Reserva> reservasDePer(Persona logged) {
-		return dataRes.getReservasdePer(logged);
-		
-	}
-	
+}
+
+public void cancelarReservas(Persona logged) {
+	dataRes.CancelarReservasDePersona(logged);
+}
+
 
 
 }	
