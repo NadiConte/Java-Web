@@ -3,7 +3,6 @@ package controlers;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.DefaultComboBoxModel;
 
 import data.DataElemento;
 import data.DataTipoElemento;
@@ -45,7 +44,8 @@ public class CtrlABMElemento {
 	}	
 	
 	public Elemento getByID(int id){
-		return dataElem.getByID(id);
+		dataElem= new DataElemento();
+		return this.dataElem.getById(id);
 	}	
 	
 	public Elemento getByNombre(String nombre){

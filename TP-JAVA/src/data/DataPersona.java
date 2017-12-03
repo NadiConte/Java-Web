@@ -16,7 +16,7 @@ public class DataPersona {
 			stmt = FactoryConexion.getInstancia()
 					.getConn().createStatement();
 			rs = stmt.executeQuery("select * from persona p "
-		 			+ "inner join categorias c on p.id_categoria=c.id_categoria");
+		 			+ "inner join categoria c on p.id_categoria=c.id_categoria");
 			if(rs!=null){
 				while(rs.next()){
 					Persona p=new Persona();
@@ -26,9 +26,11 @@ public class DataPersona {
 					p.setApellido(rs.getString("apellido"));
 					p.setDni(rs.getString("dni"));
 					p.setHabilitado(rs.getBoolean("habilitado"));
+					p.setContraseña(rs.getString("contraseña"));
+					p.setUsuario(rs.getString("usuario"));
+		 			p.setLogged(rs.getBoolean("logged_user"));
 					p.getCategoria().setId_categoria(rs.getInt("id_categoria"));
 		 			p.getCategoria().setNombreCat(rs.getString("c.nombre"));
-		 			p.setLogged(rs.getBoolean("logged_user"));
 					pers.add(p);
 				}
 			}
@@ -70,7 +72,46 @@ public class DataPersona {
 				p.setDni(rs.getString("dni"));
 				p.setHabilitado(rs.getBoolean("habilitado"));
 				p.getCategoria().setId_categoria(rs.getInt("id_categoria"));
-				p.getCategoria().setNombreCat(rs.getString("nombre")); 			
+				p.getCategoria().setNombreCat(rs.getString("nombre")); 
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			if(rs!=null)rs.close();
+			if(stmt!=null)stmt.close();
+			FactoryConexion.getInstancia().releaseConn();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return p;
+	}
+	
+	public Persona getById(int id){
+		Persona p=null;
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		try {
+			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
+					"select id_persona, p.nombre, apellido, dni, habilitado, p.id_categoria, c.nombre , logged_user from persona p "
+					+ "inner join categoria c on p.id_categoria=c.id_categoria where id_persona=?");
+			stmt.setInt(1, id);
+			rs=stmt.executeQuery();
+			if(rs!=null && rs.next()){
+				p=new Persona();
+				p.setCategoria(new Categoria());
+				p.setId_persona(rs.getInt("id_persona"));
+				p.setNombre(rs.getString("nombre"));
+				p.setApellido(rs.getString("apellido"));
+				p.setDni(rs.getString("dni"));
+				p.setHabilitado(rs.getBoolean("habilitado"));
+				p.getCategoria().setId_categoria(rs.getInt("id_categoria"));
+				p.getCategoria().setNombreCat(rs.getString("nombre")); 	
+	 			p.setLogged(rs.getBoolean("logged_user"));
 			}
 			
 		} catch (SQLException e) {
@@ -125,10 +166,10 @@ public class DataPersona {
 		try {
 			stmt=FactoryConexion.getInstancia().getConn()
 					.prepareStatement(
-					"DELETE FROM persona where dni=?",
+					"DELETE FROM persona where id_persona=?",
 					PreparedStatement.RETURN_GENERATED_KEYS
 					);
-			stmt.setString(1, p.getDni());
+			stmt.setInt(1, p.getId_persona());
 			stmt.executeUpdate();
 			keyResultSet=stmt.getGeneratedKeys();
 			if(keyResultSet!=null && keyResultSet.next()){
@@ -146,26 +187,30 @@ public class DataPersona {
 		}
 	}
 	
-	public void actualizar(Persona newp, Persona oldp){
+	public void actualizar(Persona p){
 		PreparedStatement stmt=null;
 		ResultSet keyResultSet=null;
 		try {
 			stmt=FactoryConexion.getInstancia().getConn()
 					.prepareStatement(
-					"UPDATE  persona SET dni=?, nombre=? , apellido=?, habilitado=?, id_categoria=? where dni=? ",
+					"UPDATE  persona "
+					+ "SET dni=?, nombre=? , apellido=?, usuario=?, contraseña=?, habilitado=?, id_categoria=? "
+					+ "where id_persona=? ",
 					PreparedStatement.RETURN_GENERATED_KEYS
 					);
 			
-			stmt.setString(1, newp.getDni());
-			stmt.setString(2, newp.getNombre());
-			stmt.setString(3, newp.getApellido());
-			stmt.setBoolean(4, newp.isHabilitado());
- 			stmt.setInt(5, newp.getCategoria().getId_categoria());
-			stmt.setString(6, oldp.getDni());
+			stmt.setString(1, p.getDni());
+			stmt.setString(2, p.getNombre());
+			stmt.setString(3, p.getApellido());
+			stmt.setString(4, p.getUsuario());
+			stmt.setString(5, p.getContraseña());
+			stmt.setBoolean(6, p.isHabilitado());
+ 			stmt.setInt(7, p.getCategoria().getId_categoria());
+			stmt.setInt(8, p.getId_persona());
 			stmt.executeUpdate();
 			keyResultSet=stmt.getGeneratedKeys();
 			if(keyResultSet!=null && keyResultSet.next()){
-				newp.setId_persona(keyResultSet.getInt(1));
+				p.setId_persona(keyResultSet.getInt(1));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

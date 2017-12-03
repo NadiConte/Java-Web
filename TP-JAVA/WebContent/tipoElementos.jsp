@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Menu de Tipos de Elementos</title>
 </head>
 <body>
 	<% 
@@ -18,7 +18,6 @@
 		
 		ale = ct.getAll();
 	%>
-	<a href="crearTipo.jsp"><button>Nuevo tipo</button></a>
 	<div> 
 		<table>
 			<thead>
@@ -26,6 +25,8 @@
 					<th>ID</th>
 					<th>Nombre</th>
 					<th>Dias anticipacion</th>
+					<th>Cantidad Maxima</th>
+					<th>Tiempo Maximo</th>
 					<th>Acciones</th>
 				</tr>
 			</thead>
@@ -37,6 +38,8 @@
 				<td><%= t.getId_tipo()%></td>
 				<td><%= t.getNombre()%></td>
 				<td><%= t.getDiasAnticipacion() %></td>
+				<td><%= t.getCantMaxima() %></td>
+				<td><%= t.getTiempoMax() %></td>
 				<td>
 					<form method="post" action="TipoElemento">
 						<button type="input" value=<%= t.getId_tipo() %> name="mapear">Modificar</button>
@@ -48,6 +51,8 @@
 			</tbody>
 		</table>
 	</div>
+	<a href="crearTipo.jsp"><button>Nuevo tipo</button></a>
+	<a href="menuPrincipal.jsp"><button>Volver</button></a>
 	
 </body>
 </html>

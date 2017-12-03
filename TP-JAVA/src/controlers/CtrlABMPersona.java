@@ -24,9 +24,9 @@ public class CtrlABMPersona {
 		dataPer.borrar(p);
 	}
 	
-	public void update(Persona newp, Persona oldp){
+	public void update(Persona newp){
 		
-		dataPer.actualizar(newp, oldp);
+		dataPer.actualizar(newp);
 	}
 		
 	/*public Persona getByDni(Persona p){
@@ -43,6 +43,12 @@ public Persona getByDni(String dni){
 	
 	public Persona getByDni(Persona pe) {
 		return this.dataPer.getByDni(pe);
+	}
+	public Persona getById(int id){
+		return this.dataPer.getById(id);
+	}
+	public Categoria getByID(int id){
+		return this.dataCat.getByID(id);
 	}
 	
 	public Persona getByNombreApellido(Persona p){

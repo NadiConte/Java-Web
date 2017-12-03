@@ -5,34 +5,22 @@
 <%@ page import="controlers.CtrlABMPersona" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="entity.Categoria" %>
-<%@ page import="entity.TipoElemento" %>
-<%@ page import="controlers.CtrlABMTipo" %>
+
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Menu Personas</title>
 </head>
 <body>
-	<% 
+<% 
 		ArrayList<Persona> alp = new ArrayList<Persona>();
-		CtrlABMPersona cp = new CtrlABMPersona();
+		CtrlABMPersona ctp = new CtrlABMPersona();
+		
+		alp =ctp.getAll();
 
-		alp = cp.getAll();
-		out.print(alp);
-		
-		ArrayList<TipoElemento> ale = new ArrayList<TipoElemento>();
-		CtrlABMTipo ct = new CtrlABMTipo();
-		
-		ale = ct.getAll();
-		out.print(ale);
-
-		
-		
 	%>
-	
-	
 	<div> 
 		<table>
 			<thead>
@@ -40,6 +28,9 @@
 					<th>ID</th>
 					<th>Nombre</th>
 					<th>Apellido</th>
+					<th>DNI</th>
+					<th>Usuario</th>
+					<th>Categoria</th>					
 					<th>Acciones</th>
 				</tr>
 			</thead>
@@ -48,13 +39,26 @@
 				
 			%>
 			<tr>
-				<td><%= p.getId_persona() %></td>
-				<td><%= p.getNombre() %></td>
+				<td><%= p.getId_persona()%></td>
+				<td><%= p.getNombre()%></td>
 				<td><%= p.getApellido() %></td>
+				<td><%= p.getDni() %></td>
+				<td><%= p.getUsuario() %></td>				
+				<td><%= p.getCategoria().getDescripcion() %></td>
+				<td>
+					<form method="post" action="Persona">
+						<button type="input" value=<%= p.getId_persona() %> name="mapear">Modificar</button>
+						<button type="input" value=<%= p.getId_persona() %> name="borrar">Borrar</button>
+					</form>
+				</td>
 			</tr>
 			<% } %>
 			</tbody>
 		</table>
 	</div>
+	<a href="crearPersona.jsp"><button>Nuevo Persona</button></a>
+	<a href="menuPrincipal.jsp"><button>Volver</button></a>
+	
+	
 </body>
 </html>

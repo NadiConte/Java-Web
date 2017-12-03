@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Menu de Elementos</title>
 </head>
 <body>
 <% 
@@ -19,7 +19,6 @@
 		ele =cf.getAll();
 
 	%>
-	<a href="crearElemento.jsp"><button>Nuevo Elemento</button></a>
 	<div> 
 		<table>
 			<thead>
@@ -49,6 +48,9 @@
 			</tbody>
 		</table>
 	</div>
+	<a href="crearElemento.jsp"><button>Nuevo Elemento</button></a>
+	<a href="menuPrincipal.jsp"><button>Volver</button></a>
+	
 	
 </body>
 </html>

@@ -201,7 +201,7 @@ public ArrayList<Elemento> getAll(){
 	}
 	
 
-	public Elemento getById(int id) throws Exception{
+	public Elemento getById(int id){
  		Elemento el=null;
  		PreparedStatement stmt=null;
  		ResultSet rs=null;
@@ -276,10 +276,10 @@ public ArrayList<Elemento> getAll(){
 		try {
 			stmt=FactoryConexion.getInstancia().getConn()
 					.prepareStatement(
-					"DELETE FROM elemento where nombre=?",
+					"DELETE FROM elemento where id_elemento=?",
 					PreparedStatement.RETURN_GENERATED_KEYS
 					);
-			stmt.setString(1, e.getNombre());
+			stmt.setInt(1, e.getId_elemento());
 			stmt.executeUpdate();
 			keyResultSet=stmt.getGeneratedKeys();
 			if(keyResultSet!=null && keyResultSet.next()){
@@ -305,12 +305,13 @@ public ArrayList<Elemento> getAll(){
 		try {
 			stmt=FactoryConexion.getInstancia().getConn()
 					.prepareStatement(
-					"UPDATE  elemento SET id_tipo =? where nombre=? ",
+					"UPDATE  elemento SET id_tipo =?, nombre=? where id_elemento=? ",
 					PreparedStatement.RETURN_GENERATED_KEYS
 					);
 			
 			stmt.setInt(1, e.getTipoElemento().getId_tipo());
 			stmt.setString(2, e.getNombre());
+			stmt.setInt(3, e.getId_elemento());
 			
 			stmt.executeUpdate();
 			keyResultSet=stmt.getGeneratedKeys();

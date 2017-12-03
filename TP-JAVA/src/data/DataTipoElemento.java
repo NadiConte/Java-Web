@@ -154,10 +154,10 @@ public ArrayList<TipoElemento> getAll(){
 		try {
 			stmt=FactoryConexion.getInstancia().getConn()
 					.prepareStatement(
-					"DELETE FROM tipoelemento where nombre=?",
+					"DELETE FROM tipoelemento where id_tipo=?",
 					PreparedStatement.RETURN_GENERATED_KEYS
 					);
-			stmt.setString(1, t.getNombre());
+			stmt.setInt(1, t.getId_tipo());
 			stmt.executeUpdate();
 			keyResultSet=stmt.getGeneratedKeys();
 			if(keyResultSet!=null && keyResultSet.next()){
