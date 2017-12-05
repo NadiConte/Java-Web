@@ -14,10 +14,6 @@
 <body>
 	<form method="post" action="Elemento">
 	
-	<div class="form-group">
-		<label>ID</label>
-		<input type="text" name="id"readonly>
-	</div>
 	
 	<div class="form-group">
 		<label>Nombre</label>
