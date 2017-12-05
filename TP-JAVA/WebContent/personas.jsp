@@ -56,7 +56,7 @@
 			</tbody>
 		</table>
 	</div>
-	<a href="crearPersona.jsp"><button>Nuevo Persona</button></a>
+	<a href="crearPersona.jsp"><button>Nueva Persona</button></a>
 	<a href="menuPrincipal.jsp"><button>Volver</button></a>
 	
 	

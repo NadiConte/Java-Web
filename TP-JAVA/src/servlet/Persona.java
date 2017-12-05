@@ -63,7 +63,7 @@ if (request.getParameter("mapear")!= null) {
 			Categoria c = new Categoria();
 			
 			
-			p.setId_persona(Integer.parseInt(request.getParameter("id")));
+			//p.setId_persona(Integer.parseInt(request.getParameter("id")));
 			p.setNombre(request.getParameter("nombre"));
 			p.setApellido(request.getParameter("apellido"));
 			p.setUsuario(request.getParameter("usuario"));
@@ -99,7 +99,7 @@ if (request.getParameter("mapear")!= null) {
 			
 
 			
-			p.setId_persona(Integer.parseInt(request.getParameter("id")));
+			//p.setId_persona(Integer.parseInt(request.getParameter("id")));
 			p.setNombre(request.getParameter("nombre"));
 			p.setApellido(request.getParameter("apellido"));
 			p.setDni(request.getParameter("dni"));
