@@ -27,32 +27,30 @@
 	<div class="form-group">
 		<label>ID</label>
 
-		<input type="text" class="form-control" name="id" value=<%= p.getId_persona() %> readonly/>
-
 	</div>
 	
 	<div class="form-group">
 		<label>Nombre</label>
-		<input type="text" class="form-control" name="nombre" value=<%= p.getNombre()%>>
+		<input type="text" class="form-control" name="nombre" value=<%=""%>>
 	</div>
 	
 	<div class="form-group">
 		<label>Apellido</label>
-		<input type="text" class="form-control" name="apellido" value=<%= p.getApellido() %>>
+		<input type="text" class="form-control" name="apellido" value=<%=""%>>
 	</div>
 	
 	<div class="form-group">
 		<label>Dni</label>
-		<input type="text" class="form-control" name="dni" value=<%= p.getDni()%> >
+		<input type="text" class="form-control" name="dni" value=<%=""%> >
 	</div>
 	<div class="form-group">
 		<label>Usuario</label>
-		<input type="text" class="form-control" name="usuario" value=<%= p.getUsuario() %>>
+		<input type="text" class="form-control" name="usuario" value=<%=""%>>
 	</div>
 	
 	<div class="form-group">
 		<label>Contraseña</label>
-		<input type="password" class="form-control" name="contraseña" value=<%= p.getContraseña()%>>
+		<input type="password" class="form-control" name="contraseña" value=<%=""%>>
 	</div>
 
 	<div class="form-group">
