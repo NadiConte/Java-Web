@@ -17,7 +17,7 @@
 <title>Modificar Persona</title>
 </head>
 <body>
-Modifica
+Modificar
 
 <%
 
