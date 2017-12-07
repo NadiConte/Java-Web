@@ -25,7 +25,7 @@
 
 	<%CtrlABMTipo ctt= new CtrlABMTipo();
 		ArrayList<TipoElemento> tipos=new ArrayList<TipoElemento>();
-		tipos=ctt.getAll(); %>
+		tipos = ctt.getAll(); %>
 		<select name="id_tipo" id="tipo"style="width: 154px; height: 29px">
 		
 		<%for(TipoElemento t : tipos){%>
