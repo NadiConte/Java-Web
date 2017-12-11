@@ -1,9 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <%@page import="controlers.CtrlABMElemento"%>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="entity.Reserva" %>
 <%@ page import="entity.Elemento" %>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -39,12 +40,6 @@
 		</select>	
 	</div>	
 	
-	
-	
-	<div class="form-group">
-		<label>Elemento</label>
-		<input type="text" name="elemento">
-	</div>
 	
 
 	<button type="input" name="crear">Aceptar</button>

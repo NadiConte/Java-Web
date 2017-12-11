@@ -59,5 +59,11 @@ public class Reserva {
 		this.descripcion = descripcion;
 	}
 	
+	@Override
+	public boolean equals(Object r){
+		return (r instanceof Reserva) &&
+				(((Reserva)r).getId_reserva() == this.getId_reserva());
+	}
+	
 	
 }
