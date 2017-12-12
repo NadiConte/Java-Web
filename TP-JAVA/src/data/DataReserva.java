@@ -78,6 +78,7 @@ public ArrayList<Reserva> getReservasdePer(Persona per){ //OBTENER RESERVAS POR 
 					r.setId_reserva(rs.getInt("id_reserva"));
 					r.setFecha_hora(rs.getTimestamp("fecha_hora")); 
 					r.setDescripcion(rs.getString("descripcion"));
+					
 					r.getElemento().setId_elemento(rs.getInt("id_elemento"));
 		 			r.getElemento().setNombre(rs.getString("e.nombre"));
 		 			reservas.add(r);

@@ -21,7 +21,7 @@
 		CtrlABMPersona ctrlPer = new CtrlABMPersona();
 		Persona per = ctrlPer.getLogged();
 		
-		
+		out.print(per.getNombre());
 		res = ctrl.reservasDePer(per);
 	%>
 	<div> 

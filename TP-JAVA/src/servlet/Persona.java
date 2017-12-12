@@ -66,9 +66,12 @@ if (request.getParameter("mapear")!= null) {
 			//p.setId_persona(Integer.parseInt(request.getParameter("id")));
 			p.setNombre(request.getParameter("nombre"));
 			p.setApellido(request.getParameter("apellido"));
-			p.setUsuario(request.getParameter("usuario"));
-			p.setContraseña(request.getParameter("contraseña"));
-			p.setHabilitado(Boolean.parseBoolean(request.getParameter("habilitado")));
+			p.setDni(request.getParameter("dni"));
+			//p.setUsuario(request.getParameter("usuario"));
+			//p.setContraseña(request.getParameter("contraseña"));
+			boolean is = request.getParameter( "habilitado" ) != null;
+
+			p.setHabilitado(is);
 			int id_cat=Integer.parseInt(request.getParameter("id_categoria"));
 			p.setLogged(false);
 			
@@ -103,9 +106,11 @@ if (request.getParameter("mapear")!= null) {
 			p.setNombre(request.getParameter("nombre"));
 			p.setApellido(request.getParameter("apellido"));
 			p.setDni(request.getParameter("dni"));
-			p.setUsuario(request.getParameter("usuario"));
-			p.setContraseña(request.getParameter("contraseña"));
-			p.setHabilitado(true);//LO PONGO ASI PARA VER SI FUNCIONA
+			//p.setUsuario(request.getParameter("usuario"));
+			//p.setContraseña(request.getParameter("contraseña"));
+			boolean is = request.getParameter( "habilitado" ) != null;
+
+			p.setHabilitado(is);
 			int id_cat=Integer.parseInt(request.getParameter("id_categoria"));
 			p.setLogged(false);
 

@@ -24,35 +24,41 @@
 %>
 <form method="post" action="Persona">
 
-	<div class="form-group">
-		<label>ID</label>
-
-	</div>
 	
 	<div class="form-group">
 		<label>Nombre</label>
-		<input type="text" class="form-control" name="nombre" value=<%=""%>>
+		<input type="text" class="form-control" name="nombre">
 	</div>
 	
 	<div class="form-group">
 		<label>Apellido</label>
-		<input type="text" class="form-control" name="apellido" value=<%=""%>>
+		<input type="text" class="form-control" name="apellido">
 	</div>
 	
 	<div class="form-group">
 		<label>Dni</label>
-		<input type="text" class="form-control" name="dni" value=<%=""%> >
+		<input type="text" class="form-control" name="dni" >
 	</div>
+	
 	<div class="form-group">
+		<label>Habilitado</label>
+		<input type="checkbox" class="form-control" name="habilitado" >>
+	</div>
+	
+	
+	<%--<div class="form-group">
 		<label>Usuario</label>
-		<input type="text" class="form-control" name="usuario" value=<%=""%>>
+		<input type="text" class="form-control" name="usuario" >
 	</div>
 	
 	<div class="form-group">
 		<label>Contraseña</label>
-		<input type="password" class="form-control" name="contraseña" value=<%=""%>>
+		<input type="password" class="form-control" name="contraseña" >
 	</div>
-
+	--%>
+	
+	
+	
 	<div class="form-group">
 		<label>Categoria</label>
 

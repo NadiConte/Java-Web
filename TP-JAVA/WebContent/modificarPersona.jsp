@@ -43,16 +43,11 @@ Modificar
 	
 	<div class="form-group">
 		<label>Dni</label>
-		<input type="text" class="form-control" name="dni" value=<%= p.getDni()%>  readonly>
+		<input type="text" class="form-control" name="dni" value=<%= p.getDni()%>>
 	</div>
 	<div class="form-group">
 		<label>Usuario</label>
-		<input type="text" class="form-control" name="usuario" value=<%= p.getUsuario() %>>
-	</div>
-	
-	<div class="form-group">
-		<label>Contraseña</label>
-		<input type="password" class="form-control" name="contraseña" value=<%= p.getContraseña()%>>
+		<input type="text" class="form-control" name="usuario" value=<%= p.getUsuario() %> readonly>
 	</div>
 	
 	<div class="form-group">
