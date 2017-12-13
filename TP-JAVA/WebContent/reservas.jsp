@@ -23,7 +23,7 @@
 		
 		out.print(per.getNombre());
 		res = ctrl.reservasDePer(per);
-
+    //funciona perfecto.
 	%>
 	<div> 
 		<table>
