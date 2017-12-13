@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import entity.Elemento;
 import entity.Persona;
 import entity.Reserva;
+import entity.TipoElemento;
 
 public class DataReserva {
 
@@ -63,11 +64,10 @@ public ArrayList<Reserva> getReservasdePer(Persona per){ //OBTENER RESERVAS POR 
 			stmt = FactoryConexion.getInstancia().getConn()
 					.prepareStatement("select * from reserva r "
 		 			+ "inner join elemento e on r.id_elemento=e.id_elemento "
-		 			+ "where id_persona = ? and fecha_hora > ?",
+		 			+ "where id_persona = ?",
 		 			PreparedStatement.RETURN_GENERATED_KEYS);
 			
 			stmt.setInt(1, per.getId_persona());
-			stmt.setString(2, dateFormat.format(date));
 			
 			
 			rs = stmt.executeQuery();
@@ -104,13 +104,13 @@ public ArrayList<Reserva> getReservasdePer(Persona per){ //OBTENER RESERVAS POR 
 		try {
 			stmt=FactoryConexion.getInstancia().getConn()
 					.prepareStatement(
-					"insert into reserva(fecha_hora, descripcion, id_elemento, id_persona) values (?,?,?,?)",
+					"insert into reserva (descripcion, id_elemento, id_persona) values (?,?,?)",
 					PreparedStatement.RETURN_GENERATED_KEYS
 					);
-			stmt.setTimestamp(1, new java.sql.Timestamp(r.getFecha_hora().getTime()));
- 			stmt.setString(2, r.getDescripcion());
- 			stmt.setInt(3, r.getElemento().getId_elemento());
- 			stmt.setInt(4, r.getPersona().getId_persona());
+			//stmt.setTimestamp(1, new java.sql.Timestamp(r.getFecha_hora().getTime()));
+ 			stmt.setString(1, r.getDescripcion());
+ 			stmt.setInt(2, r.getElemento().getId_elemento());
+ 			stmt.setInt(3, r.getPersona().getId_persona());
 			stmt.executeUpdate();
 			keyResultSet=stmt.getGeneratedKeys();
 			if(keyResultSet!=null && keyResultSet.next()){
@@ -212,5 +212,32 @@ public ArrayList<Reserva> getReservasdePer(Persona per){ //OBTENER RESERVAS POR 
 		}
 		
 	}
-	
+	public void cancelar(Reserva r) {
+		 		PreparedStatement stmt=null;
+		 	
+		  		try {
+		 			stmt=FactoryConexion.getInstancia().getConn()
+		 				.prepareStatement(
+		 					"update reservas set estado='cancelada' where id_reserva=?"					
+		 					);
+		 			stmt.setInt(1, r.getId_reserva());			
+		 		
+		 			stmt.executeUpdate();	
+		 			stmt = FactoryConexion.getInstancia().getConn()
+		 					.prepareStatement("update reservas set estado='cancelada' where id_reserva=?");
+		 			stmt.setInt(1, r.getId_reserva());
+		 
+		 			stmt.executeUpdate();
+		  		} catch (SQLException e) {
+		  			e.printStackTrace();
+		  		}
+		  		try {
+		 		if(stmt!=null)stmt.close();
+		 			if (stmt != null)
+		 				stmt.close();
+		  			FactoryConexion.getInstancia().releaseConn();
+		  		} catch (SQLException e) {
+		  			e.printStackTrace();
+		  		}
+		  	}
 }

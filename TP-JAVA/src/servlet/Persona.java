@@ -69,15 +69,15 @@ if (request.getParameter("mapear")!= null) {
 			p.setDni(request.getParameter("dni"));
 			//p.setUsuario(request.getParameter("usuario"));
 			//p.setContraseña(request.getParameter("contraseña"));
-			boolean is = request.getParameter( "habilitado" ) != null;
 
-			p.setHabilitado(is);
+
+			p.setHabilitado(Boolean.parseBoolean(request.getParameter("habilitado")));
 			int id_cat=Integer.parseInt(request.getParameter("id_categoria"));
 			p.setLogged(false);
 			
 			System.out.println(p.isHabilitado());
 			System.out.println(p.getNombre());
-			
+			p.setContraseña("mario");
 			c=ctp.getByID(id_cat);
 			p.setCategoria(c);
 			
@@ -85,7 +85,7 @@ if (request.getParameter("mapear")!= null) {
 			System.out.println(c.getDescripcion());
 			System.out.println(p.getCategoria().getDescripcion());
 
-			
+			p.setId_persona(Integer.parseInt(request.getParameter("id")));
 			ctp.update(p);
 			System.out.println(p.getCategoria().getDescripcion());
 

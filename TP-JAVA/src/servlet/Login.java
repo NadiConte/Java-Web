@@ -53,22 +53,37 @@ public class Login extends HttpServlet {
 					request.setAttribute("listaPersonas", ctrl.getAll());
 					
 					request.getSession().setAttribute("user", pers);
+					
+					
+					System.out.println();
+
+
+					
+					request.getRequestDispatcher("menuPrincipal.jsp").forward(request, response);
+					//response.getWriter().append(user).append(" ").append(pass);
+				
+				
+				
 				}
 			} catch (Exception e) {
 				System.out.println("error");
+			
+				
+			
 			}
 			
-
-			System.out.println();
-
+			//System.out.println();
+			request.getRequestDispatcher("PaginaError.jsp").forward(request, response);
 
 			
-			request.getRequestDispatcher("menuPrincipal.jsp").forward(request, response);
+			//request.getRequestDispatcher("menuPrincipal.jsp").forward(request, response);
 			//response.getWriter().append(user).append(" ").append(pass);
 			
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+
+			
 		}
 	}
 

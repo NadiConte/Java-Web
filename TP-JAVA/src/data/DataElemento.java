@@ -207,8 +207,8 @@ public ArrayList<Elemento> getAll(){
  		ResultSet rs=null;
  		try {
  			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
- 					"select id_elemento, e.nombre, id_tipo, t.nombre, cantMaxima,tiempoMax,diasAnticipacion"
- 					+ " from elementos e "
+ 					"select id_elemento, e.nombre, e.id_tipo, t.nombre, cantMaxima,tiempoMax,diasAnticipacion"
+ 					+ " from elemento e "
  					+ "inner join tipoelemento t on e.id_tipo=t.id_tipo where id_elemento=?");
  			stmt.setInt(1, id);
  			rs=stmt.executeQuery();

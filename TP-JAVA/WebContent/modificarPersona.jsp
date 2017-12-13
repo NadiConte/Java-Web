@@ -64,7 +64,7 @@ Modificar
 		<select name="id_categoria" id="tipo"style="width: 154px; height: 29px">
 		
 		<%for(Categoria c : cats){%>
-		<option value="<%=c.getId_categoria()%>"><%=c.getDescripcion()%></option><%} %>	
+		<option value="<%=c.getId_categoria()%>"<%if (c.getId_categoria()==p.getCategoria().getId_categoria()) { %> selected <% }%>><%=c.getDescripcion()%></option><%} %>	
 		
 		</select>	
 	</div>	

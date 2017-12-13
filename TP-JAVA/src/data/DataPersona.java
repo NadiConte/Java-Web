@@ -193,9 +193,10 @@ public class DataPersona {
 		try {
 			stmt=FactoryConexion.getInstancia().getConn()
 					.prepareStatement(
-					"UPDATE  persona "
-					+ "SET dni=?, nombre=? , apellido=?, usuario=?, contraseña=?, habilitado=?, id_categoria=? "
-					+ "where id_persona=? ",
+					//"UPDATE  persona "
+					//+ "SET dni=?, nombre=? , apellido=?, usuario=?, contraseña=?, habilitado=?, id_categoria=? "
+					//+ "where id_persona=? "
+					"UPDATE  persona SET dni=?, nombre=? , apellido=?,usuario=?, contraseña=?, habilitado=?,id_categoria=? where id_persona=? ",
 					PreparedStatement.RETURN_GENERATED_KEYS
 					);
 			
