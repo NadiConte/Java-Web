@@ -104,14 +104,15 @@ public ArrayList<Reserva> getReservasdePer(Persona per){ //OBTENER RESERVAS POR 
 		try {
 			stmt=FactoryConexion.getInstancia().getConn()
 					.prepareStatement(
-					"insert into reserva (descripcion, id_elemento, id_persona) values (?,?,?)",
+					"insert into reserva (descripcion, id_elemento, id_persona, fecha_hora) values (?,?,?,?)",
 					PreparedStatement.RETURN_GENERATED_KEYS
 					);
 			//stmt.setTimestamp(1, new java.sql.Timestamp(r.getFecha_hora().getTime()));
  			stmt.setString(1, r.getDescripcion());
  			stmt.setInt(2, r.getElemento().getId_elemento());
  			stmt.setInt(3, r.getPersona().getId_persona());
-			stmt.executeUpdate();
+			stmt.setTimestamp(4, new java.sql.Timestamp(r.getFecha_hora().getTime()));
+ 			stmt.executeUpdate();
 			keyResultSet=stmt.getGeneratedKeys();
 			if(keyResultSet!=null && keyResultSet.next()){
 				r.setId_reserva(keyResultSet.getInt(1));

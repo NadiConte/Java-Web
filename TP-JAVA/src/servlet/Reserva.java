@@ -59,21 +59,21 @@ public class Reserva extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-if (request.getParameter("crear")!= null) {
+			if (request.getParameter("crear")!= null) {
 			
-			entity.Reserva e = new entity.Reserva();
-			CtrlABMReserva cte = new CtrlABMReserva();
-			SimpleDateFormat f= new SimpleDateFormat("dd/MM/yyyy HH:mm");
-			e.setDescripcion(request.getParameter("descripcion"));
-			java.util.Date fechaHora = null;
-			String fecha = request.getParameter("fecha_hora");
-			
-			try {
-				fechaHora = f.parse(fecha);
-			} catch (ParseException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+				entity.Reserva r = new entity.Reserva();
+				CtrlABMReserva cte = new CtrlABMReserva();
+				SimpleDateFormat f= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				r.setDescripcion(request.getParameter("descripcion"));
+				java.util.Date fechaHora = null;
+				String fecha = request.getParameter("fecha_hora");
+				
+				try {
+					fechaHora = f.parse(fecha);
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
 			entity.Elemento elemento = new entity.Elemento();
 			controlers.CtrlABMElemento ce = new controlers.CtrlABMElemento();
@@ -83,17 +83,17 @@ if (request.getParameter("crear")!= null) {
 			CtrlABMPersona cp = new CtrlABMPersona();
 			
 			p = cp.getById(Integer.parseInt(request.getParameter("personaLogueada")));
-			e.setFecha_hora(fechaHora);
-			e.setElemento(elemento);
-			e.setPersona(p);
-			
-			
+			r.setFecha_hora(fechaHora);
+			r.setElemento(elemento);
+			r.setPersona(p);
+			System.out.println(r.getFecha_hora());
+			System.out.println(r.getPersona().getNombre());
 
 			//Falta setear la fecha que viene de request.getParameter("fecha_hora")) <--- convertir ese String en Date;
 			// e.setFecha_hora(fecha_hora);
 			
 			try {
-				cte.add(e);
+				cte.add(r);
 			} catch (Exception e2) {
 				System.out.println("Aca tira error");
 			}
