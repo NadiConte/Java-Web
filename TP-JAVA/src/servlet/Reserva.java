@@ -63,9 +63,18 @@ if (request.getParameter("crear")!= null) {
 			
 			entity.Reserva e = new entity.Reserva();
 			CtrlABMReserva cte = new CtrlABMReserva();
-			
+			SimpleDateFormat f= new SimpleDateFormat("dd/MM/yyyy HH:mm");
 			e.setDescripcion(request.getParameter("descripcion"));
+			java.util.Date fechaHora = null;
+			String fecha = request.getParameter("fecha_hora");
 			
+			try {
+				fechaHora = f.parse(fecha);
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+				
 			entity.Elemento elemento = new entity.Elemento();
 			controlers.CtrlABMElemento ce = new controlers.CtrlABMElemento();
 			elemento = ce.getByID(Integer.parseInt(request.getParameter("id_tipo")));
@@ -74,9 +83,11 @@ if (request.getParameter("crear")!= null) {
 			CtrlABMPersona cp = new CtrlABMPersona();
 			
 			p = cp.getById(Integer.parseInt(request.getParameter("personaLogueada")));
-
+			e.setFecha_hora(fechaHora);
 			e.setElemento(elemento);
 			e.setPersona(p);
+			
+			
 
 			//Falta setear la fecha que viene de request.getParameter("fecha_hora")) <--- convertir ese String en Date;
 			// e.setFecha_hora(fecha_hora);
