@@ -48,7 +48,15 @@ public void delete(Reserva r){
 
 public void update(Reserva r){
 	dataRes.update(r);
+	
+	
 }
+
+
+
+
+
+
 
 
 public ArrayList<Reserva> getAll(){

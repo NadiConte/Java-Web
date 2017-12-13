@@ -57,6 +57,7 @@ public class Reserva {
 	public Reserva(Date fecha_hora, String descripcion) {
 		this.fecha_hora = fecha_hora;
 		this.descripcion = descripcion;
+		
 	}
 	
 	@Override

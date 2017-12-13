@@ -4,6 +4,8 @@
 <%@ page import="entity.Reserva" %>
 <%@ page import="entity.Elemento" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="entity.Persona" %>
+<%@ page import="controlers.CtrlABMPersona" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -12,9 +14,18 @@
 <title>Crear Reserva</title>
 </head>
 <body>
+
+<%
+
+CtrlABMPersona ctrlPer = new CtrlABMPersona();
+Persona per = ctrlPer.getLogged();
+
+out.print(per.getNombre());
+%>
+
 <form method="post" action="Reserva">
 
-
+	<input name="personaLogueada" value=<%= per.getId_persona() %> hidden>
 	<div class="form-group">
 		<label>Fecha y Hora</label>
 		<input type="text" name="fecha_hora">

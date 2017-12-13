@@ -23,6 +23,7 @@
 		
 		out.print(per.getNombre());
 		res = ctrl.reservasDePer(per);
+
 	%>
 	<div> 
 		<table>
@@ -31,7 +32,9 @@
 					<th>Fecha y Hora</th>
 					<th>Descripcion</th>
 					<th>Elemento</th>
+					<th>Estado</th>
 			   </tr>
+			    </tr>
 			</thead>
 			<tbody>
 			<% for (Reserva r : res){
@@ -41,10 +44,12 @@
 				<td><%= r.getFecha_hora()%></td>
 				<td><%= r.getDescripcion() %></td>
 				<td><%= r.getElemento().getNombre()%></td>
+					
 				<td>
 				
 					<form method="post" action="Reserva">
-						<button type="input" value=<%= r.getId_reserva() %> name="borrar">Borrar</button>
+				
+						<button type="submit" value=<%= r.getId_reserva() %> name="borrar">cancelar</button>
 					</form>
 				</td>
 			</tr>
