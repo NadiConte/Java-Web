@@ -7,8 +7,7 @@
 <title>PaginaError</title>
 </head>
 <body>
-<h1><b> El usuario o password es incorrecto
-por favor regrese a la pagina anterior y vuelvalo a  intentar</b></h1>
+<h1><b>Las credenciales ingresadas son incorrectas o el usuario no esta habilitado</b></h1>
 </body>
 </html>
 <a href="login.html"><button>Volver</button></a>

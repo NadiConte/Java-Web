@@ -8,16 +8,7 @@ public class Persona {
 	private String usuario;
 	private String contraseña;
 	private boolean habilitado;
-	private boolean logged;
 	
-	public boolean isLogged() {
-		return logged;
-	}
-
-	public void setLogged(boolean logged) {
-		this.logged = logged;
-	}
-
 	private Categoria categoria;
 		
 	public String getUsuario() {

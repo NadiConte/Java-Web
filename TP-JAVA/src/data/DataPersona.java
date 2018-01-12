@@ -28,8 +28,7 @@ public class DataPersona {
 					p.setHabilitado(rs.getBoolean("habilitado"));
 					p.setContraseña(rs.getString("contraseña"));
 					p.setUsuario(rs.getString("usuario"));
-		 			p.setLogged(rs.getBoolean("logged_user"));
-					p.getCategoria().setId_categoria(rs.getInt("id_categoria"));
+		 			p.getCategoria().setId_categoria(rs.getInt("id_categoria"));
 		 			p.getCategoria().setNombreCat(rs.getString("c.nombre"));
 					pers.add(p);
 				}
@@ -97,7 +96,7 @@ public class DataPersona {
 		ResultSet rs=null;
 		try {
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
-					"select id_persona, p.nombre, apellido, dni, habilitado, p.id_categoria, c.nombre , logged_user from persona p "
+					"select id_persona, p.nombre, apellido, dni, habilitado, p.id_categoria, c.nombre from persona p "
 					+ "inner join categoria c on p.id_categoria=c.id_categoria where id_persona=?");
 			stmt.setInt(1, id);
 			rs=stmt.executeQuery();
@@ -111,8 +110,7 @@ public class DataPersona {
 				p.setHabilitado(rs.getBoolean("habilitado"));
 				p.getCategoria().setId_categoria(rs.getInt("id_categoria"));
 				p.getCategoria().setNombreCat(rs.getString("nombre")); 	
-	 			p.setLogged(rs.getBoolean("logged_user"));
-			}
+	 		}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -225,8 +223,7 @@ public class DataPersona {
 		}
 	}
 	
-	//pase el metodo tal cual estaba antes, me parece que estaria correcto asi
-	public Boolean validarUsuario(Persona per) {
+	public Boolean isUserValid(Persona per) {
 		int aux = 0;
 		ResultSet rs=null;
 		PreparedStatement stmt=null;
@@ -241,80 +238,42 @@ public class DataPersona {
 			
 			rs= stmt.executeQuery();
 		if(rs!=null && rs.next() && rs.getInt("habilitado")==1){
-			aux = 1;
-			this.storeLoggedUser(rs.getInt("id_persona"));
-			
-		}else{
-			aux = 2;
-		}
+			return true;}	
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-		if (aux == 1) {
-			return true;
-		} else 
-			return false; 
-	}
+		return false;
+		
 
-	private void storeLoggedUser(int idLogueada) {
-		PreparedStatement stmt=null;
-		ResultSet keyResultSet=null;
-			try {
-				stmt=FactoryConexion.getInstancia().getConn()
-						.prepareStatement(
-						"UPDATE  persona SET logged_user=? where id_persona=? ",
-						PreparedStatement.RETURN_GENERATED_KEYS
-						);
-				
-			stmt.setInt(1, 1);
-			stmt.setInt(2, idLogueada);
-			stmt.executeUpdate();
-			keyResultSet=stmt.getGeneratedKeys();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}}
-	
 
-			public void cleanLoggedUser() {
-				PreparedStatement stmt=null;
-				ResultSet keyResultSet=null;
-				ArrayList<TipoElemento> tipos= new ArrayList<TipoElemento>();
-				try {
-					stmt=FactoryConexion.getInstancia().getConn()
-							.prepareStatement("UPDATE persona SET logged_user = 0",
-									PreparedStatement.RETURN_GENERATED_KEYS);
-					stmt.executeUpdate();
-					keyResultSet=stmt.getGeneratedKeys();
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-	
+
 }
-
-	public Persona getLogged() {
-		Persona perLogueada = new Persona();
+	
+	public Persona validarUsuario(String user, String pass){
+		Persona p=null;
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
 		try {
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
-					"select * from persona p where logged_user=?");
-			stmt.setInt(1, 1);
+					"select id_persona, p.nombre, apellido, dni, habilitado, p.id_categoria, c.nombre from persona p "
+					+ "inner join categoria c on p.id_categoria=c.id_categoria where usuario=? and contraseña = ? and habilitado = 1");
+			stmt.setString(1, user);
+			stmt.setString(2, pass);
+			
 			rs=stmt.executeQuery();
-			if(rs!=null && rs.next()){		
-		perLogueada.setCategoria(new Categoria());
-		perLogueada.setId_persona(rs.getInt("id_persona"));
-		perLogueada.setNombre(rs.getString("nombre"));
-		perLogueada.setApellido(rs.getString("apellido"));
-		perLogueada.setDni(rs.getString("dni"));
-		perLogueada.setHabilitado(rs.getBoolean("habilitado"));
-		perLogueada.getCategoria().setId_categoria(rs.getInt("id_categoria"));
-		perLogueada.getCategoria().setNombreCat(rs.getString("nombre")); 
-	
-	
-}
+			if(rs!=null && rs.next()){
+				p=new Persona();
+				p.setCategoria(new Categoria());
+				p.setId_persona(rs.getInt("id_persona"));
+				p.setNombre(rs.getString("nombre"));
+				p.setApellido(rs.getString("apellido"));
+				p.setDni(rs.getString("dni"));
+				p.setHabilitado(rs.getBoolean("habilitado"));
+				p.getCategoria().setId_categoria(rs.getInt("id_categoria"));
+				p.getCategoria().setNombreCat(rs.getString("nombre")); 
+				
+			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -328,7 +287,9 @@ public class DataPersona {
 			e.printStackTrace();
 		}
 		
-		return perLogueada;
-	}}
+		return p;
+	}
+
+}
 
 

@@ -19,8 +19,6 @@
 		ArrayList <Reserva> res = new ArrayList<Reserva>();
 		CtrlABMReserva ctrl = new CtrlABMReserva();
 		CtrlABMPersona ctrlPer = new CtrlABMPersona();
-		//Persona per = ctrlPer.getLogged();
-		
 		Persona per=(Persona)session.getAttribute("user");
 		out.print(per.getNombre());
 		res = ctrl.reservasDePer(per);

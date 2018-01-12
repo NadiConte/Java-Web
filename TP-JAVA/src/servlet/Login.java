@@ -41,18 +41,13 @@ public class Login extends HttpServlet {
 			String user=request.getParameter("user");
 			String pass=request.getParameter("pass");
 			
-			Persona per=new Persona();
-			Persona pers = null;
-			per.setUsuario(user);
-			per.setContraseña(pass);
 			CtrlABMPersona ctrl= new CtrlABMPersona();
+			Persona per=ctrl.loguearUsuario(user, pass);
 			
 			try {
-				if(ctrl.validarUSR(per)==true){
-					pers=ctrl.getByDni(per);
+				if(per != null){
 					request.setAttribute("listaPersonas", ctrl.getAll());
-					
-					request.getSession().setAttribute("user", pers);
+					request.getSession().setAttribute("user", per);
 					
 					
 					System.out.println();

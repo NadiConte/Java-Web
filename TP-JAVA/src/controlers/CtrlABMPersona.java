@@ -29,17 +29,6 @@ public class CtrlABMPersona {
 		dataPer.actualizar(newp);
 	}
 		
-	/*public Persona getByDni(Persona p){
-		dataPer= new DataPersona();
-		return this.dataPer.getByDni(p);
-	}
-	
-public Persona getByDni(String dni){
-		Persona p=new Persona();
-		p.setDni(dni);
-		return getByDni(p);
-	}
-	*/
 	
 	public Persona getByDni(Persona pe) {
 		return this.dataPer.getByDni(pe);
@@ -68,12 +57,12 @@ public Persona getByDni(String dni){
 		return dataPer.getAll();
 	}
 		
-
-	
-
 	public Boolean validarUSR(Persona p) {
-		dataPer.cleanLoggedUser();
-		return dataPer.validarUsuario(p);
+		return dataPer.isUserValid(p);
+	}
+	
+	public Persona loguearUsuario(String user, String pass) {
+		return dataPer.validarUsuario(user, pass);
 	}
 
 	public ArrayList<Categoria> getCategorias(){
@@ -81,11 +70,7 @@ public Persona getByDni(String dni){
 	}
 
 
-	public Persona getLogged() {
-		dataPer= new DataPersona();
-		return dataPer.getLogged();
-		
-	}
+	
 
 
 }

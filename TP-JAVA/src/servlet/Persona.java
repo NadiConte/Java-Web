@@ -73,7 +73,6 @@ if (request.getParameter("mapear")!= null) {
 
 			p.setHabilitado(Boolean.parseBoolean(request.getParameter("habilitado")));
 			int id_cat=Integer.parseInt(request.getParameter("id_categoria"));
-			p.setLogged(false);
 			
 			System.out.println(p.isHabilitado());
 			System.out.println(p.getNombre());
@@ -112,8 +111,7 @@ if (request.getParameter("mapear")!= null) {
 
 			p.setHabilitado(is);
 			int id_cat=Integer.parseInt(request.getParameter("id_categoria"));
-			p.setLogged(false);
-
+		
 			c=ctp.getByID(id_cat);
 			p.setCategoria(c);
 			
