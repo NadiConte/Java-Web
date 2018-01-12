@@ -81,7 +81,7 @@ CREATE TABLE `persona` (
   `apellido` varchar(45) DEFAULT NULL,
   `habilitado` tinyint(4) DEFAULT NULL,
   `usuario` varchar(45) DEFAULT NULL,
-  `pass` varchar(45) DEFAULT NULL,
+  `contraseña` varchar(45) DEFAULT NULL,
   `id_categoria` int(11) NOT NULL,
   PRIMARY KEY (`id_persona`),
   KEY `id_categoria_idx` (`id_categoria`),
