@@ -7,7 +7,7 @@
 <title>PaginaError</title>
 </head>
 <body>
-<h1><b>Las credenciales ingresadas son incorrectas o el usuario no esta habilitado</b></h1>
+<h1><b>Las credenciales ingresadas son incorrectas o el usuario se encuentra habilitado</b></h1>
 </body>
 </html>
 <a href="login.html"><button>Volver</button></a>
