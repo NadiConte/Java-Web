@@ -65,11 +65,11 @@ public class Reserva extends HttpServlet {
 				CtrlABMReserva cte = new CtrlABMReserva();
 				SimpleDateFormat f= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				r.setDescripcion(request.getParameter("descripcion"));
-				java.util.Date fechaHora = null;
+				java.util.Date fechaHoraDesde = null;
 				String fecha = request.getParameter("fecha_hora");
 				
 				try {
-					fechaHora = f.parse(fecha);
+					fechaHoraDesde = f.parse(fecha);
 				} catch (ParseException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -83,10 +83,10 @@ public class Reserva extends HttpServlet {
 			CtrlABMPersona cp = new CtrlABMPersona();
 			
 			p = cp.getById(Integer.parseInt(request.getParameter("personaLogueada")));
-			r.setFecha_hora(fechaHora);
+			r.setFecha_hora_desde(fechaHoraDesde);
 			r.setElemento(elemento);
 			r.setPersona(p);
-			System.out.println(r.getFecha_hora());
+			System.out.println(r.getFecha_hora_desde());
 			System.out.println(r.getPersona().getNombre());
 
 			//Falta setear la fecha que viene de request.getParameter("fecha_hora")) <--- convertir ese String en Date;
