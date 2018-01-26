@@ -86,7 +86,7 @@ CREATE TABLE `persona` (
   PRIMARY KEY (`id_persona`),
   KEY `id_categoria_idx` (`id_categoria`),
   CONSTRAINT `id_categoria` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id_categoria`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -95,7 +95,7 @@ CREATE TABLE `persona` (
 
 LOCK TABLES `persona` WRITE;
 /*!40000 ALTER TABLE `persona` DISABLE KEYS */;
-INSERT INTO `persona` VALUES (1,'12345','mario','lopez',1,'mario','mario',1),(2,'67890','maria','gomez',0,'maria','maria',2),(3,'1212','carla','gonzalez',0,NULL,'mario',3);
+INSERT INTO `persona` VALUES (1,'12345','mario','lopez',1,'mario','mario',1),(2,'67890','maria','gomez',0,'maria','maria',2),(3,'1212','carla','gonzalez',0,NULL,'mario',2),(4,'112233','Oscar','Moreno',0,NULL,'mario',3);
 /*!40000 ALTER TABLE `persona` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -108,11 +108,12 @@ DROP TABLE IF EXISTS `reserva`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `reserva` (
   `id_reserva` int(11) NOT NULL AUTO_INCREMENT,
-  `fecha_hora` datetime DEFAULT NULL,
+  `fecha_hora_desde` datetime DEFAULT NULL,
+  `fecha_hora_hasta` datetime DEFAULT NULL,
   `descripcion` varchar(100) DEFAULT NULL,
+  `estado` varchar(45) DEFAULT NULL,
   `id_elemento` int(11) NOT NULL,
   `id_persona` int(11) NOT NULL,
-  `estado` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id_reserva`),
   KEY `id_elemento_idx` (`id_elemento`),
   KEY `d_persona_idx` (`id_persona`),
@@ -127,7 +128,7 @@ CREATE TABLE `reserva` (
 
 LOCK TABLES `reserva` WRITE;
 /*!40000 ALTER TABLE `reserva` DISABLE KEYS */;
-INSERT INTO `reserva` VALUES (1,'2018-05-01 10:00:00','final superior',25,1,NULL);
+INSERT INTO `reserva` VALUES (1,'2018-05-01 10:00:00',NULL,'final superior',NULL,25,1);
 /*!40000 ALTER TABLE `reserva` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -145,7 +146,7 @@ CREATE TABLE `tipoelemento` (
   `tiempoMax` int(11) DEFAULT NULL,
   `diasAnticipacion` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_tipo`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -175,4 +176,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-01-10 19:51:27
+-- Dump completed on 2018-01-25 21:58:34

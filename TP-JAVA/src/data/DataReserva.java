@@ -1,6 +1,7 @@
 package data;
 
 import java.util.Date;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,6 +18,8 @@ import entity.TipoElemento;
 public class DataReserva {
 
 	public ArrayList<Reserva> getAll(){
+		//DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		//java.util.Date date = new Date();
 		
 		Statement stmt=null;
 		ResultSet rs=null;
@@ -31,8 +34,11 @@ public class DataReserva {
 					Reserva r=new Reserva();
 					r.setElemento(new Elemento());
 					r.setId_reserva(rs.getInt("id_reserva"));
-					//r.setFecha_hora(rs.getString("fecha_hora")); ver
+					r.setFecha_hora_desde(rs.getTimestamp("fecha_hora_desde")); 
+					r.setFecha_hora_hasta(rs.getTimestamp("fecha_hora_hasta")); 
+					r.setEstado(rs.getString("estado"));
 					r.setDescripcion(rs.getString("descripcion"));
+					
 					r.getElemento().setId_elemento(rs.getInt("id_elemento"));
 		 			r.getElemento().setNombre(rs.getString("e.nombre"));
 		 			reservas.add(r);
@@ -53,9 +59,6 @@ public class DataReserva {
 	}
 	
 public ArrayList<Reserva> getReservasdePer(Persona per){ //OBTENER RESERVAS POR PERSONA
-	DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-	java.util.Date date = new Date();
-	
 	
 	PreparedStatement stmt=null;
 		ResultSet rs=null;
@@ -76,8 +79,10 @@ public ArrayList<Reserva> getReservasdePer(Persona per){ //OBTENER RESERVAS POR 
 					Reserva r=new Reserva();
 					r.setElemento(new Elemento());
 					r.setId_reserva(rs.getInt("id_reserva"));
-					r.setFecha_hora(rs.getTimestamp("fecha_hora")); 
+					r.setFecha_hora_desde(rs.getTimestamp("fecha_hora_desde")); 
+					r.setFecha_hora_hasta(rs.getTimestamp("fecha_hora_hasta")); 
 					r.setDescripcion(rs.getString("descripcion"));
+					r.setEstado(rs.getString("estado"));
 					
 					r.getElemento().setId_elemento(rs.getInt("id_elemento"));
 		 			r.getElemento().setNombre(rs.getString("e.nombre"));
@@ -104,14 +109,16 @@ public ArrayList<Reserva> getReservasdePer(Persona per){ //OBTENER RESERVAS POR 
 		try {
 			stmt=FactoryConexion.getInstancia().getConn()
 					.prepareStatement(
-					"insert into reserva (descripcion, id_elemento, id_persona, fecha_hora) values (?,?,?,?)",
+					"insert into reserva (descripcion, id_elemento, id_persona, fecha_hora_desde, fecha_hora_hasta, estado) values (?,?,?,?,?,?)",
 					PreparedStatement.RETURN_GENERATED_KEYS
 					);
 			//stmt.setTimestamp(1, new java.sql.Timestamp(r.getFecha_hora().getTime()));
  			stmt.setString(1, r.getDescripcion());
  			stmt.setInt(2, r.getElemento().getId_elemento());
  			stmt.setInt(3, r.getPersona().getId_persona());
-			stmt.setTimestamp(4, new java.sql.Timestamp(r.getFecha_hora().getTime()));
+			stmt.setTimestamp(4, new java.sql.Timestamp(r.getFecha_hora_desde().getTime()));
+			stmt.setTimestamp(5, new java.sql.Timestamp(r.getFecha_hora_hasta().getTime()));
+ 			stmt.setString(6, r.getEstado());
  			stmt.executeUpdate();
 			keyResultSet=stmt.getGeneratedKeys();
 			if(keyResultSet!=null && keyResultSet.next()){
@@ -163,14 +170,16 @@ public ArrayList<Reserva> getReservasdePer(Persona per){ //OBTENER RESERVAS POR 
 		try {
 			stmt=FactoryConexion.getInstancia().getConn()
 					.prepareStatement(
-					"UPDATE  reserva SET fecha_hora=?, descripcion=?, id_elemento =? where id_reserva=? ",
+					"UPDATE  reserva SET fecha_hora_desde=?, descripcion=?, id_elemento =?, estado=?, fecha_hora_hasta=? where id_reserva=? ",
 					PreparedStatement.RETURN_GENERATED_KEYS
 					);
 			
-			stmt.setString(1, r.getFecha_hora().toString());
+			stmt.setString(1, r.getFecha_hora_desde().toString());
 			stmt.setString(2, r.getDescripcion());
 			stmt.setInt(3, r.getElemento().getId_elemento());
-			stmt.setInt(4, r.getId_reserva());			
+			stmt.setString(4, r.getEstado());
+			stmt.setString(5, r.getFecha_hora_hasta().toString());
+			stmt.setInt(6, r.getId_reserva());			
 			stmt.executeUpdate();
 			keyResultSet=stmt.getGeneratedKeys();
 			if(keyResultSet!=null && keyResultSet.next()){
@@ -219,14 +228,11 @@ public ArrayList<Reserva> getReservasdePer(Persona per){ //OBTENER RESERVAS POR 
 		  		try {
 		 			stmt=FactoryConexion.getInstancia().getConn()
 		 				.prepareStatement(
-		 					"update reservas set estado='cancelada' where id_reserva=?"					
+		 					"update reservas set estado=? where id_reserva=?"					
 		 					);
-		 			stmt.setInt(1, r.getId_reserva());			
+		 			stmt.setString(1,"cancelada");
+		 			stmt.setInt(2, r.getId_reserva());			
 		 		
-		 			stmt.executeUpdate();	
-		 			stmt = FactoryConexion.getInstancia().getConn()
-		 					.prepareStatement("update reservas set estado='cancelada' where id_reserva=?");
-		 			stmt.setInt(1, r.getId_reserva());
 		 
 		 			stmt.executeUpdate();
 		  		} catch (SQLException e) {
@@ -241,4 +247,5 @@ public ArrayList<Reserva> getReservasdePer(Persona per){ //OBTENER RESERVAS POR 
 		  			e.printStackTrace();
 		  		}
 		  	}
-}
+}	
+	

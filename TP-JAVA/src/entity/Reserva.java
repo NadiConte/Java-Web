@@ -6,8 +6,10 @@ import java.text.DateFormat;
 public class Reserva {
 	
 	private int id_reserva;
-	private java.util.Date fecha_hora;
+	private java.util.Date fecha_hora_desde;
+	private java.util.Date fecha_hora_hasta;
 	private String descripcion;
+	private String estado;
 	private Elemento elemento;
 	private Persona persona;
 	
@@ -27,12 +29,28 @@ public class Reserva {
 		this.id_reserva = id_reserva;
 	}
 	
-	public java.util.Date getFecha_hora() {
-		return fecha_hora;
+	public java.util.Date getFecha_hora_desde() {
+		return fecha_hora_desde;
 	}
 	
-	public void setFecha_hora(java.util.Date fecha_hora) {
-		this.fecha_hora = fecha_hora;
+	public java.util.Date getFecha_hora_hasta() {
+		return fecha_hora_hasta;
+	}
+
+	public void setFecha_hora_hasta(java.util.Date fecha_hora_hasta) {
+		this.fecha_hora_hasta = fecha_hora_hasta;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public void setFecha_hora_desde(java.util.Date fecha_hora_desde) {
+		this.fecha_hora_desde = fecha_hora_desde;
 	}
 	
 	public String getDescripcion() {
@@ -53,13 +71,14 @@ public class Reserva {
 
 	public Reserva() {
 	}
-
-	public Reserva(Date fecha_hora, String descripcion) {
-		this.fecha_hora = fecha_hora;
-		this.descripcion = descripcion;
-		
-	}
 	
+	public Reserva(java.util.Date fecha_hora_desde, java.util.Date fecha_hora_hasta, String descripcion, String estado) {
+		this.fecha_hora_desde = fecha_hora_desde;
+		this.fecha_hora_hasta = fecha_hora_hasta;
+		this.descripcion = descripcion;
+		this.estado = estado;
+	}
+
 	@Override
 	public boolean equals(Object r){
 		return (r instanceof Reserva) &&
