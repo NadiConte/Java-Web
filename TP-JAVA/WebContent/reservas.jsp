@@ -23,8 +23,13 @@
 		CtrlABMReserva ctrl = new CtrlABMReserva();
 		CtrlABMPersona ctrlPer = new CtrlABMPersona();
 		Persona per=(Persona)session.getAttribute("user");
-		out.print(per.getNombre());
-		res = ctrl.reservasDePer(per);
+		out.print(per.getNombre() + " - " + per.getCategoria().getDescripcion());
+		if (!per.getCategoria().esAdministrador()){
+			res = ctrl.reservasDePer(per);	
+		}else {
+			res = ctrl.getAll();
+		}
+		
     //funciona perfecto.
 	%>
 	<div> 

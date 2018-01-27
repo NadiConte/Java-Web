@@ -4,8 +4,17 @@ public class Categoria {
 	private int id_categoria;
 	private String descripcion;
 	
+	private static int ADMINISTRADOR = 1;
+	private static int ENCARGADO = 2;
+	private static int USUARIO = 3;
+
+	
 	public int getId_categoria() {
 		return id_categoria;
+	}
+	
+	public Boolean esAdministrador () {
+		return this.id_categoria == this.ADMINISTRADOR;
 	}
 	
 	public void setId_categoria(int id_categoria) {
