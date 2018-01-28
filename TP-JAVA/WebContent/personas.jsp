@@ -63,7 +63,7 @@
 		</table>
 	</div>
 	<a href="crearPersona.jsp"><button>Nueva Persona</button></a>
-	<a href="menuPrincipal.jsp"><button>Volver</button></a>
+	<a href="menuAdministrador.jsp"><button>Volver</button></a>
 	
 	
 </body>

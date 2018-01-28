@@ -24,7 +24,7 @@
 		CtrlABMPersona ctrlPer = new CtrlABMPersona();
 		Persona per=(Persona)session.getAttribute("user");
 		out.print(per.getNombre() + " - " + per.getCategoria().getDescripcion());
-		if (!per.getCategoria().esAdministrador()){
+		if (!per.esAdministrador()){
 			res = ctrl.reservasDePer(per);	
 		}else {
 			res = ctrl.getAll();
@@ -36,7 +36,8 @@
 		<table>
 			<thead>
 				<tr>
-					<th>Fecha y Hora</th>
+					<th>Fecha y Hora Desde</th>
+					<th>Fecha y Hora Hasta</th>
 					<th>Descripcion</th>
 					<th>Elemento</th>
 					<th>Estado</th>
@@ -48,7 +49,8 @@
 				
 			%>
 			<tr>
-				<td><%= r.getFecha_hora()%></td>
+				<td><%= r.getFecha_hora_desde()%></td>
+				<td><%= r.getFecha_hora_hasta()%></td>
 				<td><%= r.getDescripcion() %></td>
 				<td><%= r.getElemento().getNombre()%></td>
 					
@@ -65,7 +67,7 @@
 		</table>
 	</div>
 	<a href="crearReserva.jsp"><button>Nueva Reserva</button></a>
-	<a href="menuPrincipal.jsp"><button>Volver</button></a>
+	<a href="menuPrincipal.jsp"><button>Volver</button></a> <%-- ver como volver a cada menu dependiendo el tipo de usuario--%> 
 	
 </body>
 </html>

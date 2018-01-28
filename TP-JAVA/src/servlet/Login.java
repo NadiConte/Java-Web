@@ -53,10 +53,11 @@ public class Login extends HttpServlet {
 					System.out.println();
 
 
-					
-					request.getRequestDispatcher("menuPrincipal.jsp").forward(request, response);
-					//response.getWriter().append(user).append(" ").append(pass);
-				
+					if (!per.esAdministrador()) { //que onda los encargados?
+						request.getRequestDispatcher("menuPrincipal.jsp").forward(request, response);
+						}else {
+						request.getRequestDispatcher("menuAdministrador.jsp").forward(request, response);	
+						}
 				
 				
 				}

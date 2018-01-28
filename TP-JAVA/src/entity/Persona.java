@@ -26,7 +26,15 @@ public class Persona {
 	public void setContraseña(String contraseña) {
 		this.contraseña = contraseña;
 	}
+	
+	public Boolean esAdministrador () {
+		return this.categoria.getId_categoria() == this.categoria.ADMINISTRADOR;
+	}
 
+	public Boolean esEncargado () {
+		return this.categoria.getId_categoria() == this.categoria.ENCARGADO;
+	}
+	
 	public Categoria getCategoria(){
 		return categoria;
 	}

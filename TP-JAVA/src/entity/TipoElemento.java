@@ -7,6 +7,7 @@ public class TipoElemento {
 	private int cantMaxima;
 	private int tiempoMax;
 	private int diasAnticipacion;
+	private Boolean soloEncargado;
 	
 	public int getId_tipo() {
 		return id_tipo;
@@ -14,6 +15,14 @@ public class TipoElemento {
 	
 	public void setId_tipo(int id_tipo) {
 		this.id_tipo = id_tipo;
+	}
+	
+	public Boolean getSoloEncargado() {
+		return soloEncargado;
+	}
+	
+	public void setSoloEncargado(Boolean soloEncargado) {
+		this.soloEncargado = soloEncargado;
 	}
 	
 	public String getNombre() {

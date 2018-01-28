@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import entity.TipoElemento;
 
 public class DataTipoElemento {
+	
 public ArrayList<TipoElemento> getAll(){
 		
 		Statement stmt=null;
@@ -26,6 +27,7 @@ public ArrayList<TipoElemento> getAll(){
 					t.setCantMaxima(rs.getInt("cantMaxima"));
 					t.setTiempoMax(rs.getInt("tiempoMax"));
 					t.setDiasAnticipacion(rs.getInt("diasAnticipacion"));
+					t.setSoloEncargado(rs.getBoolean("solo_encargado"));
 					tipos.add(t);
 				}
 			}
@@ -65,6 +67,7 @@ public ArrayList<TipoElemento> getAll(){
 					t.setCantMaxima(rs.getInt("cantMaxima"));
 					t.setTiempoMax(rs.getInt("tiempoMax"));
 					t.setDiasAnticipacion(rs.getInt("diasAnticipacion"));		
+					t.setSoloEncargado(rs.getBoolean("solo_encargado"));
 			}
 			
 		} catch (SQLException ex) {
@@ -98,7 +101,8 @@ public ArrayList<TipoElemento> getAll(){
 					t.setNombre(rs.getString("nombre"));
 					t.setCantMaxima(rs.getInt("cantMaxima"));
 					t.setTiempoMax(rs.getInt("tiempoMax"));
-					t.setDiasAnticipacion(rs.getInt("diasAnticipacion"));	
+					t.setDiasAnticipacion(rs.getInt("diasAnticipacion"));
+					t.setSoloEncargado(rs.getBoolean("solo_encargado"));
 				}
 			}
 			
@@ -124,7 +128,7 @@ public ArrayList<TipoElemento> getAll(){
 		try {
 			stmt=FactoryConexion.getInstancia().getConn()
 					.prepareStatement(
-					"insert into tipoelemento( nombre,cantMaxima,tiempoMax,diasAnticipacion) values (?,?,?,?)",
+					"insert into tipoelemento( nombre,cantMaxima,tiempoMax,diasAnticipacion,solo_encargado) values (?,?,?,?,?)",
 					PreparedStatement.RETURN_GENERATED_KEYS
 					);
 			
@@ -132,6 +136,8 @@ public ArrayList<TipoElemento> getAll(){
 			stmt.setInt(2, t.getCantMaxima());
 			stmt.setInt(3, t.getTiempoMax());
 			stmt.setInt(4, t.getDiasAnticipacion());
+			stmt.setBoolean(5, t.getSoloEncargado());
+			
 			stmt.executeUpdate();
 			keyResultSet=stmt.getGeneratedKeys();
 			if(keyResultSet!=null && keyResultSet.next()){
@@ -181,7 +187,7 @@ public ArrayList<TipoElemento> getAll(){
  		try {
  			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
  					"update tipoelemento "
- 					+ "set nombre=?, cantMaxima=?, tiempoMax=?, diasAnticipacion=? "
+ 					+ "set nombre=?, cantMaxima=?, tiempoMax=?, diasAnticipacion=?, solo_encargado=? "
  					+ "where id_tipo=?",
  					PreparedStatement.RETURN_GENERATED_KEYS
  					);
@@ -190,6 +196,7 @@ public ArrayList<TipoElemento> getAll(){
  			stmt.setInt(3, t.getTiempoMax());
  			stmt.setInt(4, t.getDiasAnticipacion());
  			stmt.setInt(5, t.getId_tipo());
+			stmt.setBoolean(5, t.getSoloEncargado());
  			stmt.executeUpdate();
  			
 		} catch (SQLException e) {

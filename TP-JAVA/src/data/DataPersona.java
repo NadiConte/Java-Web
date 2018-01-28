@@ -26,7 +26,7 @@ public class DataPersona {
 					p.setApellido(rs.getString("apellido"));
 					p.setDni(rs.getString("dni"));
 					p.setHabilitado(rs.getBoolean("habilitado"));
-					p.setContraseña(rs.getString("contraseña"));
+					p.setContraseña(rs.getString("pass"));
 					p.setUsuario(rs.getString("usuario"));
 		 			p.getCategoria().setId_categoria(rs.getInt("id_categoria"));
 		 			p.getCategoria().setNombreCat(rs.getString("c.nombre"));
@@ -133,7 +133,7 @@ public class DataPersona {
 		try {
 			stmt=FactoryConexion.getInstancia().getConn()
 					.prepareStatement(
-					"insert into persona(dni, nombre, apellido, habilitado, id_categoria) values (?,?,?,?,?)",
+					"insert into persona(dni, nombre, apellido, habilitado, id_categoria, usuario, pass) values (?,?,?,?,?,?,?)",
 					PreparedStatement.RETURN_GENERATED_KEYS
 					);
 			stmt.setString(1, p.getDni());
@@ -141,6 +141,9 @@ public class DataPersona {
  			stmt.setString(3, p.getApellido());
  			stmt.setBoolean(4, p.isHabilitado());
  			stmt.setInt(5, p.getCategoria().getId_categoria());
+ 			stmt.setString(6, p.getUsuario());
+ 			stmt.setString(7, p.getContraseña());
+ 			
 			stmt.executeUpdate();
 			keyResultSet=stmt.getGeneratedKeys();
 			if(keyResultSet!=null && keyResultSet.next()){
@@ -191,10 +194,7 @@ public class DataPersona {
 		try {
 			stmt=FactoryConexion.getInstancia().getConn()
 					.prepareStatement(
-					//"UPDATE  persona "
-					//+ "SET dni=?, nombre=? , apellido=?, usuario=?, contraseña=?, habilitado=?, id_categoria=? "
-					//+ "where id_persona=? "
-					"UPDATE  persona SET dni=?, nombre=? , apellido=?,usuario=?, contraseña=?, habilitado=?,id_categoria=? where id_persona=? ",
+					"UPDATE  persona SET dni=?, nombre=? , apellido=?,usuario=?, pass=?, habilitado=?,id_categoria=? where id_persona=? ",
 					PreparedStatement.RETURN_GENERATED_KEYS
 					);
 			
@@ -230,7 +230,7 @@ public class DataPersona {
 		try {
 			stmt=FactoryConexion.getInstancia().getConn()
 					.prepareStatement(
-					"select * from persona where usuario = ? and contraseña = ?",
+					"select * from persona where usuario = ? and pass = ?",
 					PreparedStatement.RETURN_GENERATED_KEYS
 					);
 			stmt.setString(1, per.getUsuario());
@@ -257,7 +257,7 @@ public class DataPersona {
 		try {
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
 					"select id_persona, p.nombre, apellido, dni, habilitado, p.id_categoria, c.nombre from persona p "
-					+ "inner join categoria c on p.id_categoria=c.id_categoria where usuario=? and contraseña = ? and habilitado = 1");
+					+ "inner join categoria c on p.id_categoria=c.id_categoria where usuario=? and pass = ? and habilitado = 1");
 			stmt.setString(1, user);
 			stmt.setString(2, pass);
 			

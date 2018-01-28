@@ -81,7 +81,7 @@ CREATE TABLE `persona` (
   `apellido` varchar(45) DEFAULT NULL,
   `habilitado` tinyint(4) DEFAULT NULL,
   `usuario` varchar(45) DEFAULT NULL,
-  `contraseña` varchar(45) DEFAULT NULL,
+  `pass` varchar(45) DEFAULT NULL,
   `id_categoria` int(11) NOT NULL,
   PRIMARY KEY (`id_persona`),
   KEY `id_categoria_idx` (`id_categoria`),
@@ -95,7 +95,7 @@ CREATE TABLE `persona` (
 
 LOCK TABLES `persona` WRITE;
 /*!40000 ALTER TABLE `persona` DISABLE KEYS */;
-INSERT INTO `persona` VALUES (1,'12345','mario','lopez',1,'mario','mario',1),(2,'67890','maria','gomez',0,'maria','maria',2),(3,'1212','carla','gonzalez',0,NULL,'mario',2),(4,'112233','Oscar','Moreno',0,NULL,'mario',3);
+INSERT INTO `persona` VALUES (1,'12345','mario','lopez',1,'mario','mario',3),(2,'67890','maria','gomez',1,'admin','admin',1),(3,'1212','carla','gonzalez',1,'pepe','encargado',2),(4,'112233','Oscar','Moreno',0,NULL,'mario',3);
 /*!40000 ALTER TABLE `persona` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -145,17 +145,17 @@ CREATE TABLE `tipoelemento` (
   `cantMaxima` int(11) DEFAULT NULL,
   `tiempoMax` int(11) DEFAULT NULL,
   `diasAnticipacion` int(11) DEFAULT NULL,
+  `solo_encargado` bit DEFAULT NULL,
   PRIMARY KEY (`id_tipo`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
 --
 -- Dumping data for table `tipoelemento`
 --
 
 LOCK TABLES `tipoelemento` WRITE;
 /*!40000 ALTER TABLE `tipoelemento` DISABLE KEYS */;
-INSERT INTO `tipoelemento` VALUES (1,'laboratorio',3,21,7),(2,'proyector',5,6,3),(3,'salon',6,24,30),(4,'pantalla',2,20,21);
+INSERT INTO `tipoelemento` VALUES (1,'laboratorio',3,21,7,1),(2,'proyector',5,6,3,1),(3,'salon',6,24,30,0),(4,'pantalla',2,20,21,0);
 /*!40000 ALTER TABLE `tipoelemento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,4 +176,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-01-25 21:58:34
+-- Dump completed on 2018-01-25 21:58:34persona

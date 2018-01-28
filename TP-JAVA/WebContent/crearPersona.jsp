@@ -46,7 +46,7 @@
 	</div>
 	
 	
-	<%--<div class="form-group">
+	<div class="form-group">
 		<label>Usuario</label>
 		<input type="text" class="form-control" name="usuario" >
 	</div>
@@ -55,7 +55,7 @@
 		<label>Contraseña</label>
 		<input type="password" class="form-control" name="contraseña" >
 	</div>
-	--%>
+	
 	
 	
 	

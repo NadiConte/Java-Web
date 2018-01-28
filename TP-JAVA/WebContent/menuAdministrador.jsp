@@ -9,7 +9,10 @@
 </head>
 <body>
 	
-	<h1><b>Menú Principal - Bienvenido!</b></h1>
-	<div><a href="reservas.jsp">Mis Reservas</a></div>
+	<h1><b>Administrar:</b></h1>
+	<div><a href="personas.jsp">Personas</a></div>
+	<div><a href="tipoElementos.jsp">Tipos de Elementos</a></div>
+	<div><a href="elementos.jsp">Elementos</a></div>
+	<div><a href="reservas.jsp">Reservas</a></div>
 </body>
 </html>

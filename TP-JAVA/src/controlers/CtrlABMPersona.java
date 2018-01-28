@@ -53,7 +53,6 @@ public class CtrlABMPersona {
 	
 	public ArrayList<Persona> getAll(){
 		dataPer= new DataPersona();
-		//return this.pers;
 		return dataPer.getAll();
 	}
 		

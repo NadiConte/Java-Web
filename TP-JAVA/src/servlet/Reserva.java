@@ -61,44 +61,55 @@ public class Reserva extends HttpServlet {
 		doGet(request, response);
 			if (request.getParameter("crear")!= null) {
 			
-				entity.Reserva r = new entity.Reserva();
-				CtrlABMReserva cte = new CtrlABMReserva();
-				SimpleDateFormat f= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				r.setDescripcion(request.getParameter("descripcion"));
-				java.util.Date fechaHoraDesde = null;
-				String fecha = request.getParameter("fecha_hora");
+				CtrlABMPersona cp = new CtrlABMPersona();			
+				Persona p = cp.getById(Integer.parseInt(request.getParameter("personaLogueada")));
+				
+				entity.Elemento elemento = new entity.Elemento();
+				controlers.CtrlABMElemento ce = new controlers.CtrlABMElemento();
+				elemento = ce.getByID(Integer.parseInt(request.getParameter("id_tipo")));
+				
+				
+				if (p.esEncargado() || elemento.getTipoElemento().getSoloEncargado() == false) {
+					entity.Reserva r = new entity.Reserva();
+					CtrlABMReserva cte = new CtrlABMReserva();
+					SimpleDateFormat f= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					r.setDescripcion(request.getParameter("descripcion"));
+					java.util.Date fechaHoraDesde = null;
+					String fecha = request.getParameter("fecha_hora");
+					
+					try {
+						fechaHoraDesde = f.parse(fecha);
+					} catch (ParseException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+				
+				
+				
+				r.setFecha_hora_desde(fechaHoraDesde);
+				r.setElemento(elemento);
+				r.setPersona(p);
+				System.out.println(r.getFecha_hora_desde());
+				System.out.println(r.getPersona().getNombre());
+
+				//Falta setear la fecha que viene de request.getParameter("fecha_hora")) <--- convertir ese String en Date;
+				// e.setFecha_hora(fecha_hora);
 				
 				try {
-					fechaHoraDesde = f.parse(fecha);
-				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					cte.add(r);
+				} catch (Exception e2) {
+					System.out.println("Aca tira error");
+				}
+				request.getRequestDispatcher("reservas.jsp").forward(request, response);}
+				else {
+					request.getRequestDispatcher("errorSoloEncargado.jsp").forward(request, response);
 				}
 				
-			entity.Elemento elemento = new entity.Elemento();
-			controlers.CtrlABMElemento ce = new controlers.CtrlABMElemento();
-			elemento = ce.getByID(Integer.parseInt(request.getParameter("id_tipo")));
-			
-			Persona p = new Persona();
-			CtrlABMPersona cp = new CtrlABMPersona();
-			
-			p = cp.getById(Integer.parseInt(request.getParameter("personaLogueada")));
-			r.setFecha_hora_desde(fechaHoraDesde);
-			r.setElemento(elemento);
-			r.setPersona(p);
-			System.out.println(r.getFecha_hora_desde());
-			System.out.println(r.getPersona().getNombre());
+				
 
-			//Falta setear la fecha que viene de request.getParameter("fecha_hora")) <--- convertir ese String en Date;
-			// e.setFecha_hora(fecha_hora);
 			
-			try {
-				cte.add(r);
-			} catch (Exception e2) {
-				System.out.println("Aca tira error");
-			}
 			
-			request.getRequestDispatcher("reservas.jsp").forward(request, response);
 		}
 		
 	
@@ -124,6 +135,19 @@ public class Reserva extends HttpServlet {
 	
 		
 		request.getRequestDispatcher("reservas.jsp").forward(request, response);
+	}
+	
+	if (request.getParameter("volverMenu")!= null) {
+		CtrlABMPersona cp = new CtrlABMPersona();			
+		Persona p = cp.getById(Integer.parseInt(request.getParameter("personaLogueada")));
+		
+		if (p.esAdministrador()) {
+			request.getRequestDispatcher("menuAdministrador.jsp").forward(request, response);
+		}else {
+			request.getRequestDispatcher("menuPrincipal.jsp").forward(request, response);
+		}
+		
+		
 	}
 }
 
