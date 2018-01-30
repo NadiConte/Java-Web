@@ -53,7 +53,7 @@ public class Login extends HttpServlet {
 					System.out.println();
 
 
-					if (!per.esAdministrador()) { //que onda los encargados?
+					if (!per.esAdministrador()) { 
 						request.getRequestDispatcher("menuPrincipal.jsp").forward(request, response);
 						}else {
 						request.getRequestDispatcher("menuAdministrador.jsp").forward(request, response);	

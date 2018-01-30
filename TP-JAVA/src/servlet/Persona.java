@@ -63,31 +63,19 @@ public class Persona extends HttpServlet {
 			entity.Persona p = new entity.Persona();
 			CtrlABMPersona ctp = new CtrlABMPersona();
 
-			Categoria c = new Categoria();
-
-			// p.setId_persona(Integer.parseInt(request.getParameter("id")));
 			p.setNombre(request.getParameter("nombre"));
 			p.setApellido(request.getParameter("apellido"));
 			p.setDni(request.getParameter("dni"));
-			// p.setUsuario(request.getParameter("usuario"));
-			// p.setContraseña(request.getParameter("contraseña"));
+			p.setUsuario(request.getParameter("usuario"));
+			p.setContraseña(request.getParameter("contraseña"));
 
 			p.setHabilitado(Boolean.parseBoolean(request.getParameter("habilitado")));
 			int id_cat = Integer.parseInt(request.getParameter("id_categoria"));
-
-			System.out.println(p.isHabilitado());
-			System.out.println(p.getNombre());
-			p.setContraseña("mario");
-			c = ctp.getByID(id_cat);
+			Categoria c = ctp.getByID(id_cat);
 			p.setCategoria(c);
-
-			System.out.println(p.isHabilitado());
-			System.out.println(c.getDescripcion());
-			System.out.println(p.getCategoria().getDescripcion());
-
 			p.setId_persona(Integer.parseInt(request.getParameter("id")));
+			
 			ctp.update(p);
-			System.out.println(p.getCategoria().getDescripcion());
 
 			request.getRequestDispatcher("personas.jsp").forward(request, response);
 		}
@@ -105,7 +93,6 @@ public class Persona extends HttpServlet {
 			p.setUsuario(request.getParameter("usuario"));
 			p.setContraseña(request.getParameter("contraseña"));
 			boolean enabled = request.getParameter("habilitado") != null;
-
 			p.setHabilitado(enabled);
 			int id_cat = Integer.parseInt(request.getParameter("id_categoria"));
 
