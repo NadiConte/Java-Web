@@ -57,11 +57,12 @@ public class TipoElemento {
 		this.diasAnticipacion = diasAnticipacion;
 	}
 	
-	public TipoElemento( String nombre, int cantMaxima, int tiempoMax, int diasAnticipacion) {
+	public TipoElemento( String nombre, int cantMaxima, int tiempoMax, int diasAnticipacion, Boolean soloEncargado) {
 		this.nombre = nombre;
 		this.cantMaxima = cantMaxima;
 		this.tiempoMax = tiempoMax;
 		this.diasAnticipacion = diasAnticipacion;
+		this.soloEncargado=soloEncargado;
 	}
 	
 	public TipoElemento() {

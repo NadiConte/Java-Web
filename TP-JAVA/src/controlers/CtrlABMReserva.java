@@ -53,12 +53,6 @@ public void update(Reserva r){
 }
 
 
-
-
-
-
-
-
 public ArrayList<Reserva> getAll(){
 return dataRes.getAll();}
 
@@ -76,6 +70,8 @@ public void cancelarReservas(Persona logged) {
 	dataRes.CancelarReservasDePersona(logged);
 }
 
-
+public ArrayList<Elemento> getElementosDisp(java.util.Date fechaHora, TipoElemento tipo) {
+	return dataRes.elementosDisp(fechaHora, tipo);		
+}
 
 }	

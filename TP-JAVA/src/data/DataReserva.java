@@ -247,5 +247,53 @@ public ArrayList<Reserva> getReservasdePer(Persona per){ //OBTENER RESERVAS POR 
 		  			e.printStackTrace();
 		  		}
 		  	}
+	
+	public ArrayList<Elemento> elementosDisp(java.util.Date fechaHora, TipoElemento t) { 
+		ArrayList<Elemento> disponibles = new ArrayList<Elemento>();
+
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		
+		try {						
+			stmt = FactoryConexion.getInstancia()
+					.getConn().prepareStatement("SET @fecha =  ?, @tipo=?;");
+			stmt.setTimestamp(1, new java.sql.Timestamp(fechaHora.getTime()));
+			stmt.setInt(2,t.getId_tipo());
+			stmt.executeQuery();
+
+			
+			stmt = FactoryConexion.getInstancia()
+					.getConn().prepareStatement("select e.id_elemento, e.nombre from elemento e "
+							+ "inner join tipoelemento t on e.id_tipo=t.id_tipo\n"
+							+ "where t.id_tipo=@tipo and e.id_elemento not in (\n"
+							+ "select e.id_elemento from elemento e left join reserva r on e.id_elemento=r.id_elemento \n" + 
+							"inner join tipoelemento t on e.id_tipo=t.id_tipo\n" + 
+							"where t.id_tipo=@tipo\n" + 
+							"and (@fecha between r.fecha_hora_desde and r.fecha_hora_hasta) "
+							+ "or (date_add(@fecha, INTERVAL t.tiempoMax*60 minute) between r.fecha_hora_desde and r.fecha_hora_hasta)"
+							+ "or(@fecha<r.fecha_hora_desde and date_add(@fecha, INTERVAL t.tiempoMax*60 minute)>r.fecha_hora_hasta)"
+							+ "and (r.estado='activa'))");				
+			
+			rs = stmt.executeQuery();
+			if(rs!=null){
+				while(rs.next()){
+					Elemento e=new Elemento();
+					e.setId_elemento(rs.getInt("id"));
+					e.setNombre(rs.getString("nombre"));					
+					disponibles.add(e);
+				}
+			}
+		} catch (SQLException e) {		
+			e.printStackTrace();	
+		}
+		try {
+			if(rs!=null) rs.close();
+			if(stmt!=null) stmt.close();
+			FactoryConexion.getInstancia().releaseConn();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return disponibles;
+	}
 }	
 	
