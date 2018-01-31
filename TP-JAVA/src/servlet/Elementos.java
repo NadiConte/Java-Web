@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,19 +11,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import controlers.CtrlABMElemento;
 import controlers.CtrlABMTipo;
+import entity.Elemento;
 import entity.TipoElemento;
 
 /**
  * Servlet implementation class Elemento
  */
 @WebServlet("/Elemento")
-public class Elemento extends HttpServlet {
+public class Elementos extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Elemento() {
+    public Elementos() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,6 +35,11 @@ public class Elemento extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+      	CtrlABMElemento cf = new CtrlABMElemento();
+		ArrayList<Elemento> ele = cf.getAll();
+		request.setAttribute("allElements", ele);
+		request.getRequestDispatcher("/elementos.jsp").forward(request, response);
+
 	}
 
 	/**

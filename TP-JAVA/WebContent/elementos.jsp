@@ -1,10 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="entity.TipoElemento" %>
-<%@ page import="controlers.CtrlABMTipo" %>
-<%@ page import="controlers.CtrlABMElemento" %>
-<%@ page import="entity.Elemento" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,14 +10,7 @@
 <title>Menu de Elementos</title>
 </head>
 <body>
-<% 
-		ArrayList<Elemento> ele = new ArrayList<Elemento>();
-      	CtrlABMElemento cf = new CtrlABMElemento();
-		
-		ele =cf.getAll();
-
-	%>
-	<div> 
+	<div class="container"> 
 		<table>
 			<thead>
 				<tr>
@@ -30,21 +21,29 @@
 				</tr>
 			</thead>
 			<tbody>
-			<% for (Elemento e : ele){
-				
-			%>
+				<c:forEach items="${allElements}" var="ele">		
 			<tr>
-				<td><%= e.getId_elemento()%></td>
-				<td><%= e.getNombre()%></td>
-				<td><%= e.getTipoElemento().getNombre() %></td>
+				<td align="left"><input type="text"
+				name="<c:out value="${ele.id_elemento}"/>"
+				value="<c:out value="${ele.id_elemento}"/>" disabled /></td>
+								<td align="left"><input type="text"
+				name="<c:out value="${ele.nombre}"/>"
+				value="<c:out value="${ele.nombre}"/>" disabled /></td>
+								<td align="left"><input type="text"
+				name="<c:out value="${ele.tipoElemento.nombre}"/>"
+				value="<c:out value="${ele.tipoElemento.nombre}"/>" disabled /></td>
 				<td>
 					<form method="post" action="Elemento">
-						<button type="input" value=<%= e.getNombre() %> name="mapear">Modificar</button>
-						<button type="input" value=<%= e.getNombre() %> name="borrar">Borrar</button>
+						<input type="submit" name="mapear"
+						value="Modificar">
+						<input type="submit" name="mapear"
+						value="Modificar">
+						
+						<button type="input" value=<c:out value = "${ele.nombre}"/> name="borrar">Borrar</button>
 					</form>
 				</td>
 			</tr>
-			<% } %>
+			</c:forEach>
 			</tbody>
 		</table>
 	</div>
