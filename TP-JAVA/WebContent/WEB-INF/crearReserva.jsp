@@ -56,6 +56,6 @@ out.print(per.getNombre());
 	<button type="input" name="crear">Aceptar</button>
 </form>
 
-<a href="reservas.jsp"><button>Volver</button></a>
+<a href="/WEB-INF/reservas.jsp"><button>Volver</button></a>
 </body>
 </html>

@@ -41,7 +41,7 @@
 		<button type="input" name="crear">Aceptar</button>
 	</form>
 	
-	<a href="elementos.jsp"><button>Volver</button></a>
+	<a href="/WEB-INF/elementos.jsp"><button>Volver</button></a>
 
 </body>
 </html>

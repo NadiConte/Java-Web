@@ -1,3 +1,4 @@
-/servlet/
-/data/
-/controlers/
+/META-INF/
+/WEB-INF/
+/login.html
+/style/

@@ -10,6 +10,6 @@
 <body>
 	
 	<h1><b>Menú Principal - Bienvenido!</b></h1>
-	<div><a href="reservas.jsp">Mis Reservas</a></div>
+	<div><a href="/WEB-INF/reservas.jsp">Mis Reservas</a></div>
 </body>
 </html>

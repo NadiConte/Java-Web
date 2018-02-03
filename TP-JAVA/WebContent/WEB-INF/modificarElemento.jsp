@@ -51,7 +51,7 @@ Modifica
 	<button type="input" name="modificar">Aceptar</button>
 </form>
 
-<a href="elementos.jsp"><button>Volver</button></a>
+<a href="/WEB-INF/elementos.jsp"><button>Volver</button></a>
 
 </body>
 </html>

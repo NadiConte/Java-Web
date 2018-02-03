@@ -34,6 +34,6 @@
 	<button type="input" name="crear">Aceptar</button>
 </form>
 
-<a href="tipoElementos.jsp"><button>Volver</button></a>
+<a href="/WEB-INF/tipoElementos.jsp"><button>Volver</button></a>
 </body>
 </html>

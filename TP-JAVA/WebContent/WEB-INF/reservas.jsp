@@ -66,8 +66,8 @@
 			</tbody>
 		</table>
 	</div>
-	<a href="crearReserva.jsp"><button>Nueva Reserva</button></a>
-	<a href="menuPrincipal.jsp"><button>Volver</button></a> <%-- ver como volver a cada menu dependiendo el tipo de usuario--%> 
+	<a href="/WEB-INF/crearReserva.jsp"><button>Nueva Reserva</button></a>
+	<a href="/WEB-INF/menuPrincipal.jsp"><button>Volver</button></a> <%-- ver como volver a cada menu dependiendo el tipo de usuario--%> 
 	
 </body>
 </html>

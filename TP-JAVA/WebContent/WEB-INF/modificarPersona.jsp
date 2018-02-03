@@ -73,7 +73,7 @@ Modificar
 	<button type="input" name="modificar">Aceptar</button>
 </form>
 
-<a href="personas.jsp"><button>Volver</button></a>
+<a href="/WEB-INF/personas.jsp"><button>Volver</button></a>
 
 </body>
 </html>
