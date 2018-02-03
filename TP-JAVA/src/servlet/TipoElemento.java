@@ -53,7 +53,7 @@ public class TipoElemento extends HttpServlet {
 			
 			request.setAttribute("tipoElemento", te);
 			
-			request.getRequestDispatcher("modificarTipo.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/modificarTipo.jsp").forward(request, response);
 			
 		}
 		
@@ -70,7 +70,7 @@ public class TipoElemento extends HttpServlet {
 			
 			cte.update(te);
 			
-			request.getRequestDispatcher("tipoElementos.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/tipoElementos.jsp").forward(request, response);
 		}
 		
 		if (request.getParameter("crear")!= null) {
@@ -85,7 +85,7 @@ public class TipoElemento extends HttpServlet {
 			
 			cte.add(te);
 			
-			request.getRequestDispatcher("tipoElementos.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/tipoElementos.jsp").forward(request, response);
 		}
 		
 		if (request.getParameter("borrar")!= null) {
@@ -99,7 +99,7 @@ public class TipoElemento extends HttpServlet {
 			
 			cte.delete(te);
 			
-			request.getRequestDispatcher("tipoElementos.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/tipoElementos.jsp").forward(request, response);
 		}
 	}
 

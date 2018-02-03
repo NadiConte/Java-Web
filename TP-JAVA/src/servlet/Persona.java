@@ -54,7 +54,7 @@ public class Persona extends HttpServlet {
 
 			request.setAttribute("persona", p);
 
-			request.getRequestDispatcher("modificarPersona.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/modificarPersona.jsp").forward(request, response);
 
 		}
 
@@ -77,7 +77,7 @@ public class Persona extends HttpServlet {
 			
 			ctp.update(p);
 
-			request.getRequestDispatcher("personas.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/personas.jsp").forward(request, response);
 		}
 
 		if (request.getParameter("crear") != null) {
@@ -101,7 +101,7 @@ public class Persona extends HttpServlet {
 
 			ctp.add(p);
 
-			request.getRequestDispatcher("personas.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/personas.jsp").forward(request, response);
 		}
 
 		if (request.getParameter("borrar") != null) {
@@ -117,7 +117,7 @@ public class Persona extends HttpServlet {
 			p = ctp.getById(id);
 			ctp.delete(p);
 
-			request.getRequestDispatcher("personas.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/personas.jsp").forward(request, response);
 		}
 	}
 

@@ -101,9 +101,9 @@ public class Reserva extends HttpServlet {
 				} catch (Exception e2) {
 					System.out.println("Aca tira error");
 				}
-				request.getRequestDispatcher("reservas.jsp").forward(request, response);}
+				request.getRequestDispatcher("/WEB-INF/reservas.jsp").forward(request, response);}
 				else {
-					request.getRequestDispatcher("errorSoloEncargado.jsp").forward(request, response);
+					request.getRequestDispatcher("/WEB-INF/errorSoloEncargado.jsp").forward(request, response);
 				}
 				
 				
@@ -134,7 +134,7 @@ public class Reserva extends HttpServlet {
 		
 	
 		
-		request.getRequestDispatcher("reservas.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/reservas.jsp").forward(request, response);
 	}
 	
 	if (request.getParameter("volverMenu")!= null) {
@@ -142,9 +142,9 @@ public class Reserva extends HttpServlet {
 		Persona p = cp.getById(Integer.parseInt(request.getParameter("personaLogueada")));
 		
 		if (p.esAdministrador()) {
-			request.getRequestDispatcher("menuAdministrador.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/menuAdministrador.jsp").forward(request, response);
 		}else {
-			request.getRequestDispatcher("menuPrincipal.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/menuPrincipal.jsp").forward(request, response);
 		}
 		
 		

@@ -38,7 +38,7 @@ public class Elementos extends HttpServlet {
       	CtrlABMElemento cf = new CtrlABMElemento();
 		ArrayList<Elemento> ele = cf.getAll();
 		request.setAttribute("allElements", ele);
-		request.getRequestDispatcher("/elementos.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/elementos.jsp").forward(request, response);
 
 	}
 
@@ -58,7 +58,7 @@ public class Elementos extends HttpServlet {
 			
 			request.setAttribute("elemento", e);
 			
-			request.getRequestDispatcher("modificarElemento.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/modificarElemento.jsp").forward(request, response);
 			
 		}
 		
@@ -79,7 +79,7 @@ public class Elementos extends HttpServlet {
 			
 			cte.update(e);
 			
-			request.getRequestDispatcher("elementos.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/elementos.jsp").forward(request, response);
 		}
 		
 		if (request.getParameter("crear")!= null) {
@@ -103,7 +103,7 @@ public class Elementos extends HttpServlet {
 			
 			cte.add(e);
 			
-			request.getRequestDispatcher("elementos.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/elementos.jsp").forward(request, response);
 		}
 		
 		if (request.getParameter("borrar")!= null) {
@@ -119,7 +119,7 @@ public class Elementos extends HttpServlet {
 			e=cte.getByNombre(nombre);
 			cte.delete(e);
 			
-			request.getRequestDispatcher("elementos.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/elementos.jsp").forward(request, response);
 		}
 	}
 
