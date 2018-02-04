@@ -17,7 +17,7 @@ import entity.TipoElemento;
 /**
  * Servlet implementation class Elemento
  */
-@WebServlet("/Elemento")
+@WebServlet({"/Elemento", "/Elementos", "/elementos"})
 public class Elementos extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -33,19 +33,20 @@ public class Elementos extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
       	CtrlABMElemento cf = new CtrlABMElemento();
 		ArrayList<Elemento> ele = cf.getAll();
 		request.setAttribute("allElements", ele);
-		request.getRequestDispatcher("/WEB-INF/elementos.jsp").forward(request, response);
-
+		request.getRequestDispatcher("elementos.jsp").forward(request, response);
+		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	
 		if (request.getParameter("mapear")!= null) {
 			
 			String nombre = request.getParameter("mapear");
@@ -58,7 +59,7 @@ public class Elementos extends HttpServlet {
 			
 			request.setAttribute("elemento", e);
 			
-			request.getRequestDispatcher("/WEB-INF/modificarElemento.jsp").forward(request, response);
+			request.getRequestDispatcher("/modificarElemento.jsp").forward(request, response);
 			
 		}
 		
@@ -71,16 +72,15 @@ public class Elementos extends HttpServlet {
 			CtrlABMTipo ctt = new CtrlABMTipo();
 
 			
-			e.setId_elemento(Integer.parseInt(request.getParameter("id")));
+			//e.setId_elemento(Integer.parseInt(request.getParameter("id"))); los id son PL - no se modifican
 			e.setNombre(request.getParameter("nombre"));
 			int id_tipo=Integer.parseInt(request.getParameter("id_tipo"));
 			te=ctt.getByID(id_tipo);
 			e.setTipoElemento(te);			
 			
 			cte.update(e);
-			
-			request.getRequestDispatcher("/WEB-INF/elementos.jsp").forward(request, response);
-		}
+			this.doGet(request, response);
+			}
 		
 		if (request.getParameter("crear")!= null) {
 			
@@ -102,9 +102,9 @@ public class Elementos extends HttpServlet {
 
 			
 			cte.add(e);
+			this.doGet(request, response);
 			
-			request.getRequestDispatcher("/WEB-INF/elementos.jsp").forward(request, response);
-		}
+			}
 		
 		if (request.getParameter("borrar")!= null) {
 			
@@ -118,9 +118,8 @@ public class Elementos extends HttpServlet {
 			
 			e=cte.getByNombre(nombre);
 			cte.delete(e);
-			
-			request.getRequestDispatcher("/WEB-INF/elementos.jsp").forward(request, response);
-		}
+			this.doGet(request, response);
+			}
 	}
 
 }

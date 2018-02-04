@@ -77,7 +77,7 @@
 	<button type="input" name="crear">Aceptar</button>
 </form>
 
-<a href="/WEB-INF/personas.jsp"><button>Volver</button></a>
+<a href="/personas.jsp"><button>Volver</button></a>
 
 </body>
 </html>

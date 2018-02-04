@@ -18,7 +18,7 @@ import entity.*;
 /**
  * Servlet implementation class TipoElemento
  */
-@WebServlet("/TipoElemento")
+@WebServlet({"/TipoElemento", "/tipoElementos"})
 public class TipoElemento extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -53,7 +53,7 @@ public class TipoElemento extends HttpServlet {
 			
 			request.setAttribute("tipoElemento", te);
 			
-			request.getRequestDispatcher("/WEB-INF/modificarTipo.jsp").forward(request, response);
+			request.getRequestDispatcher("/modificarTipo.jsp").forward(request, response);
 			
 		}
 		
@@ -70,7 +70,7 @@ public class TipoElemento extends HttpServlet {
 			
 			cte.update(te);
 			
-			request.getRequestDispatcher("/WEB-INF/tipoElementos.jsp").forward(request, response);
+			request.getRequestDispatcher("/tipoElementos.jsp").forward(request, response);
 		}
 		
 		if (request.getParameter("crear")!= null) {
@@ -85,7 +85,7 @@ public class TipoElemento extends HttpServlet {
 			
 			cte.add(te);
 			
-			request.getRequestDispatcher("/WEB-INF/tipoElementos.jsp").forward(request, response);
+			request.getRequestDispatcher("/tipoElementos.jsp").forward(request, response);
 		}
 		
 		if (request.getParameter("borrar")!= null) {
@@ -99,7 +99,7 @@ public class TipoElemento extends HttpServlet {
 			
 			cte.delete(te);
 			
-			request.getRequestDispatcher("/WEB-INF/tipoElementos.jsp").forward(request, response);
+			request.getRequestDispatcher("/tipoElementos.jsp").forward(request, response);
 		}
 	}
 

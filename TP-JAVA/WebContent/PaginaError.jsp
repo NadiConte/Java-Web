@@ -10,4 +10,4 @@
 <h1><b>Las credenciales ingresadas son incorrectas o el usuario se encuentra habilitado</b></h1>
 </body>
 </html>
-<a href="login.html"><button>Volver</button></a>
+<a href="index.jsp"><button>Volver</button></a>

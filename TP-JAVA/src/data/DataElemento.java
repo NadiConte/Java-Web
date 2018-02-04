@@ -300,8 +300,8 @@ public ArrayList<Elemento> getAll(){
 	
 	
 	public void update(Elemento e){
-		PreparedStatement stmt=null;
 		ResultSet keyResultSet=null;
+		PreparedStatement stmt=null;
 		try {
 			stmt=FactoryConexion.getInstancia().getConn()
 					.prepareStatement(

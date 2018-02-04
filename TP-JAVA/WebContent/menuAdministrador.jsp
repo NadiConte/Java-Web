@@ -8,11 +8,13 @@
 <title>Menú Principal</title>
 </head>
 <body>
-	
+			
 	<h1><b>Administrar:</b></h1>
-	<div><a href="/WEB-INF/personas.jsp">Personas</a></div>
-	<div><a href="/WEB-INF/tipoElementos.jsp">Tipos de Elementos</a></div>
-	<div><a href="/WEB-INF/elementos.jsp">Elementos</a></div>
-	<div><a href="/WEB-INF/reservas.jsp">Reservas</a></div>
+	
+	<div><a href="/TPJAVA/personas">Personas</a></div>
+	<div><a href="/TPJAVA/tipoElementos">Tipos de Elementos</a></div>
+	<div><a href="/TPJAVA/elementos">Elementos</a></div>
+	<div><a href="/TPJAVA/reservas">Reservas</a></div>
+	</form>
 </body>
 </html>

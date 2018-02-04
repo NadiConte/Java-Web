@@ -10,7 +10,9 @@
 <title>Menu de Elementos</title>
 </head>
 <body>
-	<div class="container"> 
+	<class="container">
+	<form id="formelementos" name="Elementos"
+			action="Elementos" method="post">
 		<table>
 			<thead>
 				<tr>
@@ -33,12 +35,9 @@
 				name="<c:out value="${ele.tipoElemento.nombre}"/>"
 				value="<c:out value="${ele.tipoElemento.nombre}"/>" disabled /></td>
 				<td>
-					<form method="post" action="Elemento">
-						<input type="submit" name="mapear"
-						value="Modificar">
-						<input type="submit" name="mapear"
-						value="Modificar">
-						
+					<form method="post" action="Elementos">
+
+						<button type="input" value=<c:out value = "${ele.nombre}"/> name="mapear">Modificar</button>
 						<button type="input" value=<c:out value = "${ele.nombre}"/> name="borrar">Borrar</button>
 					</form>
 				</td>
@@ -50,6 +49,6 @@
 	<a href="crearElemento.jsp"><button>Nuevo Elemento</button></a>
 	<a href="menuPrincipal.jsp"><button>Volver</button></a>
 	
-	
+</form>
 </body>
 </html>
