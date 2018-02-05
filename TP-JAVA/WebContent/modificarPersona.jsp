@@ -28,28 +28,35 @@ Modificar
 
 	<div class="form-group">
 		<label>ID</label>
-		<input type="text" class="form-control" name="id" value=<%= p.getId_persona() %> readonly/>
+		<input type="text" name="id" value=<%= p.getId_persona() %> readonly/>
 	</div>
 	
 	<div class="form-group">
 		<label>Nombre</label>
-		<input type="text" class="form-control" name="nombre" value=<%= p.getNombre()%>>
+		<input type="text" name="nombre" value=<%= p.getNombre()%>>
 	</div>
 	
 	<div class="form-group">
 		<label>Apellido</label>
-		<input type="text" class="form-control" name="apellido" value=<%= p.getApellido() %>>
+		<input type="text"  name="apellido" value=<%= p.getApellido() %>>
 	</div>
 	
 	<div class="form-group">
 		<label>Dni</label>
-		<input type="text" class="form-control" name="dni" value=<%= p.getDni()%>>
+		<input type="text"  name="dni" value=<%= p.getDni()%>>
 	</div>
 	<div class="form-group">
 		<label>Usuario</label>
-		<input type="text" class="form-control" name="usuario" value=<%= p.getUsuario() %> readonly>
+		<input type="text" name="usuario" value=<%= p.getUsuario() %>>
 	</div>
-	
+	<div class="form-group">
+		<label>Contraseña</label>
+		<input type="password" name="contraseña" value=<%=p.getContraseña() %>>
+	</div>
+	<div class="form-group">
+		<label>Email</label>
+		<input type="text"  name="email" value=<%=p.getEmail()%>>
+	</div>
 	<div class="form-group">
 		<label>Habilitado</label>
 		<input type="checkbox" class="form-control" name="habilitado" value=<%= p.isHabilitado()%>>

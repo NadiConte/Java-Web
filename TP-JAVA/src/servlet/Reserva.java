@@ -19,6 +19,7 @@ import controlers.CtrlABMPersona;
 import entity.Categoria;
 import entity.Persona;
 import entity.TipoElemento;
+import util.Emailer;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -77,6 +78,7 @@ public class Reserva extends HttpServlet {
 					java.util.Date fechaHoraDesde = null;
 					String fecha = request.getParameter("fecha_hora");
 					
+					
 					try {
 						fechaHoraDesde = f.parse(fecha);
 					} catch (ParseException e1) {
@@ -92,12 +94,20 @@ public class Reserva extends HttpServlet {
 				r.setPersona(p);
 				System.out.println(r.getFecha_hora_desde());
 				System.out.println(r.getPersona().getNombre());
+				
+				
+				String mail=r.getPersona().getEmail();
 
+				
+
+				
+				
 				//Falta setear la fecha que viene de request.getParameter("fecha_hora")) <--- convertir ese String en Date;
 				// e.setFecha_hora(fecha_hora);
 				
 				try {
 					cte.add(r);
+					Emailer.getInstance().send(mail,"Reserva Creada",cte.datosRes(r));
 				} catch (Exception e2) {
 					System.out.println("Aca tira error");
 				}

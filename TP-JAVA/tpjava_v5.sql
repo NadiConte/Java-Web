@@ -63,7 +63,7 @@ CREATE TABLE `elemento` (
 
 LOCK TABLES `elemento` WRITE;
 /*!40000 ALTER TABLE `elemento` DISABLE KEYS */;
-INSERT INTO `elemento` VALUES (9,'lab01',1),(10,'lab02',1),(11,'lab03',1),(13,'epsonXX',2),(14,'BENQ',2),(15,'viewSonic',2),(16,'anfiteatro',3),(17,'sum',3),(25,'salon308',3);
+INSERT INTO `elemento` VALUES (10,'lab02',1),(11,'lab03',1),(13,'epsonXX',2),(14,'BENQ',2),(15,'viewSonic',2),(16,'anfiteatro',3),(17,'sum',3),(25,'salon308',3);
 /*!40000 ALTER TABLE `elemento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,6 +82,7 @@ CREATE TABLE `persona` (
   `habilitado` tinyint(4) DEFAULT NULL,
   `usuario` varchar(45) DEFAULT NULL,
   `pass` varchar(45) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
   `id_categoria` int(11) NOT NULL,
   PRIMARY KEY (`id_persona`),
   KEY `id_categoria_idx` (`id_categoria`),
@@ -95,7 +96,7 @@ CREATE TABLE `persona` (
 
 LOCK TABLES `persona` WRITE;
 /*!40000 ALTER TABLE `persona` DISABLE KEYS */;
-INSERT INTO `persona` VALUES (1,'12345','mario','lopez',1,'mario','mario',3),(2,'67890','maria','gomez',1,'admin','admin',1),(3,'1212','carla','gonzalez',1,'pepe','encargado',2),(4,'112233','Oscar','Moreno',0,NULL,'mario',3);
+INSERT INTO `persona` VALUES (1,'12345','mario','lopez',1,'mario','mario','mario@gmail.com',3),(2,'67890','maria','gomez',1,'admin','admin','admin@gmail.com',1),(3,'1212','carla','gonzalez',1,'pepe','encargado',NULL,2),(4,'112233','Oscar','Moreno',0,NULL,'mario',NULL,3);
 /*!40000 ALTER TABLE `persona` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -145,17 +146,18 @@ CREATE TABLE `tipoelemento` (
   `cantMaxima` int(11) DEFAULT NULL,
   `tiempoMax` int(11) DEFAULT NULL,
   `diasAnticipacion` int(11) DEFAULT NULL,
-  `solo_encargado` bit DEFAULT NULL,
+  `solo_encargado` bit(1) DEFAULT NULL,
   PRIMARY KEY (`id_tipo`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
 --
 -- Dumping data for table `tipoelemento`
 --
 
 LOCK TABLES `tipoelemento` WRITE;
 /*!40000 ALTER TABLE `tipoelemento` DISABLE KEYS */;
-INSERT INTO `tipoelemento` VALUES (1,'laboratorio',3,21,7,1),(2,'proyector',5,6,3,1),(3,'salon',6,24,30,0),(4,'pantalla',2,20,21,0);
+INSERT INTO `tipoelemento` VALUES (1,'laboratorio',3,21,7,''),(2,'proyector',5,6,3,''),(3,'salon',6,24,30,'\0'),(4,'pantalla',2,20,21,'\0');
 /*!40000 ALTER TABLE `tipoelemento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,4 +178,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-01-25 21:58:34persona
+-- Dump completed on 2018-02-04 19:12:29

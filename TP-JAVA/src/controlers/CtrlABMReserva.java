@@ -1,14 +1,6 @@
 package controlers;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JComboBox;
-
-import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
-import org.jdesktop.swingbinding.JComboBoxBinding;
-import org.jdesktop.swingbinding.SwingBindings;
-
 import data.DataElemento;
 import data.DataPersona;
 import data.DataReserva;
@@ -18,6 +10,7 @@ import entity.Persona;
 import entity.Reserva;
 import entity.TipoElemento;
 
+
 public class CtrlABMReserva {
 
 	private DataReserva dataRes;
@@ -26,10 +19,7 @@ public class CtrlABMReserva {
 	private DataTipoElemento dataTipo;
 	private ArrayList<Reserva> res;
 	
-	public void initDataBindings(ArrayList<Elemento> elementos, JComboBox cboElementos_1) {
-		JComboBoxBinding<Elemento,List<Elemento>,JComboBox> jComboBinding = SwingBindings.createJComboBoxBinding(UpdateStrategy.READ_WRITE, elementos, cboElementos_1, "elementosDeUnTipo");
-		jComboBinding.bind();
-	}	
+
 	
 public CtrlABMReserva() {
 	dataRes = new DataReserva();
@@ -74,4 +64,17 @@ public ArrayList<Elemento> getElementosDisp(java.util.Date fechaHora, TipoElemen
 	return dataRes.elementosDisp(fechaHora, tipo);		
 }
 
+public String datosRes(Reserva r) throws Exception{
+	
+	String msj = 
+			"Datos de la reserva: "+ r.getId_reserva()+"\n"
+			+ "Tipo de elemento: " + r.getElemento().getTipoElemento().getNombre()+"\n"
+			+ "Elemento reservado: " + r.getElemento().getNombre()+"\n"
+			+ "Fecha de inicio de la reserva: " + r.getFecha_hora_desde()+"\n"
+			+ "Fecha de fin de la reserva: " + r.getFecha_hora_hasta()+"\n"
+			+ "Datos personales:\n"
+			+ "Nombre: " + r.getPersona().getNombre()+"\n"
+			+ "Apellido: " + r.getPersona().getApellido()+"\n";
+	return msj;
+}
 }	

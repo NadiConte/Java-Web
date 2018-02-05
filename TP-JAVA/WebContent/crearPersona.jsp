@@ -27,33 +27,37 @@
 	
 	<div class="form-group">
 		<label>Nombre</label>
-		<input type="text" class="form-control" name="nombre">
+		<input type="text"  name="nombre">
 	</div>
 	
 	<div class="form-group">
 		<label>Apellido</label>
-		<input type="text" class="form-control" name="apellido">
+		<input type="text"  name="apellido">
 	</div>
 	
 	<div class="form-group">
 		<label>Dni</label>
-		<input type="text" class="form-control" name="dni" >
+		<input type="text" name="dni" >
 	</div>
 	
 	<div class="form-group">
 		<label>Habilitado</label>
-		<input type="checkbox" class="form-control" name="habilitado" >>
+		<input type="checkbox"  name="habilitado" >>
 	</div>
 	
 	
 	<div class="form-group">
 		<label>Usuario</label>
-		<input type="text" class="form-control" name="usuario" >
+		<input type="text" name="usuario" >
 	</div>
 	
 	<div class="form-group">
 		<label>Contraseña</label>
-		<input type="password" class="form-control" name="contraseña" >
+		<input type="password"  name="contraseña" >
+	</div>
+	<div class="form-group">
+		<label>Email</label>
+		<input type="text" name="email">
 	</div>
 	
 	

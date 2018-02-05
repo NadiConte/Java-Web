@@ -1,6 +1,7 @@
 
 <!DOCTYPE html>
-<html lang="en"><head>
+<html lang="en">
+<head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,7 +14,7 @@
     <title>Login!</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="style/bootstrap.css" rel="stylesheet">
+    <link href="style/css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="style/start.css" rel="stylesheet">

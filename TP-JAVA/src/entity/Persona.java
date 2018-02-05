@@ -8,6 +8,7 @@ public class Persona {
 	private String usuario;
 	private String contraseña;
 	private boolean habilitado;
+	private String email;
 	
 	private Categoria categoria;
 		
@@ -29,6 +30,14 @@ public class Persona {
 	
 	public Boolean esAdministrador () {
 		return this.categoria.getId_categoria() == this.categoria.ADMINISTRADOR;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public Boolean esEncargado () {
@@ -76,11 +85,12 @@ public class Persona {
 		this.habilitado = habilitado;
 	}
 	
-	public Persona (String dni, String nombre, String apellido, boolean habilitado){
+	public Persona (String dni, String nombre, String apellido, boolean habilitado, String email){
 		this.setDni(dni);
 		this.setNombre(nombre);
 		this.setApellido(apellido);
 		this.setHabilitado(habilitado);
+		this.setEmail(email);
 	}
 	
 	public Persona(){}

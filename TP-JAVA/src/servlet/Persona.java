@@ -68,6 +68,7 @@ public class Persona extends HttpServlet {
 			p.setDni(request.getParameter("dni"));
 			p.setUsuario(request.getParameter("usuario"));
 			p.setContraseña(request.getParameter("contraseña"));
+			p.setEmail(request.getParameter("email"));
 
 			p.setHabilitado(Boolean.parseBoolean(request.getParameter("habilitado")));
 			int id_cat = Integer.parseInt(request.getParameter("id_categoria"));
@@ -92,6 +93,7 @@ public class Persona extends HttpServlet {
 			p.setDni(request.getParameter("dni"));
 			p.setUsuario(request.getParameter("usuario"));
 			p.setContraseña(request.getParameter("contraseña"));
+			p.setEmail(request.getParameter("email"));
 			boolean enabled = request.getParameter("habilitado") != null;
 			p.setHabilitado(enabled);
 			int id_cat = Integer.parseInt(request.getParameter("id_categoria"));

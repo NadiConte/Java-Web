@@ -85,5 +85,10 @@ public class Reserva {
 				(((Reserva)r).getId_reserva() == this.getId_reserva());
 	}
 	
+	/*@Override
+	public String toString(){
+		return Integer.toString(this.getId_reserva()+" - "+this.getPersona().getNombre()+" - "+this.getElemento().getTipoElemento().getNombre()+" - "+this.getElemento().getNombre()+" - "+
+				this.getFecha_hora_desde()+" - "+ this.getFecha_hora_hasta() ;
+	}*/
 	
 }

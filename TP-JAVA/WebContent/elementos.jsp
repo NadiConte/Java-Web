@@ -8,12 +8,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Menu de Elementos</title>
+<link href="style/bootstrap.css" rel="stylesheet">
 </head>
 <body>
 	<class="container">
 	<form id="formelementos" name="Elementos"
 			action="Elementos" method="post">
-		<table>
+		<table class = "table table-striped">
 			<thead>
 				<tr>
 					<th>ID</th>
@@ -47,7 +48,7 @@
 		</table>
 	</div>
 	<a href="crearElemento.jsp"><button>Nuevo Elemento</button></a>
-	<a href="menuPrincipal.jsp"><button>Volver</button></a>
+	<a href="menuAdministrador.jsp"><button>Volver</button></a>
 	
 </form>
 </body>
