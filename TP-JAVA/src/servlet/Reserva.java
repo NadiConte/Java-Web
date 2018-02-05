@@ -56,7 +56,7 @@ public class Reserva extends HttpServlet {
 		ArrayList<entity.Reserva> res;
 		CtrlABMReserva ctrl = new CtrlABMReserva();
 		CtrlABMPersona cp = new CtrlABMPersona();			
-		entity.Persona per = cp.getById(Integer.parseInt(request.getParameter("personaLogueada")));
+		entity.Persona per = (Persona) request.getSession().getAttribute("personaLogueada");
 		if (!per.esAdministrador()){
 			res = ctrl.reservasDePer(per);	
 		}else {
@@ -75,14 +75,14 @@ public class Reserva extends HttpServlet {
 			if (request.getParameter("crear")!= null) {
 			
 				CtrlABMPersona cp = new CtrlABMPersona();			
-				Persona p = cp.getById(Integer.parseInt(request.getParameter("personaLogueada")));
+				entity.Persona per = (Persona) request.getSession().getAttribute("personaLogueada");
 				
 				entity.Elemento elemento = new entity.Elemento();
 				controlers.CtrlABMElemento ce = new controlers.CtrlABMElemento();
 				elemento = ce.getByID(Integer.parseInt(request.getParameter("id_tipo")));
 				
 				
-				if (p.esEncargado() || elemento.getTipoElemento().getSoloEncargado() == false) {
+				if (per.esEncargado() || elemento.getTipoElemento().getSoloEncargado() == false) {
 					entity.Reserva r = new entity.Reserva();
 					CtrlABMReserva cte = new CtrlABMReserva();
 					SimpleDateFormat f= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -103,7 +103,7 @@ public class Reserva extends HttpServlet {
 				
 				r.setFecha_hora_desde(fechaHoraDesde);
 				r.setElemento(elemento);
-				r.setPersona(p);
+				r.setPersona(per);
 				System.out.println(r.getFecha_hora_desde());
 				System.out.println(r.getPersona().getNombre());
 				
@@ -129,18 +129,9 @@ public class Reserva extends HttpServlet {
 					request.getRequestDispatcher("/errorSoloEncargado.jsp").forward(request, response);
 				}
 				
-				
-
 			
 			
 		}
-		
-	
-
-	
-	
-	
-	
 	if (request.getParameter("borrar")!= null) {
 		
 		entity.Reserva r = new entity.Reserva();
@@ -162,13 +153,27 @@ public class Reserva extends HttpServlet {
 	
 	if (request.getParameter("volverMenu")!= null) {
 		CtrlABMPersona cp = new CtrlABMPersona();			
-		Persona p = cp.getById(Integer.parseInt(request.getParameter("personaLogueada")));
+		entity.Persona per = (Persona) request.getSession().getAttribute("personaLogueada");
 		
-		if (p.esAdministrador()) {
+		if (per.esAdministrador()) {
 			request.getRequestDispatcher("/menuAdministrador.jsp").forward(request, response);
 		}else {
 			request.getRequestDispatcher("/menuPrincipal.jsp").forward(request, response);
 		}
+		
+		
+	}
+	
+	if (request.getParameter("volverMenu")!=null) {
+		
+		CtrlABMPersona cp = new CtrlABMPersona();			
+		entity.Persona per = (Persona) request.getSession().getAttribute("personaLogueada");
+		if (per.esAdministrador()) {
+			request.getRequestDispatcher("/menuAdministrador.jsp").forward(request, response);
+		}else {
+			request.getRequestDispatcher("/menuPrincipal.jsp").forward(request, response);
+		}
+		
 		
 		
 	}

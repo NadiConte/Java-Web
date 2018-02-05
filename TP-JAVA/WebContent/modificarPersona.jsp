@@ -26,10 +26,6 @@ Modificar
 %>
 <form method="post" action="Persona">
 
-	<div class="form-group">
-		<label>ID</label>
-		<input type="text" name="id" value=<%= p.getId_persona() %> readonly/>
-	</div>
 	
 	<div class="form-group">
 		<label>Nombre</label>

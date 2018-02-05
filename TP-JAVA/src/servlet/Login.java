@@ -50,7 +50,7 @@ public class Login extends HttpServlet {
 			try {
 				if(per != null){
 					request.setAttribute("listaPersonas", ctrl.getAll());
-					request.getSession().setAttribute("user", per);
+					request.getSession().setAttribute("personaLogueada", per);
 					
 					
 					System.out.println();

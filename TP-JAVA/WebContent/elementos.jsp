@@ -11,7 +11,6 @@
 <link href="style/bootstrap.css" rel="stylesheet">
 </head>
 <body>
-	<class="container">
 	<form id="formelementos" name="Elementos"
 			action="Elementos" method="post">
 		<table class = "table table-striped">
@@ -36,20 +35,20 @@
 				name="<c:out value="${ele.tipoElemento.nombre}"/>"
 				value="<c:out value="${ele.tipoElemento.nombre}"/>" disabled /></td>
 				<td>
-					<form method="post" action="Elementos">
+	
 
 						<button type="input" value=<c:out value = "${ele.nombre}"/> name="mapear">Modificar</button>
 						<button type="input" value=<c:out value = "${ele.nombre}"/> name="borrar">Borrar</button>
-					</form>
+				
 				</td>
 			</tr>
 			</c:forEach>
 			</tbody>
 		</table>
-	</div>
-	<a href="crearElemento.jsp"><button>Nuevo Elemento</button></a>
-	<button type="input" name="volverMenu">Volver</button>
-	
 </form>
+	<a href="/TPJAVA/crearElemento.jsp"><button>Nuevo Elemento</button></a>
+	<a href="/TPJAVA/menuAdministrador.jsp"><button>Volver</button></a>
+	
+
 </body>
 </html>

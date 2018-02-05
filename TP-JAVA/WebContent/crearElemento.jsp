@@ -14,8 +14,6 @@
 <title>Nuevo Elemento</title>
 </head>
 <body>
-	<form method="post" action="Elemento">
-	
 	
 	<div class="form-group">
 		<label>Nombre</label>
@@ -39,8 +37,7 @@
 	
 	
 		<button type="input" name="crear">Aceptar</button>
-	</form>
-	
+
 	<a href="/elementos.jsp"><button>Volver</button></a>
 
 </body>

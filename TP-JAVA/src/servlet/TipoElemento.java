@@ -35,6 +35,18 @@ public class TipoElemento extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		ArrayList<entity.TipoElemento> ale = new ArrayList<>();
+		CtrlABMTipo ct = new CtrlABMTipo();
+		
+		try {
+			ale = ct.getAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		request.setAttribute("todosTipoEle", ale);
+		request.getRequestDispatcher("/tipoElementos.jsp").forward(request, response);
 		
 				}
 
@@ -70,8 +82,7 @@ public class TipoElemento extends HttpServlet {
 			
 			cte.update(te);
 			
-			request.getRequestDispatcher("/tipoElementos.jsp").forward(request, response);
-		}
+			this.doGet(request, response);}
 		
 		if (request.getParameter("crear")!= null) {
 			
@@ -85,7 +96,7 @@ public class TipoElemento extends HttpServlet {
 			
 			cte.add(te);
 			
-			request.getRequestDispatcher("/tipoElementos.jsp").forward(request, response);
+			this.doGet(request, response);
 		}
 		
 		if (request.getParameter("borrar")!= null) {
@@ -99,7 +110,8 @@ public class TipoElemento extends HttpServlet {
 			
 			cte.delete(te);
 			
-			request.getRequestDispatcher("/tipoElementos.jsp").forward(request, response);
+			this.doGet(request, response);
+			
 		}
 	}
 

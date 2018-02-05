@@ -43,23 +43,20 @@
 				name="<c:out value="${res.descripcion}"/>"
 				value="<c:out value="${res.descripcion}"/>" disabled /></td>
 				<td><input type="text"
-				name="<c:out value="${res.nombre}"/>"
-				value="<c:out value="${res.nombre}"/>" disabled /></td>
+				name="<c:out value="${res.elemento.nombre}"/>"
+				value="<c:out value="${res.elemento.nombre}"/>" disabled /></td>
 					
 				<td>
-				
-					<form method="post" action="Reserva">
-				
 						<button type="submit" value=<c:out value = "${res.id_reserva}"/> name="borrar">cancelar</button>
-					</form>
 				</td>
 			</tr>
 			</c:forEach>
 			</tbody>
 		</table>
-
-	<a href="/crearReserva.jsp"><button>Nueva Reserva</button></a>
-	<a href="/menuPrincipal.jsp"><button>Volver</button></a> <%-- ver como volver a cada menu dependiendo el tipo de usuario--%> 
 	</form>
+	<a href="/TPJAVA/crearReserva.jsp"><button>Nueva Reserva</button></a>
+		<button type="button"  name="volverMenu">Volver</button>
+	
+
 </body>
 </html>

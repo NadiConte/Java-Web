@@ -122,19 +122,7 @@ public class Elementos extends HttpServlet {
 			this.doGet(request, response);
 			}
 		
-		if (request.getParameter("volverMenu")!=null) {
-			
-			CtrlABMPersona cp = new CtrlABMPersona();			
-			entity.Persona per = cp.getById(Integer.parseInt(request.getParameter("personaLogueada")));
-			if (per.esAdministrador()) {
-				request.getRequestDispatcher("/menuAdministrador.jsp").forward(request, response);
-			}else {
-				request.getRequestDispatcher("/menuPrincipal.jsp").forward(request, response);
-			}
-			
-			
-			
-		}
+
 	}
 
 }
