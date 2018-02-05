@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controlers.CtrlABMElemento;
+import controlers.CtrlABMPersona;
 import controlers.CtrlABMTipo;
 import entity.Elemento;
 import entity.TipoElemento;
@@ -45,8 +46,8 @@ public class Elementos extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 	
+		
 		if (request.getParameter("mapear")!= null) {
 			
 			String nombre = request.getParameter("mapear");
@@ -120,6 +121,20 @@ public class Elementos extends HttpServlet {
 			cte.delete(e);
 			this.doGet(request, response);
 			}
+		
+		if (request.getParameter("volverMenu")!=null) {
+			
+			CtrlABMPersona cp = new CtrlABMPersona();			
+			entity.Persona per = cp.getById(Integer.parseInt(request.getParameter("personaLogueada")));
+			if (per.esAdministrador()) {
+				request.getRequestDispatcher("/menuAdministrador.jsp").forward(request, response);
+			}else {
+				request.getRequestDispatcher("/menuPrincipal.jsp").forward(request, response);
+			}
+			
+			
+			
+		}
 	}
 
 }

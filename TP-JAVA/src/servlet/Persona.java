@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,6 +37,14 @@ public class Persona extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		ArrayList<entity.Persona> alp;
+		CtrlABMPersona ctp = new CtrlABMPersona();
+		
+		alp =ctp.getAll();
+		
+		request.setAttribute("allPeople", alp);
+		request.getRequestDispatcher("/personas.jsp").forward(request, response);
 	}
 
 	/**
@@ -78,7 +88,7 @@ public class Persona extends HttpServlet {
 			
 			ctp.update(p);
 
-			request.getRequestDispatcher("/personas.jsp").forward(request, response);
+			this.doGet(request, response);
 		}
 
 		if (request.getParameter("crear") != null) {
@@ -103,7 +113,7 @@ public class Persona extends HttpServlet {
 
 			ctp.add(p);
 
-			request.getRequestDispatcher("/personas.jsp").forward(request, response);
+			this.doGet(request, response);
 		}
 
 		if (request.getParameter("borrar") != null) {
@@ -119,7 +129,7 @@ public class Persona extends HttpServlet {
 			p = ctp.getById(id);
 			ctp.delete(p);
 
-			request.getRequestDispatcher("/personas.jsp").forward(request, response);
+			this.doGet(request, response);
 		}
 	}
 

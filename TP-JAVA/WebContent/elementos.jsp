@@ -48,7 +48,7 @@
 		</table>
 	</div>
 	<a href="crearElemento.jsp"><button>Nuevo Elemento</button></a>
-	<a href="menuAdministrador.jsp"><button>Volver</button></a>
+	<button type="input" name="volverMenu">Volver</button>
 	
 </form>
 </body>

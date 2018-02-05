@@ -3,6 +3,7 @@ package servlet;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -52,6 +53,17 @@ public class Reserva extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		ArrayList<entity.Reserva> res;
+		CtrlABMReserva ctrl = new CtrlABMReserva();
+		CtrlABMPersona cp = new CtrlABMPersona();			
+		entity.Persona per = cp.getById(Integer.parseInt(request.getParameter("personaLogueada")));
+		if (!per.esAdministrador()){
+			res = ctrl.reservasDePer(per);	
+		}else {
+			res = ctrl.getAll();
+		}
+		request.setAttribute("todasReservas", res);
+		request.getRequestDispatcher("reservas.jsp").forward(request, response);
 	}
 
 	/**
@@ -111,7 +123,8 @@ public class Reserva extends HttpServlet {
 				} catch (Exception e2) {
 					System.out.println("Aca tira error");
 				}
-				request.getRequestDispatcher("/reservas.jsp").forward(request, response);}
+				this.doGet(request, response);
+				}
 				else {
 					request.getRequestDispatcher("/errorSoloEncargado.jsp").forward(request, response);
 				}

@@ -1,12 +1,10 @@
 <!-- <%@page import="javax.security.auth.message.callback.PrivateKeyCallback.Request"%> -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@page import="controlers.CtrlABMPersona"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="entity.Reserva" %>
-<%@ page import="entity.Persona" %>
-<%@page import="controlers.CtrlABMReserva" %>
-<%@page import="controlers.CtrlABMPersona" %>
+
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -18,21 +16,9 @@
 <title>Menu de Reservas</title>
 </head>
 <body>
-	<% 
-		ArrayList <Reserva> res = new ArrayList<Reserva>();
-		CtrlABMReserva ctrl = new CtrlABMReserva();
-		CtrlABMPersona ctrlPer = new CtrlABMPersona();
-		Persona per=(Persona)session.getAttribute("user");
-		out.print(per.getNombre() + " - " + per.getCategoria().getDescripcion());
-		if (!per.esAdministrador()){
-			res = ctrl.reservasDePer(per);	
-		}else {
-			res = ctrl.getAll();
-		}
-		
-    //funciona perfecto.
-	%>
-	<div> 
+ 
+	<form id="formreservas" name="Reserva"
+			action="Reserva" method="post">
 		<table>
 			<thead>
 				<tr>
@@ -45,29 +31,35 @@
 			    </tr>
 			</thead>
 			<tbody>
-			<% for (Reserva r : res){
-				
-			%>
+				<c:forEach items="${todasReservas}" var="res">
 			<tr>
-				<td><%= r.getFecha_hora_desde()%></td>
-				<td><%= r.getFecha_hora_hasta()%></td>
-				<td><%= r.getDescripcion() %></td>
-				<td><%= r.getElemento().getNombre()%></td>
+				<td><input type="text"
+				name="<c:out value="${res.fecha_hora_desde}"/>"
+				value="<c:out value="${res.fecha_hora_desde}"/>" disabled /></td>
+				<td><input type="text"
+				name="<c:out value="${res.fecha_hora_hasta}"/>"
+				value="<c:out value="${res.fecha_hora_hasta}"/>" disabled /></td>
+				<td><input type="text"
+				name="<c:out value="${res.descripcion}"/>"
+				value="<c:out value="${res.descripcion}"/>" disabled /></td>
+				<td><input type="text"
+				name="<c:out value="${res.nombre}"/>"
+				value="<c:out value="${res.nombre}"/>" disabled /></td>
 					
 				<td>
 				
 					<form method="post" action="Reserva">
 				
-						<button type="submit" value=<%= r.getId_reserva() %> name="borrar">cancelar</button>
+						<button type="submit" value=<c:out value = "${res.id_reserva}"/> name="borrar">cancelar</button>
 					</form>
 				</td>
 			</tr>
-			<% } %>
+			</c:forEach>
 			</tbody>
 		</table>
-	</div>
+
 	<a href="/crearReserva.jsp"><button>Nueva Reserva</button></a>
 	<a href="/menuPrincipal.jsp"><button>Volver</button></a> <%-- ver como volver a cada menu dependiendo el tipo de usuario--%> 
-	
+	</form>
 </body>
 </html>
