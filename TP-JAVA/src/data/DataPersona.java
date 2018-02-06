@@ -98,7 +98,7 @@ public class DataPersona {
 		ResultSet rs=null;
 		try {
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
-					"select id_persona, p.nombre, apellido, dni, habilitado, email, p.id_categoria, c.nombre from persona p "
+					"select id_persona, p.nombre, apellido, dni, habilitado, usuario, pass, email, p.id_categoria, c.nombre from persona p "
 					+ "inner join categoria c on p.id_categoria=c.id_categoria where id_persona=?");
 			stmt.setInt(1, id);
 			rs=stmt.executeQuery();
@@ -111,6 +111,8 @@ public class DataPersona {
 				p.setDni(rs.getString("dni"));
 				p.setHabilitado(rs.getBoolean("habilitado"));
 				p.setEmail(rs.getString("email"));
+				p.setUsuario(rs.getString("usuario"));
+				p.setContraseña(rs.getString("pass"));
 				p.getCategoria().setId_categoria(rs.getInt("id_categoria"));
 				p.getCategoria().setNombreCat(rs.getString("nombre")); 	
 	 		}

@@ -64,6 +64,19 @@ public class Persona extends HttpServlet {
 
 			request.setAttribute("persona", p);
 
+
+			ArrayList<Categoria> cats=ctp.getCategorias();
+			
+			Categoria miCat = new Categoria();
+			request.setAttribute("categorias", cats);
+			for (Categoria c: cats) {
+				if (p.getCategoria().getId_categoria() == c.getId_categoria()) {
+					miCat = c;
+				}
+			}
+			
+			request.setAttribute("selectedCat", miCat);
+			
 			request.getRequestDispatcher("/modificarPersona.jsp").forward(request, response);
 
 		}
