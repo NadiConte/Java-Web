@@ -12,9 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sun.javafx.scene.layout.region.Margins.Converter;
-import com.sun.jmx.snmp.Timestamp;
-
 import controlers.CtrlABMElemento;
 import controlers.CtrlABMPersona;
 import entity.Categoria;

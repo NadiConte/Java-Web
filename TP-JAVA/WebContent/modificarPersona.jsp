@@ -64,9 +64,10 @@ Modificar
 		
 	</div>	
 
-	
-<button type="input" value=<c:out value = "${persona.id_persona}"/> name="modificar">Aceptar</button>
+<%--- tengo que poder llamar  al servlet desde aca --%>
+<form action="/TPJAVA/personas" method="post" name="modificar"> 
+    <input type="submit" value="Aceptar" />
+</form>
 <a href="/TPJAVA/personas"><button>Volver</button></a>
-
 </body>
 </html>

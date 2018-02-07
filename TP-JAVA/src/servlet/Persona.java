@@ -9,15 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sun.javafx.scene.layout.region.Margins.Converter;
-
 import controlers.CtrlABMPersona;
 import entity.Categoria;
 
 /**
  * Servlet implementation class Persona
  */
-@WebServlet({"/Persona", "/personas"})
+@WebServlet({"/Persona", "/personas", "Personas"})
 public class Persona extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
