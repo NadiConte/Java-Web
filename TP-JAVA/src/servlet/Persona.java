@@ -15,7 +15,7 @@ import entity.Categoria;
 /**
  * Servlet implementation class Persona
  */
-@WebServlet({"/Persona", "/personas", "Personas"})
+@WebServlet({"/Persona", "/personas", "/Personas"})
 public class Persona extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
