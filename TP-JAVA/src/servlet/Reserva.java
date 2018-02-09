@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import controlers.CtrlABMElemento;
 import controlers.CtrlABMPersona;
 import entity.Categoria;
+import entity.Elemento;
 import entity.Persona;
 import entity.TipoElemento;
 import util.Emailer;
@@ -69,6 +70,36 @@ public class Reserva extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+		
+		
+			if (request.getParameter("mapearNuevaReserva")!= null) {
+				
+				CtrlABMTipo ctTipo= new CtrlABMTipo();
+				ArrayList<TipoElemento>  ctele =new ArrayList<TipoElemento>();
+				try {
+					ctele = ctTipo.getAll();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
+				request.setAttribute("allTipos", ctele);
+				request.getRequestDispatcher("crearReserva.jsp").forward(request, response);
+				
+			}
+		
+			if(request.getParameter("cargarElementos")!=null) {
+				int idTipo = (Integer.parseInt(request.getParameter("id_tipo")));
+				
+				CtrlABMElemento ctele= new CtrlABMElemento();
+				ArrayList<Elemento> elementos= ctele.getByTipo(idTipo);
+				
+				request.setAttribute("allElements", elementos);
+				request.getRequestDispatcher("crearReserva.jsp").forward(request, response);
+				}
+			
+			
 			if (request.getParameter("crear")!= null) {
 			
 				CtrlABMPersona cp = new CtrlABMPersona();			

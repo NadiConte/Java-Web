@@ -165,6 +165,47 @@ public ArrayList<Elemento> getAll(){
 		return e;
 	}
 	
+	public ArrayList<Elemento> getByIdTipo(int idTipo){
+		Elemento el = null;
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		ArrayList<Elemento> elem= new ArrayList<>();
+		try {
+			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
+			"select * from elemento e "
+			+ "inner join tipoelemento t on e.id_tipo=t.id_tipo "
+			+ " where t.id_tipo = ?");
+			stmt.setInt(1, idTipo);
+			rs=stmt.executeQuery();
+			if(rs!=null && rs.next()){
+					el=new Elemento();
+		 			el.setTipoElemento(new TipoElemento());
+		 			el.setId_elemento(rs.getInt("id_elemento"));
+		 			el.setNombre(rs.getString("e.nombre"));
+		 			el.getTipoElemento().setId_tipo(rs.getInt("id_tipo"));
+		 			el.getTipoElemento().setNombre(rs.getString("t.nombre"));
+		 			elem.add(el);
+				}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+
+		try {
+			if(rs!=null)rs.close();
+			if(stmt!=null)stmt.close();
+			FactoryConexion.getInstancia().releaseConn();
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+		
+		return elem;
+		
+	}
+	
+	
 	public Elemento getByTipo(String tipo){
 		Elemento e= new Elemento();
 		PreparedStatement stmt=null;

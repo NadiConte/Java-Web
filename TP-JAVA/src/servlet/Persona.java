@@ -51,52 +51,50 @@ public class Persona extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		if (request.getParameter("mapear") != null) {
-
-			int id = Integer.parseInt(request.getParameter("mapear"));
-
-			entity.Persona p = new entity.Persona();
-			CtrlABMPersona ctp = new CtrlABMPersona();
-
-			p = ctp.getById(id);
-
-			request.setAttribute("persona", p);
-
-
-			ArrayList<Categoria> cats=ctp.getCategorias();
+		if (request.getParameter("mapearEdit") != null ||request.getParameter("mapearCrear") != null) {
 			
-			Categoria miCat = new Categoria();
+			CtrlABMPersona ctp = new CtrlABMPersona();
+			ArrayList<Categoria> cats=ctp.getCategorias();
 			request.setAttribute("categorias", cats);
-			for (Categoria c: cats) {
-				if (p.getCategoria().getId_categoria() == c.getId_categoria()) {
-					miCat = c;
+			
+			if (request.getParameter("mapearEdit") != null) {
+				int id = Integer.parseInt(request.getParameter("mapearEdit"));
+				entity.Persona p = new entity.Persona();
+				p = ctp.getById(id);
+				request.setAttribute("persona", p);
+				Categoria miCat = new Categoria();
+				for (Categoria c: cats) {
+					if (p.getCategoria().getId_categoria() == c.getId_categoria()) {
+						miCat = c;
+					}
 				}
+				request.setAttribute("selectedCat", miCat);
+				request.getRequestDispatcher("/modificarPersona.jsp").forward(request, response);
 			}
 			
-			request.setAttribute("selectedCat", miCat);
-			
-			request.getRequestDispatcher("/modificarPersona.jsp").forward(request, response);
+			if (request.getParameter("mapearCrear") != null){
+				request.getRequestDispatcher("/crearPersona.jsp").forward(request, response);
 
+			}
+			
 		}
 
 		if (request.getParameter("modificar") != null) {
-
+		
 			entity.Persona p = new entity.Persona();
 			CtrlABMPersona ctp = new CtrlABMPersona();
 
+			p.setId_persona(Integer.parseInt(request.getParameter("id_persona")));
 			p.setNombre(request.getParameter("nombre"));
 			p.setApellido(request.getParameter("apellido"));
 			p.setDni(request.getParameter("dni"));
 			p.setUsuario(request.getParameter("usuario"));
 			p.setContraseña(request.getParameter("contraseña"));
 			p.setEmail(request.getParameter("email"));
-
 			p.setHabilitado(Boolean.parseBoolean(request.getParameter("habilitado")));
-			int id_cat = Integer.parseInt(request.getParameter("id_categoria"));
-
+			Integer id_cat = Integer.parseInt(request.getParameter("id_categoria"));
 			Categoria c = ctp.getByID(id_cat);
 			p.setCategoria(c);
-			
 			ctp.update(p);
 
 			this.doGet(request, response);

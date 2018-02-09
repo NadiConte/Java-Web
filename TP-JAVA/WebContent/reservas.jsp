@@ -1,7 +1,6 @@
 <!-- <%@page import="javax.security.auth.message.callback.PrivateKeyCallback.Request"%> -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@page import="controlers.CtrlABMPersona"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 
@@ -53,8 +52,9 @@
 			</c:forEach>
 			</tbody>
 		</table>
-	</form>
-	<a href="/TPJAVA/crearReserva.jsp"><button>Nueva Reserva</button></a>
+
+	<button type="input" name="mapearNuevaReserva">Nueva Reserva</button>
+			</form>
 		<button type="button"  name="volverMenu">Volver</button>
 	
 

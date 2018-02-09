@@ -37,9 +37,9 @@ public class CtrlABMElemento {
 	
 	}
 	
-	public Elemento getByTipo(String tipo){
+	public ArrayList<Elemento> getByTipo(int tipo){
 		dataElem= new DataElemento();
-		return this.dataElem.getByTipo(tipo);
+		return this.dataElem.getByIdTipo(tipo);
 	
 	}	
 	

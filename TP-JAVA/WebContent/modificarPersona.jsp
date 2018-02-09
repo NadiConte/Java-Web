@@ -2,10 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="entity.Persona" %>
-<%@ page import="entity.Categoria" %>
-<%@ page import="controlers.CtrlABMPersona" %>
-<%@ page import="java.util.ArrayList" %>
+
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -21,6 +18,13 @@
 <body>
 Modificar
 <form method="post" action="Persona">
+	
+	<div class="form-group">
+		<label>ID</label>
+		<input type="text" name="id_persona" readonly="readonly" value=<c:out value="${persona.id_persona}" />>
+	</div>
+	
+	
 	<div class="form-group">
 		<label>Nombre</label>
 		<input type="text" name="nombre" value=<c:out value="${persona.nombre}"/>>
@@ -33,7 +37,7 @@ Modificar
 	
 	<div class="form-group">
 		<label>Dni</label>
-		<input type="text"  name="dni" value=<c:out value="${persona.dni}" disable/>>
+		<input type="text"  name="dni" value=<c:out value="${persona.dni}"/>>
 	</div>
 	<div class="form-group">
 		<label>Usuario</label>
@@ -49,7 +53,8 @@ Modificar
 	</div>
 	<div class="form-group">
 		<label>Habilitado</label>
-		<input type="checkbox" class="form-control" name="habilitado" value=<c:out value="${persona.habilitado}"/>>
+		<input type="checkbox" name="<c:out value="${persona.habilitado}"/>" 
+				id="habilitado" value="<c:out value="${persona.habilitado}"/>" ${persona.habilitado == 'true' ? 'checked' : ''}>
 	</div>
 
  	<div class="form-group">
