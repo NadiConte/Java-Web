@@ -20,7 +20,7 @@
 </head>
 <body>
 Modificar
-
+<form method="post" action="Persona">
 	<div class="form-group">
 		<label>Nombre</label>
 		<input type="text" name="nombre" value=<c:out value="${persona.nombre}"/>>
@@ -33,7 +33,7 @@ Modificar
 	
 	<div class="form-group">
 		<label>Dni</label>
-		<input type="text"  name="dni" value=<c:out value="${persona.dni}"/>>
+		<input type="text"  name="dni" value=<c:out value="${persona.dni}" disable/>>
 	</div>
 	<div class="form-group">
 		<label>Usuario</label>
@@ -55,9 +55,9 @@ Modificar
  	<div class="form-group">
 		<label>Categoria</label>
 		 
-		<select name="categoria">
+		<select name="id_categoria">
 		<c:forEach items="${categorias}" var="categoria">
-        <option value="${categoria.descripcion}" ${categoria.id_categoria == selectedCat.id_categoria ? 'selected="selected"' : ''}>${categoria.descripcion}</option>
+        <option value="${categoria.id_categoria}" ${categoria.id_categoria == selectedCat.id_categoria ? 'selected="selected"' : ''}>${categoria.descripcion}</option>
     
     </c:forEach>
     </select>
@@ -65,10 +65,9 @@ Modificar
 
 	</div>	
 
-<%--- tengo que poder llamar  al servlet desde aca --%>
-<form action= "/TPJAVA/personas" method="post" > 
-    <input type="submit" name="modificar" value="Aceptar" />
+<button type="input" name="modificar">Aceptar</button>
 </form>
+
 <a href="/TPJAVA/personas"><button>Volver</button></a>
 </body>
 </html>

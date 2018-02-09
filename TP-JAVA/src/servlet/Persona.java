@@ -93,9 +93,9 @@ public class Persona extends HttpServlet {
 
 			p.setHabilitado(Boolean.parseBoolean(request.getParameter("habilitado")));
 			int id_cat = Integer.parseInt(request.getParameter("id_categoria"));
+
 			Categoria c = ctp.getByID(id_cat);
 			p.setCategoria(c);
-			p.setId_persona(Integer.parseInt(request.getParameter("id")));
 			
 			ctp.update(p);
 
