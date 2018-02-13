@@ -67,7 +67,7 @@ public ArrayList<Reserva> getReservasdePer(Persona per){ //OBTENER RESERVAS POR 
 			stmt = FactoryConexion.getInstancia().getConn()
 					.prepareStatement("select * from reserva r "
 		 			+ "inner join elemento e on r.id_elemento=e.id_elemento "
-		 			+ "where id_persona = ?",
+		 			+ "where id_persona = ? and r.fecha_hora_desde>=curdate()",
 		 			PreparedStatement.RETURN_GENERATED_KEYS);
 			
 			stmt.setInt(1, per.getId_persona());
@@ -248,52 +248,70 @@ public ArrayList<Reserva> getReservasdePer(Persona per){ //OBTENER RESERVAS POR 
 		  		}
 		  	}
 	
-	public ArrayList<Elemento> elementosDisp(java.util.Date fechaHora, TipoElemento t) { 
-		ArrayList<Elemento> disponibles = new ArrayList<Elemento>();
-
-		PreparedStatement stmt=null;
+	public int  cantReservasXTipo(Persona p,TipoElemento t, Elemento e) {
+		PreparedStatement stmt= null;
 		ResultSet rs=null;
-		
-		try {						
-			stmt = FactoryConexion.getInstancia()
-					.getConn().prepareStatement("SET @fecha =  ?, @tipo=?;");
-			stmt.setTimestamp(1, new java.sql.Timestamp(fechaHora.getTime()));
-			stmt.setInt(2,t.getId_tipo());
-			stmt.executeQuery();
-
+		int i=0;
+		try{ 
+		stmt= FactoryConexion.getInstancia().getConn().prepareStatement( "select * from reserva r "
+				+ "inner join tipoelemento e on r.id_elemento=e.id_elemento"
+				+ "where (r.id_persona=? and r.id_elemento=? and e.id_tipo=? and r.fecha_hora_hasta>=curdate())");
+		stmt.setInt(1,p.getId_persona());
+		stmt.setInt(2,t.getId_tipo());	
+		stmt.setInt(3,e.getId_elemento());
 			
-			stmt = FactoryConexion.getInstancia()
-					.getConn().prepareStatement("select e.id_elemento, e.nombre from elemento e "
-							+ "inner join tipoelemento t on e.id_tipo=t.id_tipo\n"
-							+ "where t.id_tipo=@tipo and e.id_elemento not in (\n"
-							+ "select e.id_elemento from elemento e left join reserva r on e.id_elemento=r.id_elemento \n" + 
-							"inner join tipoelemento t on e.id_tipo=t.id_tipo\n" + 
-							"where t.id_tipo=@tipo\n" + 
-							"and (@fecha between r.fecha_hora_desde and r.fecha_hora_hasta) "
-							+ "or (date_add(@fecha, INTERVAL t.tiempoMax*60 minute) between r.fecha_hora_desde and r.fecha_hora_hasta)"
-							+ "or(@fecha<r.fecha_hora_desde and date_add(@fecha, INTERVAL t.tiempoMax*60 minute)>r.fecha_hora_hasta)"
-							+ "and (r.estado='activa'))");				
+			 rs=stmt.executeQuery();
+			 if (rs!= null ){
+					while(rs.next()){
+						i++;
+					}
+			 }
+		} catch (SQLException ex) {
 			
-			rs = stmt.executeQuery();
-			if(rs!=null){
-				while(rs.next()){
-					Elemento e=new Elemento();
-					e.setId_elemento(rs.getInt("id"));
-					e.setNombre(rs.getString("nombre"));					
-					disponibles.add(e);
-				}
-			}
-		} catch (SQLException e) {		
-			e.printStackTrace();	
+			ex.printStackTrace();
 		}
 		try {
 			if(rs!=null) rs.close();
 			if(stmt!=null) stmt.close();
 			FactoryConexion.getInstancia().releaseConn();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (SQLException ex) {	
+			ex.printStackTrace();
 		}
-		return disponibles;
+		return (i);	
 	}
+	
+	public boolean estaDisponible(Reserva r){
+		PreparedStatement stmt= null;
+		ResultSet rs=null;
+		ArrayList<Reserva> res = new ArrayList<Reserva>();
+		boolean i=true;
+		try{ 
+		stmt= FactoryConexion.getInstancia().getConn().prepareStatement( "select * from reserva r "
+				+ "inner join tipoelemento e on r.id_elemento=e.id_elemento "
+				+ "where (?<r.`hora_fecha_hasta` and ?>r.`hora_fecha_desde`) and (r.id_elemento=? and e.id_tipo=?)");
+		stmt.setString(1, r.getFecha_hora_hasta().toString());
+		stmt.setString(1, r.getFecha_hora_desde().toString());	
+		stmt.setInt(3,r.getElemento().getId_elemento());
+		stmt.setInt(4,r.getElemento().getTipoElemento().getId_tipo());			
+			 
+			 rs=stmt.executeQuery();
+			 if(rs!=null && rs.next()){
+						i=false;
+				}
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+			try {
+				if(rs!=null) rs.close();
+				if(stmt!=null) stmt.close();
+				FactoryConexion.getInstancia().releaseConn();
+			} catch (SQLException e) {	
+				e.printStackTrace();
+			}
+			return (i);	
+		} 
+		 
+			 
 }	
 	

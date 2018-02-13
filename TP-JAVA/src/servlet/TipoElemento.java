@@ -48,38 +48,44 @@ public class TipoElemento extends HttpServlet {
 		request.setAttribute("todosTipoEle", ale);
 		request.getRequestDispatcher("/tipoElementos.jsp").forward(request, response);
 		
-				}
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if (request.getParameter("mapear")!= null) {
-			int idTipo = Integer.parseInt(request.getParameter("mapear"));
-			
-			
-			entity.TipoElemento te = new entity.TipoElemento();
+		if (request.getParameter("mapearEdit") != null ||request.getParameter("mapearCrear") != null) {
+
 			CtrlABMTipo cte = new CtrlABMTipo();
+		
+			if (request.getParameter("mapearEdit") != null) {
+				int id_tipo = Integer.parseInt(request.getParameter("mapearEdit"));
+				entity.TipoElemento te = new entity.TipoElemento();
+				te = cte.getByID(id_tipo);				
+				request.setAttribute("tipo", te);
+
+				request.getRequestDispatcher("/modificarTipo.jsp").forward(request, response);
+			}
 			
-			te = cte.getByID(idTipo);
-			
-			request.setAttribute("tipoElemento", te);
-			
-			request.getRequestDispatcher("/modificarTipo.jsp").forward(request, response);
+			if (request.getParameter("mapearCrear") != null){
+				request.getRequestDispatcher("/crearTipo.jsp").forward(request, response);
+
+			}
 			
 		}
+			
 		
 		if (request.getParameter("modificar")!= null) {
 			
 			entity.TipoElemento te = new entity.TipoElemento();
 			CtrlABMTipo cte = new CtrlABMTipo();
 			
-			te.setId_tipo(Integer.parseInt(request.getParameter("id")));
+			te.setId_tipo(Integer.parseInt(request.getParameter("id_tipo")));
 			te.setNombre(request.getParameter("nombre"));
 			te.setCantMaxima(Integer.parseInt(request.getParameter("cantMax")));
 			te.setDiasAnticipacion(Integer.parseInt(request.getParameter("diasAnt")));
 			te.setTiempoMax(Integer.parseInt(request.getParameter("tiempoMax")));
-			
+			te.setSoloEncargado(Boolean.parseBoolean(request.getParameter("soloEncargado")));
 			cte.update(te);
 			
 			this.doGet(request, response);}
@@ -93,7 +99,7 @@ public class TipoElemento extends HttpServlet {
 			te.setCantMaxima(Integer.parseInt(request.getParameter("cantMax")));
 			te.setDiasAnticipacion(Integer.parseInt(request.getParameter("diasAnt")));
 			te.setTiempoMax(Integer.parseInt(request.getParameter("tiempoMax")));
-			
+			te.setSoloEncargado(Boolean.parseBoolean(request.getParameter("soloEncargado")));
 			cte.add(te);
 			
 			this.doGet(request, response);

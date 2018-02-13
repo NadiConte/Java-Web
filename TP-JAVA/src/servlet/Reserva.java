@@ -123,10 +123,14 @@ public class Reserva extends HttpServlet {
 			CtrlABMReserva cte = new CtrlABMReserva();
 			r.setDescripcion(request.getParameter("descripcion"));
 			
+			CtrlABMTipo ct=new CtrlABMTipo();
+			
+			
 			SimpleDateFormat f= new SimpleDateFormat("dd/MM/yyyy HH:mm");
 			java.util.Date fechaHoraDesde = null, fechaHoraHasta = null;
 			String fechaDesde = request.getParameter("fecha_hora");		
 			String fechaHasta = request.getParameter("fecha_hora_hasta");		
+			
 			
 			try {
 						fechaHoraDesde = f.parse(fechaDesde);
@@ -136,25 +140,48 @@ public class Reserva extends HttpServlet {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
+								
+				entity.TipoElemento t=ct.getByID(ele.getTipoElemento().getId_tipo());
 				
-				r.setFecha_hora_desde(fechaHoraDesde);
-				r.setFecha_hora_hasta(fechaHoraHasta);
-				r.setElemento(ele);
-				r.setPersona(per);
-				
+				int cantRes= cte.cantReservasXTipo(per, t, ele);
 				String mail=r.getPersona().getEmail();
-
-				//Falta setear la fecha que viene de request.getParameter("fecha_hora")) <--- convertir ese String en Date;
-				// e.setFecha_hora(fecha_hora);
 				
-				try {
-					cte.add(r);
-					Emailer.getInstance().send(mail,"Reserva Creada",cte.datosRes(r));
-				} catch (Exception e2) {
-					System.out.println("Aca tira error");
-				}
+				if (cantRes<t.getCantMaxima()) {//no supera la cantidad maxima
+					
+					
+						
+						int cantDias=0;			
+						cantDias = t.getDiasAnticipacion();			
+						Date hoy = new Date();
+						
+						if(((fechaHoraDesde.getTime()-hoy.getTime())/86400000) < cantDias){//diferencia de dias desde hoy hasta la fecha de reserva inferior a la esperada
+						  //mostrar mensaje en pantalla
+							
+						}else {
+							int tiempoMax=t.getTiempoMax();
+							if(tiempoMax< ((fechaHoraHasta.getTime()-fechaHoraDesde.getTime())/86400000)){//supera la cantidad de tiempo maxima de reserva
+								//mostrar mensaje
+							}else {
+							
+							if (cte.estaDisponible(r)){//esta disponible ese elemento para las horas seleccionadas
+								
+								r.setFecha_hora_desde(fechaHoraDesde);
+								r.setFecha_hora_hasta(fechaHoraHasta);
+								r.setElemento(ele);
+								r.setPersona(per);
+								try {
+									cte.add(r);
+									Emailer.getInstance().send(mail,"Reserva Creada",cte.datosRes(r));
+								} catch (Exception e2) {
+									System.out.println("Aca tira error");
+								}
+							}
+						}
+					}
+				}			
+			
 				this.doGet(request, response);
-				}
+		}
 				
 				
 			
@@ -163,12 +190,19 @@ public class Reserva extends HttpServlet {
 	if (request.getParameter("borrar")!= null) {
 		
 		entity.Reserva r = new entity.Reserva();
-		CtrlABMReserva ctp = new CtrlABMReserva();
+		CtrlABMReserva ctr = new CtrlABMReserva();
 		
+		String mail=r.getPersona().getEmail();
 		r.setId_reserva(Integer.parseInt(request.getParameter("borrar")));
 		
 		System.out.println(r.getId_reserva());
-		ctp.delete(r);
+		try {
+			ctr.delete(r);
+			Emailer.getInstance().send(mail,"Reserva Cancelada",ctr.datosRes(r));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		//System.out.println(id);
 		//e = cte.getByID(id);
 		//System.out.println(e.getId_elemento());
@@ -203,6 +237,7 @@ public class Reserva extends HttpServlet {
 		
 		
 	}
+	
 }
 
 
