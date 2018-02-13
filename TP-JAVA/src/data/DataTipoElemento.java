@@ -195,8 +195,8 @@ public ArrayList<TipoElemento> getAll(){
  			stmt.setInt(2, t.getCantMaxima());
  			stmt.setInt(3, t.getTiempoMax());
  			stmt.setInt(4, t.getDiasAnticipacion());
- 			stmt.setInt(5, t.getId_tipo());
-			stmt.setBoolean(5, t.getSoloEncargado());
+ 			stmt.setBoolean(5, t.getSoloEncargado());
+			stmt.setInt(6, t.getId_tipo());
  			stmt.executeUpdate();
  			
 		} catch (SQLException e) {

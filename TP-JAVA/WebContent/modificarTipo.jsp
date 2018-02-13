@@ -19,7 +19,7 @@ Modificar
 
 	<div class="form-group">
 		<label>ID</label>
-		<input type="text" name="id_persona" readonly="readonly" value=<c:out value="${tipo.id_tipo}" />>
+		<input type="text" name="id_tipo" readonly="readonly" value=<c:out value="${tipo.id_tipo}" />>
 	</div>
 	<div class="form-group">
 		<label>Nombre</label>
@@ -27,15 +27,15 @@ Modificar
 	</div>
 	<div class="form-group">
 		<label>Cantidad Maxima</label>
-		<input type="text"  name="apellido" value=<c:out value="${tipo.cantMaxima}"/>>
+		<input type="text"  name="cantMax" value=<c:out value="${tipo.cantMaxima}"/>>
 	</div>
 	<div class="form-group">
 		<label>Dias Anticipacion</label>
-		<input type="text"  name="dni" value=<c:out value="${tipo.diasAnticipacion}"/>>
+		<input type="text"  name="diasAnt" value=<c:out value="${tipo.diasAnticipacion}"/>>
 	</div>
 	<div class="form-group">
 		<label>Tiempo Maximo</label>
-		<input type="text" name="usuario" value=<c:out value="${tipo.tiempoMax}"/>>
+		<input type="text" name="tiempoMax" value=<c:out value="${tipo.tiempoMax}"/>>
 	</div>
 	<div class="form-group">
 		<label>Solo Encargado</label>

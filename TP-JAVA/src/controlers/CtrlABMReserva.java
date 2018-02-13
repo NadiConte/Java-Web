@@ -37,11 +37,12 @@ public class CtrlABMReserva {
 	}
 	
 	public void update(Reserva r){
-		dataRes.update(r);
-		
-		
+		dataRes.update(r);		
 	}
 	
+	public Reserva getByID(int id){
+		return dataRes.getReservasPorID(id);		
+	}
 	
 	public ArrayList<Reserva> getAll(){
 	return dataRes.getAll();}
@@ -76,8 +77,8 @@ public class CtrlABMReserva {
 		return msj;
 	}
 	
-	public int cantReservasXTipo(Persona p,TipoElemento t, Elemento e) {
-		return dataRes.cantReservasXTipo(p, t, e);
+	public int cantReservasXTipo(Persona p,TipoElemento t) {
+		return dataRes.cantReservasXTipo(p, t);
 	}
 	
 	public boolean estaDisponible(Reserva r) {

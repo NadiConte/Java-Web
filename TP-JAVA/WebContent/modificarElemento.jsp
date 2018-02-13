@@ -12,6 +12,12 @@
 <form method="post" action="Elementos">
 
 	
+	
+	<div class="form-group">
+		<label>ID</label>
+		<input type="text" name="id_ele" readonly="readonly" value=<c:out value="${elemento.id_elemento}" />>
+	</div>
+	
 	<div class="form-group">
 		<label>Nombre</label>
 		<input type="text" name="nombre" value=<c:out value="${elemento.nombre}"/>>
@@ -21,8 +27,8 @@
 		<label>Tipo Elemento</label>
 		 
 		<select name="id_tipo">
-		<c:forEach items="${tipos}" var="t">
-        <option value="${t.id_tipo}" ${t.id_tipo == miTipo.id_tipo ? 'selected="selected"' : ''}>${tipo.nombre}</option>
+		<c:forEach items="${tiposEle}" var="t">
+        <option value="${t.id_tipo}" ${t.id_tipo == miTipo.id_tipo ? 'selected="selected"' : ''}>${t.nombre}</option>
     </c:forEach>
     </select>
 

@@ -80,7 +80,9 @@ public class TipoElemento extends HttpServlet {
 			entity.TipoElemento te = new entity.TipoElemento();
 			CtrlABMTipo cte = new CtrlABMTipo();
 			
-			te.setId_tipo(Integer.parseInt(request.getParameter("id_tipo")));
+			int idTipo = Integer.parseInt(request.getParameter("id_tipo"));
+			te = cte.getByID(idTipo);
+			
 			te.setNombre(request.getParameter("nombre"));
 			te.setCantMaxima(Integer.parseInt(request.getParameter("cantMax")));
 			te.setDiasAnticipacion(Integer.parseInt(request.getParameter("diasAnt")));

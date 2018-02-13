@@ -10,4 +10,4 @@
 <h1><b>Comuniquese con su encargado para poder reservar este elemento</b></h1>
 </body>
 </html>
-<a href="login.html"><button>Volver</button></a>
+<a href="menuPrincipal.jsp"><button>Volver</button></a>

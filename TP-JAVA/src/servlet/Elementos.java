@@ -73,7 +73,7 @@ public class Elementos extends HttpServlet {
 			request.setAttribute("elemento", e);
 			
 			
-			request.setAttribute("tipos",this.loadCombo());
+			request.setAttribute("tiposEle",this.loadCombo());
 			request.setAttribute("miTipo", mitipo);
 			
 			request.getRequestDispatcher("/modificarElemento.jsp").forward(request, response);
@@ -84,7 +84,8 @@ public class Elementos extends HttpServlet {
 			
 			entity.Elemento e = new entity.Elemento();
 			CtrlABMElemento cte = new CtrlABMElemento();
-			
+			int id_ele=Integer.parseInt(request.getParameter("id_ele"));
+			e = cte.getByID(id_ele);
 			TipoElemento te = new TipoElemento();
 			CtrlABMTipo ctt = new CtrlABMTipo();
 
@@ -108,8 +109,7 @@ public class Elementos extends HttpServlet {
 
 			
 			e.setNombre(request.getParameter("nombre"));
-			//e.set del tipo de elemento NO SE COMO SE PASA 
-
+		
 			int id_tipo=Integer.parseInt(request.getParameter("id_tipo"));
 			te=ctt.getByID(id_tipo);
 			
@@ -127,9 +127,6 @@ public class Elementos extends HttpServlet {
 			CtrlABMElemento cte = new CtrlABMElemento();
 			
 			String nombre = request.getParameter("borrar");
-			//System.out.println(id);
-			//e = cte.getByID(id);
-			//System.out.println(e.getId_elemento());
 			
 			e=cte.getByNombre(nombre);
 			cte.delete(e);

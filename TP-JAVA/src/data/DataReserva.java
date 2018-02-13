@@ -58,6 +58,51 @@ public class DataReserva {
 		return reservas;	
 	}
 	
+	public Reserva getReservasPorID(int id){ //OBTENER RESERVAS POR PERSONA
+		Reserva r=new Reserva();
+		PreparedStatement stmt=null;
+			ResultSet rs=null;
+			try {
+				stmt = FactoryConexion.getInstancia().getConn()
+						.prepareStatement("select * from reserva r "
+			 			+ "inner join elemento e on r.id_elemento=e.id_elemento "
+			 			+ "inner join persona p on r.id_persona=p.id_persona "		
+			 			+ "where id_reserva = ? and r.fecha_hora_desde>=now()",
+			 			PreparedStatement.RETURN_GENERATED_KEYS);
+				
+				stmt.setInt(1, id);
+				
+				
+				rs = stmt.executeQuery();
+				if(rs!=null){		
+						DataPersona dp = new DataPersona();
+						int idp = rs.getInt("p.id_persona");
+						
+						r.setElemento(new Elemento());
+						r.setId_reserva(rs.getInt("id_reserva"));
+						r.setFecha_hora_desde(rs.getTimestamp("fecha_hora_desde")); 
+						r.setFecha_hora_hasta(rs.getTimestamp("fecha_hora_hasta")); 
+						r.setDescripcion(rs.getString("descripcion"));
+						r.setEstado(rs.getString("estado"));					
+						r.getElemento().setId_elemento(rs.getInt("id_elemento"));
+			 			r.getElemento().setNombre(rs.getString("e.nombre"));
+			 			r.setPersona(new Persona());
+			 			r.setPersona(dp.getById(idp));
+				}
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+			try {
+				if(rs!=null) rs.close();
+				if(stmt!=null) stmt.close();
+				FactoryConexion.getInstancia().releaseConn();
+			} catch (SQLException e) {	
+				e.printStackTrace();
+			}
+			return r;	
+		}
+	
 public ArrayList<Reserva> getReservasdePer(Persona per){ //OBTENER RESERVAS POR PERSONA
 	
 	PreparedStatement stmt=null;
@@ -248,17 +293,17 @@ public ArrayList<Reserva> getReservasdePer(Persona per){ //OBTENER RESERVAS POR 
 		  		}
 		  	}
 	
-	public int  cantReservasXTipo(Persona p,TipoElemento t, Elemento e) {
+	public int cantReservasXTipo(Persona p,TipoElemento t) {
 		PreparedStatement stmt= null;
 		ResultSet rs=null;
 		int i=0;
 		try{ 
-		stmt= FactoryConexion.getInstancia().getConn().prepareStatement( "select * from reserva r "
-				+ "inner join tipoelemento e on r.id_elemento=e.id_elemento"
-				+ "where (r.id_persona=? and r.id_elemento=? and e.id_tipo=? and r.fecha_hora_hasta>=curdate())");
+		stmt= FactoryConexion.getInstancia().getConn().prepareStatement( "select * from reserva r"
+				+ " inner join elemento e on e.id_elemento = r.id_elemento"
+				+ " inner join tipoelemento te on te.id_tipo = e.id_tipo"
+				+ " where (r.id_persona = ? and te.id_tipo = ? and r.fecha_hora_hasta >= now())");
 		stmt.setInt(1,p.getId_persona());
 		stmt.setInt(2,t.getId_tipo());	
-		stmt.setInt(3,e.getId_elemento());
 			
 			 rs=stmt.executeQuery();
 			 if (rs!= null ){
@@ -286,11 +331,11 @@ public ArrayList<Reserva> getReservasdePer(Persona per){ //OBTENER RESERVAS POR 
 		ArrayList<Reserva> res = new ArrayList<Reserva>();
 		boolean i=true;
 		try{ 
-		stmt= FactoryConexion.getInstancia().getConn().prepareStatement( "select * from reserva r "
-				+ "inner join tipoelemento e on r.id_elemento=e.id_elemento "
-				+ "where (?<r.`hora_fecha_hasta` and ?>r.`hora_fecha_desde`) and (r.id_elemento=? and e.id_tipo=?)");
+		stmt= FactoryConexion.getInstancia().getConn().prepareStatement( "select * from reserva r"
+				+ " inner join tipoelemento e on e.id_elemento=r.id_elemento "
+				+ " where ((r.id_elemento=? and e.id_tipo=?) AND r.fecha_hora_hasta > ? and r.fecha_hora_desde < ?)");
 		stmt.setString(1, r.getFecha_hora_hasta().toString());
-		stmt.setString(1, r.getFecha_hora_desde().toString());	
+		stmt.setString(2, r.getFecha_hora_desde().toString());	
 		stmt.setInt(3,r.getElemento().getId_elemento());
 		stmt.setInt(4,r.getElemento().getTipoElemento().getId_tipo());			
 			 

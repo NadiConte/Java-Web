@@ -115,7 +115,6 @@ public class Reserva extends HttpServlet {
 			
 			if (request.getParameter("crear")!= null) {
 			
-			CtrlABMPersona cp = new CtrlABMPersona();			
 			entity.Persona per = (Persona) request.getSession().getAttribute("personaLogueada");		
 			CtrlABMElemento ctele = new CtrlABMElemento();
 			Elemento ele = ctele.getByID(Integer.parseInt(request.getParameter("id_ele")));				
@@ -143,8 +142,8 @@ public class Reserva extends HttpServlet {
 								
 				entity.TipoElemento t=ct.getByID(ele.getTipoElemento().getId_tipo());
 				
-				int cantRes= cte.cantReservasXTipo(per, t, ele);
-				String mail=r.getPersona().getEmail();
+				int cantRes= cte.cantReservasXTipo(per, t);
+				
 				
 				if (cantRes<t.getCantMaxima()) {//no supera la cantidad maxima
 					
@@ -153,22 +152,24 @@ public class Reserva extends HttpServlet {
 						int cantDias=0;			
 						cantDias = t.getDiasAnticipacion();			
 						Date hoy = new Date();
-						
+						//Los tipos de elementos pueden tener una cantidad máxima de días de anticipación para ser reservados.
 						if(((fechaHoraDesde.getTime()-hoy.getTime())/86400000) < cantDias){//diferencia de dias desde hoy hasta la fecha de reserva inferior a la esperada
-						  //mostrar mensaje en pantalla
+						  //mostrar mensaje error en pantalla
 							
 						}else {
 							int tiempoMax=t.getTiempoMax();
-							if(tiempoMax< ((fechaHoraHasta.getTime()-fechaHoraDesde.getTime())/86400000)){//supera la cantidad de tiempo maxima de reserva
-								//mostrar mensaje
+							if(tiempoMax < ((fechaHoraHasta.getTime()-fechaHoraDesde.getTime())/86400000)){//supera la cantidad de tiempo maxima de reserva
+								//mostrar mensaje error en pantalla
 							}else {
 							
-							if (cte.estaDisponible(r)){//esta disponible ese elemento para las horas seleccionadas
 								
 								r.setFecha_hora_desde(fechaHoraDesde);
 								r.setFecha_hora_hasta(fechaHoraHasta);
 								r.setElemento(ele);
 								r.setPersona(per);
+								String mail=r.getPersona().getEmail();
+								if (cte.estaDisponible(r)){//esta disponible ese elemento para las horas seleccionadas
+									
 								try {
 									cte.add(r);
 									Emailer.getInstance().send(mail,"Reserva Creada",cte.datosRes(r));
@@ -192,10 +193,11 @@ public class Reserva extends HttpServlet {
 		entity.Reserva r = new entity.Reserva();
 		CtrlABMReserva ctr = new CtrlABMReserva();
 		
-		String mail=r.getPersona().getEmail();
-		r.setId_reserva(Integer.parseInt(request.getParameter("borrar")));
+
 		
-		System.out.println(r.getId_reserva());
+		int id = Integer.parseInt(request.getParameter("borrar"));
+		r = ctr.getByID(id);
+		String mail=r.getPersona().getEmail();	
 		try {
 			ctr.delete(r);
 			Emailer.getInstance().send(mail,"Reserva Cancelada",ctr.datosRes(r));
@@ -203,9 +205,7 @@ public class Reserva extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//System.out.println(id);
-		//e = cte.getByID(id);
-		//System.out.println(e.getId_elemento());
+
 		
 		
 		this.doGet(request, response);
