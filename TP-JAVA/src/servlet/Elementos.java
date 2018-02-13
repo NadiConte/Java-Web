@@ -47,8 +47,19 @@ public class Elementos extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
+		if (request.getParameter("mapearCrearEle")!= null) {
+			
+			request.setAttribute("tipos",this.loadCombo());
+						
+			request.getRequestDispatcher("/crearElemento.jsp").forward(request, response);
+			
+			
+	}
+		
 		
 		if (request.getParameter("mapear")!= null) {
+			
+	
 			
 			String nombre = request.getParameter("mapear");
 						
@@ -57,8 +68,13 @@ public class Elementos extends HttpServlet {
 			CtrlABMElemento cte = new CtrlABMElemento();
 			
 			e=cte.getByNombre(nombre);
+			TipoElemento mitipo = e.getTipoElemento();
 			
 			request.setAttribute("elemento", e);
+			
+			
+			request.setAttribute("tipos",this.loadCombo());
+			request.setAttribute("miTipo", mitipo);
 			
 			request.getRequestDispatcher("/modificarElemento.jsp").forward(request, response);
 			
@@ -72,8 +88,6 @@ public class Elementos extends HttpServlet {
 			TipoElemento te = new TipoElemento();
 			CtrlABMTipo ctt = new CtrlABMTipo();
 
-			
-			//e.setId_elemento(Integer.parseInt(request.getParameter("id"))); los id son PL - no se modifican
 			e.setNombre(request.getParameter("nombre"));
 			int id_tipo=Integer.parseInt(request.getParameter("id_tipo"));
 			te=ctt.getByID(id_tipo);
@@ -122,6 +136,21 @@ public class Elementos extends HttpServlet {
 			this.doGet(request, response);
 			}
 		
+
+	}
+
+	private ArrayList<TipoElemento> loadCombo() {
+		CtrlABMTipo ctt= new CtrlABMTipo();
+		ArrayList<TipoElemento> tipos=new ArrayList<TipoElemento>();
+		try {
+			tipos = ctt.getAll();
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return tipos;
 
 	}
 

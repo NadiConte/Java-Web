@@ -1,13 +1,5 @@
-<%@page import="java.util.ArrayList"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-
-<%@ page import="entity.Elemento" %>
-<%@ page import="controlers.CtrlABMElemento" %>
-
-<%@ page import="entity.TipoElemento" %>
-<%@ page import="controlers.CtrlABMTipo" %>
-<%@ page import="java.util.ArrayList" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -17,41 +9,33 @@
 <title>Modificar Elemento</title>
 </head>
 <body>
-Modifica
-
-<%
-
-	Elemento e = (Elemento)request.getAttribute("elemento");
-
-%>
-<form method="post" action="Elemento">
+<form method="post" action="Elementos">
 
 	
 	<div class="form-group">
 		<label>Nombre</label>
-		<input type="text" name="nombre" value=<%= e.getNombre()%>>
+		<input type="text" name="nombre" value=<c:out value="${elemento.nombre}"/>>
 	</div>
-
-	<div class="form-group">
-		<label>ID_Tipo</label>
-
-	<%CtrlABMTipo ctt= new CtrlABMTipo();
-		ArrayList<TipoElemento> tipos=new ArrayList<TipoElemento>();
-		tipos=ctt.getAll(); %>
-		<select name="id_tipo" id="tipo"style="width: 154px; height: 29px">
 		
-		<%for(TipoElemento t : tipos){%>
-		<option value="<%=t.getId_tipo()%>"><%=t.getNombre()%></option><%} %>
-	
-		
-		</select>	
+ 	<div class="form-group">
+		<label>Tipo Elemento</label>
+		 
+		<select name="id_tipo">
+		<c:forEach items="${tipos}" var="t">
+        <option value="${t.id_tipo}" ${t.id_tipo == miTipo.id_tipo ? 'selected="selected"' : ''}>${tipo.nombre}</option>
+    </c:forEach>
+    </select>
+
+
 	</div>	
+		
+		
 	
 
 	<button type="input" name="modificar">Aceptar</button>
 </form>
 
-<a href="/elementos.jsp"><button>Volver</button></a>
+<a href="/TPJAVA/elementos"><button>Volver</button></a>
 
 </body>
 </html>

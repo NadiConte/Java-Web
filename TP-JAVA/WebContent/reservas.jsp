@@ -54,9 +54,10 @@
 		</table>
 
 	<button type="input" name="mapearNuevaReserva">Nueva Reserva</button>
-			</form>
-		<button type="button"  name="volverMenu">Volver</button>
+		<button type="input"  name="volverMenu">Volver</button>
 	
+			</form>
+		
 
 </body>
 </html>

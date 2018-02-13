@@ -15,16 +15,6 @@
 <body>
 
 <form method="post" action="Reserva">
-
-	<div class="form-group">
-		<label>Fecha y Hora</label>
-		<input type="text" name="fecha_hora">
-	</div>
-	
-	<div class="form-group">
-		<label>Descripcion</label>
-		<input type="text" name="descripcion">
-	</div>
 	
 			<div class="form-group">
 		<label>Tipo Elementos</label>
@@ -35,26 +25,10 @@
         <option value="${tipo.id_tipo}">${tipo.nombre}</option>
     </c:forEach>
 		</select>	
-	</div>	
 	
-	<button type="input" value=<c:out value="${tipo.id_tipo}"/> name="cargarElementos">Cargar Elementos</button>
-						
-		<div class="form-group">
-		<label>Elementos</label>
-
 	
-		<select name="id_ele" id="elemento"style="width: 154px; height: 29px">
-		
-		<c:forEach items="${allElements}" var="e">
-		<option value="${e.id_elemento}">${e.nombre}</option>
-		  </c:forEach>
-		</select>	
-	</div>	
-	
-
-		
-
-	<button type="input" name="crear">Aceptar</button>
+	<button type="input" value="${tipo.id_tipo}" name="cargarElementos">Seleccionar Elemento</button>
+			</div>				
 </form>
 
 <a href="/TPJAVA/reservas"><button>Volver</button></a>

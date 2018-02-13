@@ -45,9 +45,10 @@
 			</c:forEach>
 			</tbody>
 		</table>
+		<button type="input" name="mapearCrearEle">Nuevo Elemento</button>
+	
 </form>
-	<a href="/TPJAVA/crearElemento.jsp"><button>Nuevo Elemento</button></a>
-	<a href="/TPJAVA/menuAdministrador.jsp"><button>Volver</button></a>
+	<a href="menuAdministrador.jsp"><button>Volver</button></a>
 	
 
 </body>
