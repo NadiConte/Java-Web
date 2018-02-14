@@ -66,7 +66,8 @@ public ArrayList<Elemento> getAll(){
 			+ " where t.nombre = ?");
 			stmt.setString(1, tipoel.getNombre());
 			rs=stmt.executeQuery();
-			if(rs!=null && rs.next()){
+			if(rs!=null){
+				while(rs.next()){
 					el=new Elemento();
 		 			el.setTipoElemento(new TipoElemento());
 		 			el.setId_elemento(rs.getInt("id_elemento"));
@@ -74,7 +75,7 @@ public ArrayList<Elemento> getAll(){
 		 			el.getTipoElemento().setId_tipo(rs.getInt("id_tipo"));
 		 			el.getTipoElemento().setNombre(rs.getString("t.nombre"));
 		 			elem.add(el);
-				}
+				}}
 			
 		} catch (SQLException e) {
 			

@@ -104,7 +104,7 @@ public class Reserva extends HttpServlet {
 				if (per.esEncargado() || per.esAdministrador() || te.getSoloEncargado() == false) {	
 				
 				CtrlABMElemento ctele= new CtrlABMElemento();
-				ArrayList<Elemento> elementos= ctele.getByTipo(idTipo);
+				ArrayList<Elemento> elementos= (ArrayList<Elemento>) ctele.loadElementos(te);
 				
 				request.setAttribute("allElements", elementos);
 				request.getRequestDispatcher("/confirmarReserva.jsp").forward(request, response);}
