@@ -27,7 +27,6 @@
 					<th>Elemento</th>
 					<th>Estado</th>
 			   </tr>
-			    </tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${todasReservas}" var="res">

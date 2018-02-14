@@ -231,7 +231,6 @@ public class DataPersona {
 	}
 	
 	public Boolean isUserValid(Persona per) {
-		int aux = 0;
 		ResultSet rs=null;
 		PreparedStatement stmt=null;
 		try {
@@ -251,11 +250,7 @@ public class DataPersona {
 		e.printStackTrace();
 	}
 		return false;
-		
-
-
-
-}
+	}
 	
 	public Persona validarUsuario(String user, String pass){
 		Persona p=null;

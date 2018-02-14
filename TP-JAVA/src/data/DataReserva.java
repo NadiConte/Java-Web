@@ -328,11 +328,10 @@ public ArrayList<Reserva> getReservasdePer(Persona per){ //OBTENER RESERVAS POR 
 	public boolean estaDisponible(Reserva r){
 		PreparedStatement stmt= null;
 		ResultSet rs=null;
-		ArrayList<Reserva> res = new ArrayList<Reserva>();
 		boolean i=true;
 		try{ 
 		stmt= FactoryConexion.getInstancia().getConn().prepareStatement( "select * from reserva r"
-				+ " inner join tipoelemento e on e.id_elemento=r.id_elemento "
+				+ " inner join elemento e on e.id_elemento=r.id_elemento "
 				+ " where ((r.id_elemento=? and e.id_tipo=?) AND r.fecha_hora_hasta > ? and r.fecha_hora_desde < ?)");
 		stmt.setString(1, r.getFecha_hora_hasta().toString());
 		stmt.setString(2, r.getFecha_hora_desde().toString());	

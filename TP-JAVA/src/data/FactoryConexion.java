@@ -3,13 +3,21 @@ import java.sql.*;
 
 
 public class FactoryConexion {
-	
+	  
+    /*private String driver="com.mysql.jdbc.Driver";
+    private String host="jdbc:mysql://mysql14435-tp-java.jelastic.com/tpjava";
+    private String port="3306";
+    private String username="root";
+    private String password="YFKvlk01039";
+    private String db="tpjava";*/
+    
+
 	private String driver="com.mysql.jdbc.Driver";
 	private String host="localhost";
 	private String port="3306";
 	private String user="root";
-	private String password="admin";
-	private String db="tpjava";
+	private String password="root";
+	private String db="tpjava"; 
 	
 	private static FactoryConexion instancia;
 		

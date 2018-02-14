@@ -50,9 +50,9 @@ public class Emailer {
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(props.getProperty("mail.username")));
 			message.setRecipients(Message.RecipientType.TO,
-				InternetAddress.parse("nadinaconte@yahoo.com.ar"));
-			message.setSubject("Testing Subject"); //"Testing Subject"
-			message.setText("Reserva hecha"); //"Dear Mail Crawler,\n\n No spam to my email, please!"
+				InternetAddress.parse(to));
+			message.setSubject(subject); //"Testing Subject"
+			message.setText(body); //"Dear Mail Crawler,\n\n No spam to my email, please!"
 
 			Transport.send(message);
 

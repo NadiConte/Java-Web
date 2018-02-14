@@ -125,61 +125,65 @@ public class Reserva extends HttpServlet {
 			CtrlABMTipo ct=new CtrlABMTipo();
 			
 			
-			SimpleDateFormat f= new SimpleDateFormat("dd/MM/yyyy HH:mm");
-			java.util.Date fechaHoraDesde = null, fechaHoraHasta = null;
+			SimpleDateFormat f= new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+			java.util.Date fechaHoraDesde=null;
+			java.util.Date fechaHoraHasta=null;
 			String fechaDesde = request.getParameter("fecha_hora");		
 			String fechaHasta = request.getParameter("fecha_hora_hasta");		
-			
-			
+		
 			try {
-						fechaHoraDesde = f.parse(fechaDesde);
-						fechaHoraHasta = f.parse(fechaHasta);
-								
-					} catch (ParseException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-								
+				fechaHoraDesde = f.parse(fechaDesde);
+				fechaHoraHasta = f.parse(fechaHasta);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				System.out.println("no se formatea la fecha");
+			}
+			
+			//2018/03/03 10:00:00	
 				entity.TipoElemento t=ct.getByID(ele.getTipoElemento().getId_tipo());
 				
 				int cantRes= cte.cantReservasXTipo(per, t);
-				
-				
+			
 				if (cantRes<t.getCantMaxima()) {//no supera la cantidad maxima
 					
-					
-						
 						int cantDias=0;			
 						cantDias = t.getDiasAnticipacion();			
 						Date hoy = new Date();
+						System.out.println(fechaHoraDesde);
 						//Los tipos de elementos pueden tener una cantidad máxima de días de anticipación para ser reservados.
+						
 						if(((fechaHoraDesde.getTime()-hoy.getTime())/86400000) < cantDias){//diferencia de dias desde hoy hasta la fecha de reserva inferior a la esperada
-						  //mostrar mensaje error en pantalla
-							
+							response.getWriter().append("Los dias de anticipacion para la reserva no son suficientes.");
+				
 						}else {
-							int tiempoMax=t.getTiempoMax();
-							if(tiempoMax < ((fechaHoraHasta.getTime()-fechaHoraDesde.getTime())/86400000)){//supera la cantidad de tiempo maxima de reserva
-								//mostrar mensaje error en pantalla
-							}else {
 							
+							int tiempoMax=t.getTiempoMax();
+							
+							if(tiempoMax < ((fechaHoraHasta.getTime()-fechaHoraDesde.getTime())/86400000)){//supera la cantidad de tiempo maxima de reserva
 								
+								response.getWriter().append("El tiempo de la reserva es mayor al permitido.");
+								}else {
+							
 								r.setFecha_hora_desde(fechaHoraDesde);
 								r.setFecha_hora_hasta(fechaHoraHasta);
 								r.setElemento(ele);
 								r.setPersona(per);
 								String mail=r.getPersona().getEmail();
-								if (cte.estaDisponible(r)){//esta disponible ese elemento para las horas seleccionadas
+								if (cte.estaDisponible(r)){
+									//esta disponible ese elemento para las horas seleccionadas
 									
-								try {
-									cte.add(r);
-									Emailer.getInstance().send(mail,"Reserva Creada",cte.datosRes(r));
-								} catch (Exception e2) {
-									System.out.println("Aca tira error");
-								}
-							}
+									try {
+										System.out.println("reserva creada");
+										cte.add(r);
+										Emailer.getInstance().send(mail,"Reserva Creada",cte.datosRes(r));
+									} catch (Exception e2) {
+										System.out.println("Aca tira error");
+									}
+								}else {response.getWriter().append("El elemento no está disponible entre las fechas seleccionadas.");}
 						}
 					}
-				}			
+						
+				}		else {response.getWriter().append("Supero la cantidad de reservas permitidas para este tipo de elementos.");}	
 			
 				this.doGet(request, response);
 		}
@@ -192,12 +196,15 @@ public class Reserva extends HttpServlet {
 		
 		entity.Reserva r = new entity.Reserva();
 		CtrlABMReserva ctr = new CtrlABMReserva();
-		
-
+		Persona p=new Persona();
+		CtrlABMPersona ctp=new CtrlABMPersona();
 		
 		int id = Integer.parseInt(request.getParameter("borrar"));
 		r = ctr.getByID(id);
-		String mail=r.getPersona().getEmail();	
+		
+		p=ctp.getById(r.getPersona().getId_persona());
+		String mail=p.getEmail();
+		
 		try {
 			ctr.delete(r);
 			Emailer.getInstance().send(mail,"Reserva Cancelada",ctr.datosRes(r));
