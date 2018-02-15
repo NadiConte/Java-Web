@@ -30,8 +30,9 @@ public class Login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.getRequestDispatcher("index.jsp").forward(request, response);
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		request.getRequestDispatcher("/personas.jsp").forward(request, response);
+		
 	}
 
 	
@@ -57,9 +58,9 @@ public class Login extends HttpServlet {
 
 
 					if (!per.esAdministrador()) { 
-						request.getRequestDispatcher("/menuPrincipal.jsp").forward(request, response);
+						request.getRequestDispatcher("menuPrincipal.jsp").forward(request, response);
 						}else {
-						request.getRequestDispatcher("/menuAdministrador.jsp").forward(request, response);	
+						request.getRequestDispatcher("menuAdministrador.jsp").forward(request, response);	
 						}
 				
 				
@@ -72,7 +73,7 @@ public class Login extends HttpServlet {
 			}
 			
 			//System.out.println();
-			request.getRequestDispatcher("/PaginaError.jsp").forward(request, response);
+			request.getRequestDispatcher("PaginaError.jsp").forward(request, response);
 
 			
 			//request.getRequestDispatcher("menuPrincipal.jsp").forward(request, response);

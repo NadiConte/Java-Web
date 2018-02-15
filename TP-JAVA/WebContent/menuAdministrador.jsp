@@ -11,10 +11,10 @@
 			
 	<h1><b>Administrar:</b></h1>
 	
-	<div><a href="/TPJAVA/personas">Personas</a></div>
-	<div><a href="/TPJAVA/tipoElementos">Tipos de Elementos</a></div>
-	<div><a href="/TPJAVA/elementos">Elementos</a></div>
-	<div><a href="/TPJAVA/reservas">Reservas</a></div>
+	<div><a href="personas">Personas</a></div>
+	<div><a href="tipoElementos">Tipos de Elementos</a></div>
+	<div><a href="elementos">Elementos</a></div>
+	<div><a href="reservas">Reservas</a></div>
 	</form>
 </body>
 </html>

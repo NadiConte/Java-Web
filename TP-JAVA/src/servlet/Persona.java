@@ -42,7 +42,7 @@ public class Persona extends HttpServlet {
 		alp =ctp.getAll();
 		
 		request.setAttribute("allPeople", alp);
-		request.getRequestDispatcher("/personas.jsp").forward(request, response);
+		request.getRequestDispatcher("personas.jsp").forward(request, response);
 	}
 
 	/**

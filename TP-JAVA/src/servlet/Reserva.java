@@ -179,7 +179,7 @@ public class Reserva extends HttpServlet {
 									} catch (Exception e2) {
 										System.out.println("Aca tira error");
 									}
-								}else {response.getWriter().append("El elemento no está disponible entre las fechas seleccionadas.");}
+								}else {request.getRequestDispatcher("/errorObjetoReservado.jsp").forward(request, response);}
 						}
 					}
 						

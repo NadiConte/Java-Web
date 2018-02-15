@@ -67,16 +67,16 @@ public class DataReserva {
 						.prepareStatement("select * from reserva r "
 			 			+ "inner join elemento e on r.id_elemento=e.id_elemento "
 			 			+ "inner join persona p on r.id_persona=p.id_persona "		
-			 			+ "where id_reserva = ? and r.fecha_hora_desde>=now()",
+			 			+ "where id_reserva = ? and r.fecha_hora_desde>=curtime()",
 			 			PreparedStatement.RETURN_GENERATED_KEYS);
 				
 				stmt.setInt(1, id);
 				
 				
 				rs = stmt.executeQuery();
-				if(rs!=null){		
+				if(rs!=null  && rs.next()){		
 						DataPersona dp = new DataPersona();
-						int idp = rs.getInt("p.id_persona");
+						
 						
 						r.setElemento(new Elemento());
 						r.setId_reserva(rs.getInt("id_reserva"));
@@ -87,6 +87,7 @@ public class DataReserva {
 						r.getElemento().setId_elemento(rs.getInt("id_elemento"));
 			 			r.getElemento().setNombre(rs.getString("e.nombre"));
 			 			r.setPersona(new Persona());
+			 			int idp = rs.getInt("id_persona");
 			 			r.setPersona(dp.getById(idp));
 				}
 			} catch (SQLException e) {
@@ -273,7 +274,7 @@ public ArrayList<Reserva> getReservasdePer(Persona per){ //OBTENER RESERVAS POR 
 		  		try {
 		 			stmt=FactoryConexion.getInstancia().getConn()
 		 				.prepareStatement(
-		 					"update reservas set estado=? where id_reserva=?"					
+		 					"update reserva set estado=? where id_reserva=?"					
 		 					);
 		 			stmt.setString(1,"cancelada");
 		 			stmt.setInt(2, r.getId_reserva());			
@@ -332,11 +333,11 @@ public ArrayList<Reserva> getReservasdePer(Persona per){ //OBTENER RESERVAS POR 
 		try{ 
 		stmt= FactoryConexion.getInstancia().getConn().prepareStatement( "select * from reserva r"
 				+ " inner join elemento e on e.id_elemento=r.id_elemento "
-				+ " where ((r.id_elemento=? and e.id_tipo=?) AND r.fecha_hora_hasta > ? and r.fecha_hora_desde < ?)");
-		stmt.setString(1, r.getFecha_hora_hasta().toString());
-		stmt.setString(2, r.getFecha_hora_desde().toString());	
-		stmt.setInt(3,r.getElemento().getId_elemento());
-		stmt.setInt(4,r.getElemento().getTipoElemento().getId_tipo());			
+				+ " where ((r.id_elemento=? and e.id_tipo=?) AND r.fecha_hora_hasta =< ? and r.fecha_hora_desde => ?)");
+		stmt.setString(3, r.getFecha_hora_hasta().toString());
+		stmt.setString(4, r.getFecha_hora_desde().toString());	
+		stmt.setInt(1,r.getElemento().getId_elemento());
+		stmt.setInt(2,r.getElemento().getTipoElemento().getId_tipo());			
 			 
 			 rs=stmt.executeQuery();
 			 if(rs!=null && rs.next()){
