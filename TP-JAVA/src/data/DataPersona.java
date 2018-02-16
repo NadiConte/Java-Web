@@ -275,6 +275,8 @@ public class DataPersona {
 				p.setEmail(rs.getString("email"));
 				p.getCategoria().setId_categoria(rs.getInt("id_categoria"));
 				p.getCategoria().setNombreCat(rs.getString("nombre")); 
+				p.setUsuario(user);
+				p.setContraseña(pass);
 				
 			}
 			

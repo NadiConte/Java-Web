@@ -19,7 +19,6 @@
 		<table class = "table table-striped">
 			<thead>
 				<tr>
-					<th>ID</th>
 					<th>Nombre</th>
 					<th>Dias anticipacion</th>
 					<th>Cantidad Maxima</th>
