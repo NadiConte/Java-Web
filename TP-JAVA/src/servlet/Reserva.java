@@ -125,7 +125,7 @@ public class Reserva extends HttpServlet {
 			CtrlABMTipo ct=new CtrlABMTipo();
 			
 			
-			SimpleDateFormat f= new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+			SimpleDateFormat f= new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");//YYYY-MM-DD HH-MM-SS
 			java.util.Date fechaHoraDesde=null;
 			java.util.Date fechaHoraHasta=null;
 			String fechaDesde = request.getParameter("fecha_hora");		
@@ -136,8 +136,7 @@ public class Reserva extends HttpServlet {
 				fechaHoraHasta = f.parse(fechaHasta);
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
-				System.out.println("no se formatea la fecha");
-			}
+				}
 			
 			//2018/03/03 10:00:00	
 				entity.TipoElemento t=ct.getByID(ele.getTipoElemento().getId_tipo());
@@ -169,6 +168,7 @@ public class Reserva extends HttpServlet {
 								r.setElemento(ele); 
 								r.setPersona(per);
 								String mail=r.getPersona().getEmail();
+
 								if (cte.estaDisponible(r, t)){
 									//esta disponible ese elemento para las horas seleccionadas
 									

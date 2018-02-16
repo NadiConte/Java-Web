@@ -21,6 +21,8 @@
 		<table>
 			<thead>
 				<tr>
+					
+					<th>Persona</th>
 					<th>Fecha y Hora Desde</th>
 					<th>Fecha y Hora Hasta</th>
 					<th>Descripcion</th>
@@ -31,6 +33,9 @@
 			<tbody>
 				<c:forEach items="${todasReservas}" var="res">
 			<tr>
+				<td><input type="text"
+				name="<c:out value="${res.persona.usuario}"/>"
+				value="<c:out value="${res.persona.usuario}"/>" disabled /></td>
 				<td><input type="text"
 				name="<c:out value="${res.fecha_hora_desde}"/>"
 				value="<c:out value="${res.fecha_hora_desde}"/>" disabled /></td>
