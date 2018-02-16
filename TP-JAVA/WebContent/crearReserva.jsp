@@ -11,27 +11,37 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Crear Reserva</title>
+    <link href="style/css/bootstrap.css" rel="stylesheet">
+
 </head>
 <body>
-
-<form method="post" action="Reserva">
-	
-			<div class="form-group">
-		<label>Tipo Elementos</label>
-
-
-		<select name="id_tipo" id="tipo"style="width: 154px; height: 29px">
-		<c:forEach items="${allTipos}" var="tipo">
-        <option value="${tipo.id_tipo}">${tipo.nombre}</option>
-    </c:forEach>
-		</select>	
-	
-	
-	<button type="input" value="${tipo.id_tipo}" name="cargarElementos">Seleccionar Elemento</button>
-			</div>				
-</form>
-
-<a href="reservas"><button>Volver</button></a>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="well well-sm">	
+		<form class="form-horizontal" method="post" action="Reserva">
+			 <fieldset>
+                 <legend class="text-center header">Crear Reserva</legend>
+			                                          
+									<div class="form-group">
+		                              	<label class="col-sm-2 col-sm-2 control-label">Tipos de Elementos</label>
+		                              	<div class="col-sm-10">
+										<select name="id_tipo" id="tipo"class="form-control">
+										<c:forEach items="${allTipos}" var="tipo">
+								        <option value="${tipo.id_tipo}">${tipo.nombre}</option>
+								    </c:forEach>
+										</select>
+		                              	</div>
+		                          	</div>
+		                          	<div class="centrar-cont">
+		                          	<button type="input" value="${tipo.id_tipo}"  class="btn btn-primary" name="cargarElementos">Seleccionar Elemento</button>
+		                          		<input type="button" name="btnCancelar" value="Cancelar" class="btn btn-primary" onClick="location.href='reservas.jsp'">	
+		                          	</div></fieldset>
+		</form>
+		</div>
+      </div>
+    </div>
+</div>
 
 </body>
 </html>

@@ -11,46 +11,53 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Crear Reserva</title>
+    <link href="style/css/bootstrap.css" rel="stylesheet">
+
 </head>
 <body>
-
-<form method="post" action="Reserva">
-	
-		<div class="form-group">
-		<label>Fecha - Hora Desde</label>
-		<input type="text" name="fecha_hora">
-	</div>
-	
-		<div class="form-group">
-		<label>Fecha - Hora Hasta</label>
-		<input type="text" name="fecha_hora_hasta">
-	</div>
-	
-	
-	
-	<div class="form-group">
-		<label>Descripcion</label>
-		<input type="text" name="descripcion">
-	</div>
-	
-			
-		<div class="form-group">
-		<label>Elementos Disponibles</label>
-
-	
-		<select name="id_ele" id="elemento"style="width: 154px; height: 29px">
-		
-		<c:forEach items="${allElements}" var="e">
-		<option value="${e.id_elemento}">${e.nombre}</option>
-		  </c:forEach>
-		</select>	
-	</div>	
-		
-
-	<button type="input" name="crear">Guardar Reserva</button>
-</form>
-
-<a href="reservas"><button>Ir a Reservas</button></a>
-
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="well well-sm">	
+		<form class="form-horizontal" method="post" action="Elemento">
+			 <fieldset>
+                 <legend class="text-center header">Crear Reserva</legend>
+			                       <div class="form-group">
+		                              	<label class="col-sm-2 col-sm-2 control-label">Fecha - Hora Desde</label>
+		                              	<div class="col-sm-10">
+		                                  	<input type="text" name="fecha_hora" class="form-control" placeholder="AAAA/MM/DD HH:mm:ss">
+		                              	</div>
+		                          	</div>
+			                       <div class="form-group">
+		                              	<label class="col-sm-2 col-sm-2 control-label">Fecha - Hora Hasta</label>
+		                              	<div class="col-sm-10">
+		                                  	<input type="text" name="fecha_hora_hasta" class="form-control" placeholder="AAAA/MM/DD HH:mm:ss">
+		                              	</div>
+		                          	</div>
+			                     	<div class="form-group">
+		                              	<label class="col-sm-2 col-sm-2 control-label">Descripcion</label>
+		                              	<div class="col-sm-10">
+		                                  	<input type="text" name="descripcion" class="form-control">
+		                              	</div>
+		                          	</div>		                        
+									<div class="form-group">
+		                              	<label class="col-sm-2 col-sm-2 control-label">Elementos</label>
+		                              	<div class="col-sm-10">
+		                                  	<select name="id_ele" id="elemento" class="form-control">
+												<c:forEach items="${allElements}" var="e">
+												<option value="${e.id_elemento}">${e.nombre}</option>
+												  </c:forEach>
+											</select>
+		                              	</div>
+		                          	</div>
+		                          	<div class="centrar-cont">
+									<button type="input" name="crear" class="btn btn-primary" >Aceptar</button>
+		                          		<input type="button" name="btnCancelar" value="Cancelar" class="btn btn-primary" onClick="location.href='reservas.jsp'">	
+		                          	</div>
+		</form>
+		</div>
+      </div>
+    </div>
+</div>
 </body>
 </html>

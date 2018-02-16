@@ -8,12 +8,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Menu de Elementos</title>
-<link href="style/bootstrap.css" rel="stylesheet">
+    <link href="style/css/bootstrap.css" rel="stylesheet">
+
 </head>
 <body>
-	<form id="formelementos" name="Elementos"
-			action="Elementos" method="post">
-		<table class = "table table-striped">
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="well well-sm">	
+			<form class="form-horizontal" id="formelementos" name="Elementos" action="Elementos" method="post">
+			<fieldset>
+                 <legend class="text-center header">Elementos</legend>
+			<table class="table table-striped table-advance table-hover">
 			<thead>
 				<tr>
 					<th>ID</th>
@@ -36,19 +42,25 @@
 				value="<c:out value="${ele.tipoElemento.nombre}"/>" disabled /></td>
 				<td>
 	
-
-						<button type="input" value=<c:out value = "${ele.nombre}"/> name="mapear">Modificar</button>
-						<button type="input" value=<c:out value = "${ele.nombre}"/> name="borrar">Borrar</button>
+						<button class="btn btn-primary" type="input" value=<c:out value = "${ele.nombre}"/> name="mapear">Modificar</button>
+						<button class="btn btn-primary" type="input" value=<c:out value = "${ele.nombre}"/> name="borrar">Borrar</button>
 				
 				</td>
 			</tr>
 			</c:forEach>
 			</tbody>
 		</table>
-		<button type="input" name="mapearCrearEle">Nuevo Elemento</button>
+		<div class="centrar-cont">
+									<button type="input" name="mapearCrearEle" class="btn btn-primary" >Nuevo Elemento</button>
+		                          		<input type="button" name="btnCancelar" value="Cancelar" class="btn btn-primary" onClick="location.href='menuAdministrador.jsp'">	
+		                          	</div>
 	
-</form>
-	<a href="menuAdministrador.jsp"><button>Volver</button></a>
+		</fieldset>
+		</form>
+		</div>
+      </div>
+    </div>
+</div>
 	
 
 </body>

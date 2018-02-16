@@ -14,65 +14,85 @@
     <!-- Custom styles for this template -->
     <link href="style/start.css" rel="stylesheet">
 <title>Modificar Persona</title>
+    <link href="style/css/bootstrap.css" rel="stylesheet">
+
 </head>
 <body>
-Modificar
-<form method="post" action="Persona">
-	
-	<div class="form-group">
-		<label>ID</label>
-		<input type="text" name="id_persona" readonly="readonly" value=<c:out value="${persona.id_persona}" />>
-	</div>
-	
-	
-	<div class="form-group">
-		<label>Nombre</label>
-		<input type="text" name="nombre" value=<c:out value="${persona.nombre}"/>>
-	</div>
-	
-	<div class="form-group">
-		<label>Apellido</label>
-		<input type="text"  name="apellido" value=<c:out value="${persona.apellido}"/>>
-	</div>
-	
-	<div class="form-group">
-		<label>Dni</label>
-		<input type="text"  name="dni" value=<c:out value="${persona.dni}"/>>
-	</div>
-	<div class="form-group">
-		<label>Usuario</label>
-		<input type="text" name="usuario" value=<c:out value="${persona.usuario}"/>>
-	</div>
-	<div class="form-group">
-		<label>Contraseña</label>
-		<input type="text" name="contraseña" value=<c:out value="${persona.contraseña}"/>>
-	</div>
-	<div class="form-group">
-		<label>Email</label>
-		<input type="text"  name="email" value=<c:out value="${persona.email}"/>>
-	</div>
-	<div class="form-group">
-		<label>Habilitado</label>
-		<input type="checkbox" name="<c:out value="${persona.habilitado}"/>" 
-				id="habilitado" value="<c:out value="${persona.habilitado}"/>" ${persona.habilitado == 'true' ? 'checked' : ''}>
-	</div>
-
- 	<div class="form-group">
-		<label>Categoria</label>
-		 
-		<select name="id_categoria">
-		<c:forEach items="${categorias}" var="categoria">
-        <option value="${categoria.id_categoria}" ${categoria.id_categoria == selectedCat.id_categoria ? 'selected="selected"' : ''}>${categoria.descripcion}</option>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="well well-sm">	
+		<form class="form-horizontal" method="post" action="Persona">
+			 <fieldset>
+                 <legend class="text-center header">Modificar Persona</legend>
+                 					<div class="form-group">
+		                              	<label class="col-sm-2 col-sm-2 control-label">ID</label>
+		                              	<div class="col-sm-10">
+		                              		<input type="text" name="id_persona" readonly="readonly" class="form-control" value=<c:out value="${persona.id_persona}" />>
+		                              	</div>
+		                          	</div>
+			                       <div class="form-group">
+		                              	<label class="col-sm-2 col-sm-2 control-label">Nombre</label>
+		                              	<div class="col-sm-10">
+		                                  	<input type="text" name="nombre" class="form-control"  value=<c:out value="${persona.nombre}"/>>
+		                              	</div>
+		                          	</div>
+			                       <div class="form-group">
+		                              	<label class="col-sm-2 col-sm-2 control-label">Apellido</label>
+		                              	<div class="col-sm-10">
+		                                  	<input type="text" name="apellido" class="form-control"  value=<c:out value="${persona.apellido}"/>>
+		                              	</div>
+		                          	</div>
+			                     	<div class="form-group">
+		                              	<label class="col-sm-2 col-sm-2 control-label">DNI</label>
+		                              	<div class="col-sm-10">
+		                                  	<input type="text" name="dni" class="form-control"  value=<c:out value="${persona.dni}"/>>
+		                              	</div>
+		                          	</div>		
+		                          	<div class="form-group">
+		                              	<label class="col-sm-2 col-sm-2 control-label">Habilitado</label>
+		                              	<div class="col-sm-10">
+		                                  	<input type="checkbox" class="form-control"  name="<c:out value="${persona.habilitado}"/>" 
+											id="habilitado" value="<c:out value="${persona.habilitado}"/>" ${persona.habilitado == 'true' ? 'checked' : ''}>
+		                              	</div>
+		                          	</div>         
+		                          	<div class="form-group">
+		                              	<label class="col-sm-2 col-sm-2 control-label">Usuario</label>
+		                              	<div class="col-sm-10">
+		                                  	<input type="text"  name="usuario" class="form-control"  value=<c:out value="${persona.usuario}"/>>
+		                              	</div>
+		                          	</div>   
+		                          	<div class="form-group">
+		                              	<label class="col-sm-2 col-sm-2 control-label">Contraseña</label>
+		                              	<div class="col-sm-10">
+		                                  	<input type="text"  name="contraseña" class="form-control"  value=<c:out value="${persona.contraseña}"/>>
+		                              	</div>
+		                          	</div>          
+		                          	<div class="form-group">
+		                              	<label class="col-sm-2 col-sm-2 control-label">Email</label>
+		                              	<div class="col-sm-10">
+		                                  	<input type="text"  name="email" class="form-control"  value=<c:out value="${persona.email}"/>>
+		                              	</div>
+		                          	</div>       
+									<div class="form-group">
+		                              	<label class="col-sm-2 col-sm-2 control-label">Categoria</label>
+		                              	<div class="col-sm-10">
+		                                  	<select name="id_categoria" id="tipo" class="form-control">
+												<c:forEach items="${categorias}" var="categoria">
+       											 <option value="${categoria.id_categoria}" ${categoria.id_categoria == selectedCat.id_categoria ? 'selected="selected"' : ''}>${categoria.descripcion}</option>
     
-    </c:forEach>
-    </select>
-
-
-	</div>	
-
-<button type="input" name="modificar">Aceptar</button>
-</form>
-
-<a href="personas"><button>Volver</button></a>
+									   			 </c:forEach>
+											</select>
+		                              	</div>
+		                          	</div>
+		                          	<div class="centrar-cont">
+									<button type="input" name="modificar" class="btn btn-primary" >Aceptar</button>
+		                          		<input type="button" name="btnCancelar" value="Cancelar" class="btn btn-primary" onClick="location.href='personas.jsp'">	
+		                          	</div></fieldset>
+		</form>
+		</div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

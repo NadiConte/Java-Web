@@ -17,13 +17,19 @@
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Menu Personas</title>
+    <link href="style/css/bootstrap.css" rel="stylesheet">
+
 </head>
 <body>
-	<form id="formpersonas" name="Persona"
-			action="Persona" method="post">
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="well well-sm">	
+			<form class="form-horizontal" id="formpersonas" name="Persona" action="Persona" method="post">
+			<fieldset>
+                 <legend class="text-center header">Personas</legend>
 
-	<div> 
-	<table class = "table table-striped">
+			<table class="table table-striped table-advance table-hover">
 			<thead>
 				<tr>
 					<th>Nombre</th>
@@ -70,18 +76,26 @@
 				
 				
 				 <td>
-						<button type="input" value=<c:out value="${p.id_persona}"/> name="mapearEdit">Modificar</button>
-						<button type="input" value=<c:out value="${p.id_persona}"/> name="borrar">Borrar</button>
+						<button class="btn btn-primary" type="input" value=<c:out value="${p.id_persona}"/> name="mapearEdit">Modificar</button>
+						<button class="btn btn-primary" type="input" value=<c:out value="${p.id_persona}"/> name="borrar">Borrar</button>
 				</td>
 			</tr>
 		</c:forEach>
 			</tbody>
 		</table>
-	</div>	
-	<button type="input" name="mapearCrear">Nueva Persona</button>
-	</form>
-	<a href="menuAdministrador.jsp"><button>Volver</button></a>
+		
+		<div class="centrar-cont">
+									<button type="input" name="mapearCrear" class="btn btn-primary" >Nuevo Persona</button>
+		                          		<input type="button" name="btnCancelar" value="Cancelar" class="btn btn-primary" onClick="location.href='menuAdministrador.jsp'">	
+		                          	</div>
 	
+		</fieldset>
+		</form>
+		</div>
+      </div>
+    </div>
+</div>
+
 	
 </body>
 </html>

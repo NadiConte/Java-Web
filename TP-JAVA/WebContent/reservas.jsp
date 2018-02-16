@@ -13,12 +13,18 @@
    <script src="/bootstrap/js/bootstrap.min.js"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Menu de Reservas</title>
+    <link href="style/css/bootstrap.css" rel="stylesheet">
+
 </head>
 <body>
- 
-	<form id="formreservas" name="Reserva"
-			action="Reserva" method="post">
-		<table>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="well well-sm">	
+			<form class="form-horizontal" id="formreservas" name="Reserva" action="Reserva" method="post">
+			<fieldset>
+                 <legend class="text-center header">Elementos</legend>
+			<table class="table table-striped table-advance table-hover">
 			<thead>
 				<tr>
 					
@@ -50,17 +56,23 @@
 				value="<c:out value="${res.elemento.nombre}"/>" disabled /></td>
 					
 				<td>
-						<button type="submit" value=<c:out value = "${res.id_reserva}"/> name="borrar">cancelar</button>
+						<button class="btn btn-primary" type="submit" value=<c:out value = "${res.id_reserva}"/> name="borrar">cancelar</button>
 				</td>
 			</tr>
 			</c:forEach>
 			</tbody>
 		</table>
-
-	<button type="input" name="mapearNuevaReserva">Nueva Reserva</button>
-		<button type="input"  name="volverMenu">Volver</button>
+		<div class="centrar-cont">
+									<button type="input" name="borrar" class="btn btn-primary" >Nuevo Reserva</button>
+		                          	<button type="input"  name="volverMenu" class="btn btn-primary" >Volver</button>	
+		                          	</div>
 	
-			</form>
+		</fieldset>
+		</form>
+		</div>
+      </div>
+    </div>
+</div>
 		
 
 </body>

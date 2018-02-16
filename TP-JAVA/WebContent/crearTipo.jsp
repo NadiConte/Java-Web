@@ -9,39 +9,56 @@
 
     <!-- Custom styles for this template -->
     <link href="style/start.css" rel="stylesheet"><title>Crear Elemento</title>
+        <link href="style/css/bootstrap.css" rel="stylesheet">
+    
 </head>
 <body>
-<form method="post" action="TipoElemento">
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="well well-sm">	
+		<form class="form-horizontal" method="post" action="TipoElemento">
+			 <fieldset>
+                 <legend class="text-center header">Crear Tipo de Elemento</legend>
+                					 <div class="form-group">
+		                              	<label class="col-sm-2 col-sm-2 control-label">Nombre</label>
+		                              	<div class="col-sm-10">
+		                                  	<input type="text" name="nombre" class="form-control">
+		                              	</div>
+		                          	</div>
+			                       <div class="form-group">
+		                              	<label class="col-sm-2 col-sm-2 control-label">Cantidad maxima</label>
+		                              	<div class="col-sm-10">
+		                                  	<input type="text" name="cantMax" class="form-control">
+		                              	</div>
+		                          	</div>
+			                        <div class="form-group">
+		                              	<label class="col-sm-2 col-sm-2 control-label">Dias anticipacion</label>
+		                              	<div class="col-sm-10">
+		                                  	<input type="text" name="diasAnt" class="form-control">
+		                              	</div>
+		                          	</div>
+			                     	<div class="form-group">
+		                              	<label class="col-sm-2 col-sm-2 control-label">Tiempo maximo</label>
+		                              	<div class="col-sm-10">
+		                                  	<input type="text" name="tiempoMax" class="form-control">
+		                              	</div>
+		                          	</div>		
+		                          	<div class="form-group">
+		                              	<label class="col-sm-2 col-sm-2 control-label">Solo Encargado</label>
+		                              	<div class="col-sm-10">
+		                              		<input type="checkbox"  name="soloEncargado" class="form-control">
+		                              	</div>
+		                          	</div>	            
+		                          	<div class="centrar-cont">
+									<button type="input" name="crear" class="btn btn-primary" >Aceptar</button>
+		                          		<input type="button" name="btnCancelar" value="Cancelar" class="btn btn-primary" onClick="location.href='tipoElementos.jsp'">	
+		                          	</div></fieldset>
+		</form>
+		</div>
+      </div>
+    </div>
+</div>
 
-	
-	<div class="form-group">
-		<label>Nombre</label>
-		<input type="text" name="nombre">
-	</div>
-	
-	<div class="form-group">
-		<label>Cantidad maxima</label>
-		<input type="text" name="cantMax">
-	</div>
-	
-	<div class="form-group">
-		<label>Dias anticipacion</label>
-		<input type="text" name="diasAnt">
-	</div>
-	
-	<div class="form-group">
-		<label>Tiempo maximo</label>
-		<input type="text" name="tiempoMax">
-	</div>
-
-	<div class="form-group">
-		<label>Solo Encargado</label>
-		<input type="checkbox"  name="soloEncargado" >
-	</div>
-	
-	<button type="input" name="crear">Aceptar</button>
-</form>
-
-<a href="tipoElementos"><button>Volver</button></a>
 </body>
 </html>
