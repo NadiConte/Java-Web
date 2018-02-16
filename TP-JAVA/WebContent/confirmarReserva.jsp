@@ -50,7 +50,7 @@
 	<button type="input" name="crear">Guardar Reserva</button>
 </form>
 
-<a href="/TPJAVA/reservas"><button>Ir a Reservas</button></a>
+<a href="reservas"><button>Ir a Reservas</button></a>
 
 </body>
 </html>

@@ -64,11 +64,11 @@ public class TipoElemento extends HttpServlet {
 				te = cte.getByID(id_tipo);				
 				request.setAttribute("tipo", te);
 
-				request.getRequestDispatcher("/modificarTipo.jsp").forward(request, response);
+				request.getRequestDispatcher("modificarTipo.jsp").forward(request, response);
 			}
 			
 			if (request.getParameter("mapearCrear") != null){
-				request.getRequestDispatcher("/crearTipo.jsp").forward(request, response);
+				request.getRequestDispatcher("crearTipo.jsp").forward(request, response);
 
 			}
 			

@@ -51,8 +51,8 @@ public class Emailer {
 			message.setFrom(new InternetAddress(props.getProperty("mail.username")));
 			message.setRecipients(Message.RecipientType.TO,
 				InternetAddress.parse(to));
-			message.setSubject(subject); //"Testing Subject"
-			message.setText(body); //"Dear Mail Crawler,\n\n No spam to my email, please!"
+			message.setSubject(subject); 
+			message.setText(body); 
 
 			Transport.send(message);
 

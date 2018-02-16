@@ -8,6 +8,6 @@
 </head>
 <body>
 <h1><b>Comuniquese con su encargado para poder reservar este elemento</b></h1>
+<a href="menuPrincipal.jsp"><button>Volver</button></a>
 </body>
 </html>
-<a href="menuPrincipal.jsp"><button>Volver</button></a>

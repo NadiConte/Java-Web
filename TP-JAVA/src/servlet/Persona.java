@@ -69,11 +69,11 @@ public class Persona extends HttpServlet {
 					}
 				}
 				request.setAttribute("selectedCat", miCat);
-				request.getRequestDispatcher("/modificarPersona.jsp").forward(request, response);
+				request.getRequestDispatcher("modificarPersona.jsp").forward(request, response);
 			}
 			
 			if (request.getParameter("mapearCrear") != null){
-				request.getRequestDispatcher("/crearPersona.jsp").forward(request, response);
+				request.getRequestDispatcher("crearPersona.jsp").forward(request, response);
 
 			}
 			

@@ -8,6 +8,6 @@
 </head>
 <body>
 <h1><b>Las credenciales ingresadas son incorrectas o el usuario no se encuentra habilitado</b></h1>
+<a href="index.jsp"><button>Volver</button></a>
 </body>
 </html>
-<a href="index.jsp"><button>Volver</button></a>

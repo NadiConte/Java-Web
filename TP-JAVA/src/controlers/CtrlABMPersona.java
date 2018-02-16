@@ -33,9 +33,11 @@ public class CtrlABMPersona {
 	public Persona getByDni(Persona pe) {
 		return this.dataPer.getByDni(pe);
 	}
+	
 	public Persona getById(int id){
-		return this.dataPer.getById(id);
+		return dataPer.getById(id);
 	}
+	
 	public Categoria getByID(int id){
 		return this.dataCat.getByID(id);
 	}

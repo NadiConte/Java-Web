@@ -31,7 +31,7 @@
 			</div>				
 </form>
 
-<a href="/TPJAVA/reservas"><button>Volver</button></a>
+<a href="reservas"><button>Volver</button></a>
 
 </body>
 </html>

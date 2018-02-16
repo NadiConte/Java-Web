@@ -9,7 +9,6 @@ public class Reserva {
 	private java.util.Date fecha_hora_desde;
 	private java.util.Date fecha_hora_hasta;
 	private String descripcion;
-	private String estado;
 	private Elemento elemento;
 	private Persona persona;
 	
@@ -41,14 +40,6 @@ public class Reserva {
 		this.fecha_hora_hasta = fecha_hora_hasta;
 	}
 
-	public String getEstado() {
-		return estado;
-	}
-
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
-
 	public void setFecha_hora_desde(java.util.Date fecha_hora_desde) {
 		this.fecha_hora_desde = fecha_hora_desde;
 	}
@@ -72,11 +63,10 @@ public class Reserva {
 	public Reserva() {
 	}
 	
-	public Reserva(java.util.Date fecha_hora_desde, java.util.Date fecha_hora_hasta, String descripcion, String estado) {
+	public Reserva(java.util.Date fecha_hora_desde, java.util.Date fecha_hora_hasta, String descripcion) {
 		this.fecha_hora_desde = fecha_hora_desde;
 		this.fecha_hora_hasta = fecha_hora_hasta;
 		this.descripcion = descripcion;
-		this.estado = estado;
 	}
 
 	@Override

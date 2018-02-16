@@ -51,7 +51,7 @@ public class Elementos extends HttpServlet {
 			
 			request.setAttribute("tipos",this.loadCombo());
 						
-			request.getRequestDispatcher("/crearElemento.jsp").forward(request, response);
+			request.getRequestDispatcher("crearElemento.jsp").forward(request, response);
 			
 			
 	}
@@ -76,7 +76,7 @@ public class Elementos extends HttpServlet {
 			request.setAttribute("tiposEle",this.loadCombo());
 			request.setAttribute("miTipo", mitipo);
 			
-			request.getRequestDispatcher("/modificarElemento.jsp").forward(request, response);
+			request.getRequestDispatcher("modificarElemento.jsp").forward(request, response);
 			
 		}
 		

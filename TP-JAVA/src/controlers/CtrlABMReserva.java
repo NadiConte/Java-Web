@@ -67,7 +67,7 @@ public class CtrlABMReserva {
 		
 		String msj = 
 				"Datos de la reserva: "+ r.getId_reserva()+"\n"
-				+ "Tipo de elemento: " + r.getElemento().getTipoElemento().getNombre()+"\n"
+				//+ "Tipo de elemento: " + r.getElemento().getTipoElemento().getNombre()+"\n"
 				+ "Elemento reservado: " + r.getElemento().getNombre()+"\n"
 				+ "Fecha de inicio de la reserva: " + r.getFecha_hora_desde()+"\n"
 				+ "Fecha de fin de la reserva: " + r.getFecha_hora_hasta()+"\n"
@@ -81,8 +81,8 @@ public class CtrlABMReserva {
 		return dataRes.cantReservasXTipo(p, t);
 	}
 	
-	public boolean estaDisponible(Reserva r) {
-		return dataRes.estaDisponible(r);
+	public boolean estaDisponible(Reserva r, TipoElemento t) {
+		return dataRes.estaDisponible(r, t);
 	}
 	
 	

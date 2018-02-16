@@ -68,7 +68,7 @@
 	<button type="input" name="crear">Aceptar</button>
 </form>
 
-<a href="/TPJAVA/personas"><button>Volver</button></a>
+<a href="personas"><button>Volver</button></a>
 
 </body>
 </html>

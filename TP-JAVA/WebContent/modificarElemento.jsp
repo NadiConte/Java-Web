@@ -41,7 +41,7 @@
 	<button type="input" name="modificar">Aceptar</button>
 </form>
 
-<a href="/TPJAVA/elementos"><button>Volver</button></a>
+<a href="elementos"><button>Volver</button></a>
 
 </body>
 </html>

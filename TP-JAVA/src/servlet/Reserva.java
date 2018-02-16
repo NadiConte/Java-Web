@@ -62,7 +62,7 @@ public class Reserva extends HttpServlet {
 			res = ctrl.getAll();
 		}
 		request.setAttribute("todasReservas", res);
-		request.getRequestDispatcher("/reservas.jsp").forward(request, response);
+		request.getRequestDispatcher("reservas.jsp").forward(request, response);
 		
 	
 	}
@@ -87,7 +87,7 @@ public class Reserva extends HttpServlet {
 				
 				request.setAttribute("allTipos", ctele);
 				
-			request.getRequestDispatcher("/crearReserva.jsp").forward(request, response);
+			request.getRequestDispatcher("crearReserva.jsp").forward(request, response);
 				
 			}
 		
@@ -107,9 +107,9 @@ public class Reserva extends HttpServlet {
 				ArrayList<Elemento> elementos= (ArrayList<Elemento>) ctele.loadElementos(te);
 				
 				request.setAttribute("allElements", elementos);
-				request.getRequestDispatcher("/confirmarReserva.jsp").forward(request, response);}
+				request.getRequestDispatcher("confirmarReserva.jsp").forward(request, response);}
 				else {
-					request.getRequestDispatcher("/errorSoloEncargado.jsp").forward(request, response);
+					request.getRequestDispatcher("errorSoloEncargado.jsp").forward(request, response);
 				}}
 			
 			
@@ -153,37 +153,38 @@ public class Reserva extends HttpServlet {
 						//Los tipos de elementos pueden tener una cantidad máxima de días de anticipación para ser reservados.
 						
 						if(((fechaHoraDesde.getTime()-hoy.getTime())/86400000) < cantDias){//diferencia de dias desde hoy hasta la fecha de reserva inferior a la esperada
-							response.getWriter().append("Los dias de anticipacion para la reserva no son suficientes.");
+							request.getRequestDispatcher("errorResDiasAnt.jsp").forward(request, response);
 				
 						}else {
 							
 							int tiempoMax=t.getTiempoMax();
 							
-							if(tiempoMax < ((fechaHoraHasta.getTime()-fechaHoraDesde.getTime())/86400000)){//supera la cantidad de tiempo maxima de reserva
+							if(tiempoMax < ((fechaHoraHasta.getTime()-fechaHoraDesde.getTime())/3600000)){//supera la cantidad de tiempo maxima de reserva
 								
-								response.getWriter().append("El tiempo de la reserva es mayor al permitido.");
+								request.getRequestDispatcher("errorResTiempoMax.jsp").forward(request, response);
 								}else {
 							
 								r.setFecha_hora_desde(fechaHoraDesde);
 								r.setFecha_hora_hasta(fechaHoraHasta);
-								r.setElemento(ele);
+								r.setElemento(ele); 
 								r.setPersona(per);
 								String mail=r.getPersona().getEmail();
-								if (cte.estaDisponible(r)){
+								if (cte.estaDisponible(r, t)){
 									//esta disponible ese elemento para las horas seleccionadas
 									
 									try {
 										System.out.println("reserva creada");
 										cte.add(r);
 										Emailer.getInstance().send(mail,"Reserva Creada",cte.datosRes(r));
+										request.getRequestDispatcher("exitoRes.jsp").forward(request, response);
 									} catch (Exception e2) {
 										System.out.println("Aca tira error");
 									}
-								}else {request.getRequestDispatcher("/errorObjetoReservado.jsp").forward(request, response);}
+								}else {request.getRequestDispatcher("errorResObjetoReservado.jsp").forward(request, response);}
 						}
 					}
 						
-				}		else {response.getWriter().append("Supero la cantidad de reservas permitidas para este tipo de elementos.");}	
+				}		else {request.getRequestDispatcher("errorResCantMax.jsp").forward(request, response);}	
 			
 				this.doGet(request, response);
 		}
@@ -201,7 +202,6 @@ public class Reserva extends HttpServlet {
 		
 		int id = Integer.parseInt(request.getParameter("borrar"));
 		r = ctr.getByID(id);
-		
 		p=ctp.getById(r.getPersona().getId_persona());
 		String mail=p.getEmail();
 		
@@ -223,9 +223,9 @@ public class Reserva extends HttpServlet {
 		entity.Persona per = (Persona) request.getSession().getAttribute("personaLogueada");
 		
 		if (per.esAdministrador()) {
-			request.getRequestDispatcher("/menuAdministrador.jsp").forward(request, response);
+			request.getRequestDispatcher("menuAdministrador.jsp").forward(request, response);
 		}else {
-			request.getRequestDispatcher("/menuPrincipal.jsp").forward(request, response);
+			request.getRequestDispatcher("menuPrincipal.jsp").forward(request, response);
 		}
 		
 		
@@ -236,9 +236,9 @@ public class Reserva extends HttpServlet {
 		CtrlABMPersona cp = new CtrlABMPersona();			
 		entity.Persona per = (Persona) request.getSession().getAttribute("personaLogueada");
 		if (per.esAdministrador()) {
-			request.getRequestDispatcher("/menuAdministrador.jsp").forward(request, response);
+			request.getRequestDispatcher("menuAdministrador.jsp").forward(request, response);
 		}else {
-			request.getRequestDispatcher("/menuPrincipal.jsp").forward(request, response);
+			request.getRequestDispatcher("menuPrincipal.jsp").forward(request, response);
 		}
 		
 		
