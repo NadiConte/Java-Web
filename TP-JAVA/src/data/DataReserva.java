@@ -114,6 +114,7 @@ public ArrayList<Reserva> getReservasdePer(Persona per){ //OBTENER RESERVAS POR 
 			stmt = FactoryConexion.getInstancia().getConn()
 					.prepareStatement("select * from reserva r "
 		 			+ "inner join elemento e on r.id_elemento=e.id_elemento "
+		 			+ "inner join persona p on r.id_persona = p.id_persona "
 					+ "where id_persona = ? and r.fecha_hora_desde>=curdate()",
 		 			PreparedStatement.RETURN_GENERATED_KEYS);
 			
@@ -129,7 +130,8 @@ public ArrayList<Reserva> getReservasdePer(Persona per){ //OBTENER RESERVAS POR 
 					r.setFecha_hora_desde(rs.getTimestamp("fecha_hora_desde")); 
 					r.setFecha_hora_hasta(rs.getTimestamp("fecha_hora_hasta")); 
 					r.setDescripcion(rs.getString("descripcion"));
-					r.setPersona(per);
+					r.setPersona(new Persona());
+					r.getPersona().setUsuario(rs.getString("p.usuario"));
 					r.getElemento().setId_elemento(rs.getInt("id_elemento"));
 		 			r.getElemento().setNombre(rs.getString("e.nombre"));
 		 			reservas.add(r);

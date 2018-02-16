@@ -15,6 +15,7 @@
 	<div><a href="tipoElementos">Tipos de Elementos</a></div>
 	<div><a href="elementos">Elementos</a></div>
 	<div><a href="reservas">Reservas</a></div>
+	<div><a href="index.jsp">Cerrar Sesión</a></div>
 	</form>
 </body>
 </html>

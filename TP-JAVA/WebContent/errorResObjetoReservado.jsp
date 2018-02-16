@@ -7,7 +7,7 @@
 <title>Error</title>
 </head>
 <body>
-<formaction="Reserva" method="post">
+<form action="Reserva" method="post">
 
 	<h1><b>Este elemento ya se encuentra reservado para las fechas solicitadas</b></h1>
 	<button type="input"  name="volverMenu">Volver</button>

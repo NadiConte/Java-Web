@@ -9,7 +9,7 @@
 <body>
 <form name="Reserva" action="Reserva" method="post">
 
-	<h1><b>Su reserva ha sido creada con éxito. Se le ha enviado un mail con los detalles.</b></h1>
+	<h1><b>Su reserva ha sido creada con éxito.</b></h1>
 	<button type="input"  name="volverMenu">Volver</button>
 
 </form>

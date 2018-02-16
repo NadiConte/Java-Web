@@ -175,7 +175,7 @@ public class Reserva extends HttpServlet {
 									try {
 										System.out.println("reserva creada");
 										cte.add(r);
-										Emailer.getInstance().send(mail,"Reserva Creada",cte.datosRes(r));
+										//Emailer.getInstance().send(mail,"Reserva Creada",cte.datosRes(r));
 										request.getRequestDispatcher("exitoRes.jsp").forward(request, response);
 									} catch (Exception e2) {
 										System.out.println("Aca tira error");
@@ -207,7 +207,7 @@ public class Reserva extends HttpServlet {
 		
 		try {
 			ctr.delete(r);
-			Emailer.getInstance().send(mail,"Reserva Cancelada",ctr.datosRes(r));
+			//Emailer.getInstance().send(mail,"Reserva Cancelada",ctr.datosRes(r));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
